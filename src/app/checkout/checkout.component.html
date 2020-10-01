@@ -120,7 +120,7 @@
       <input (change)="isShippingAddressSame=!isShippingAddressSame" type="checkbox" checked aria-label="Checkbox for following text input">
     </div>
   </div>
-  <input type="text" style="font-weight: 500;" class="form-control" value="Is Billing Address same as Shipping Address?" aria-label="Text input with checkbox">
+  <input disabled=true type="text" style="font-weight: 500;" class="form-control" value="Is Billing Address same as Shipping Address?" aria-label="Text input with checkbox">
 </div>
 </div>
 </div>
@@ -208,7 +208,7 @@
             <input type="text" name="country" [(ngModel)]="checkout.country" placeholder="Country">
           </div>
           <div class="col shadow p-2 mb-3 bg-white rounded" >
-            <input type="text" placeholder="Other" name="other" [(ngModel)]="checkout.other">
+            <input type="text" placeholder="email" name="other" [(ngModel)]="checkout.email">
           </div>
 
 
