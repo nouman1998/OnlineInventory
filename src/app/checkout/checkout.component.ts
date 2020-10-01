@@ -11,12 +11,13 @@ export class CheckoutComponent implements OnInit {
   constructor(private http: HttpClient) { }
   address = {}
 
-   localUrl = 'http://localhost:8080/order/';
+  localUrl = 'http://localhost:8080/order/';
 
   ngOnInit(): void {
   }
   radioButton
   isShippingAddressSame = true
+  orderJson={}
   checkout = new Checkout();
   saved = false
   addressArray = [
@@ -107,9 +108,73 @@ export class CheckoutComponent implements OnInit {
     }
 
   }
-  postOrder(){
-// this.http.post(this.localUrl,this.address);
-console.log("Posting Order");
+  postOrder() {
+
+    this.preparingJson();
+    this.http.post(this.localUrl,this.orderJson).subscribe();
+    console.log("Posting Order");
+  }
+
+  preparingJson() {
+    this.orderJson['address']=this.address;
+    this.orderJson['customerDetail'] = {
+      "customerId": 1,
+      "firstName": "test",
+      "middleName": "",
+      "lastName": "test",
+      "phone": "9898989898",
+      "email": "test@test.com",
+      "addressLine1": "",
+      "addressLine2": "",
+      "city": "",
+      "zipCode": "",
+      "state": "",
+      "country": ""
+    }
+
+    this.orderJson['orderTotal'] = '';
+    this.orderJson['orderStatus'] = 1;
+    this.orderJson['paymentStatus'] = "";
+    this.orderJson['notificationId'] = 2;
+    this.orderJson['shippingMethod'] = "";
+    this.orderJson['shippingAmt'] = "";
+    this.orderJson['items'] = [
+
+      {
+        "itemId": 1,
+        "itemSize": "12",
+        "quantity": 12,
+        "price": 12,
+        "tax": "",
+        "couponCode": "",
+        "discountType": "",
+        "couponAmt": "",
+        "itemTotal": "",
+        "itemStatus": ""
+      }
+
+    ];
+    this.orderJson['couponDetail'] = {
+			"couponName":"",
+			"discountType":"",
+			"discountAmt":""
+      };
+
+      this.orderJson['paymentDetail']={
+        "paymentType":"",
+        "bankName":"",
+        "accountNo":"",
+        "ifscCode":"",
+        "cardNumber":"",
+        "cardUserName":"",
+        "cardExpiryDate":"",
+        "totalTax":"",
+        "totalPrice":"",
+        "totalAmount":""
+        }
+
+        console.log( "bbbbbbbb",this.orderJson)
+
   }
 
 }
