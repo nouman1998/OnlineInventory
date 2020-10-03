@@ -17,23 +17,18 @@ export class CheckoutComponent implements OnInit {
   }
   radioButton
   isShippingAddressSame = true
-  orderJson={}
+  orderJson = {}
   checkout = new Checkout();
   saved = false
   addressArray = [
     {
-      id: 1, "firstName": "test",
+      id: 1, "firstName": "Shahzad",
       "middleName": "test",
-      "lastName": "test",
+      "lastName": "Iqbal",
       "phone": "test",
       "email": "n@n.com",
-      "addressLine1": "test",
+      "addressLine1": "House S-33 Street 4 Allama Iqbal Colony Mehmoodabad Gate",
       "addressLine2": "test",
-
-
-
-
-
       "city": "test",
       "zipCode": "test",
       "state": "test",
@@ -46,7 +41,8 @@ export class CheckoutComponent implements OnInit {
   saveAddress() {
     console.log(this.checkout)
     this.addressArray.push({
-      "id": this.addressArray.length + 1, "firstName": this.checkout.name,
+      "id": this.addressArray.length + 1,
+      "firstName": this.checkout.firstName,
       "middleName": this.checkout.middleName,
       "lastName": this.checkout.lastName,
       "phone": this.checkout.phoneNumber,
@@ -75,7 +71,7 @@ export class CheckoutComponent implements OnInit {
       "addressLine1": item.addressLine1,
       "addressLine2": item.addressLine2,
       "city": item.city,
-      "zipCode": item.pincode,
+      "zipCode": item.zipCode,
       "state": item.state,
       "country": item.country,
     }
@@ -98,7 +94,7 @@ export class CheckoutComponent implements OnInit {
         "addressLine1": item.address,
         "addressLine2": item.address1,
         "city": item.city,
-        "zipCode": item.pincode,
+        "zipCode": item.zipCode,
         "state": item.state,
         "country": item.country,
       }
@@ -111,25 +107,25 @@ export class CheckoutComponent implements OnInit {
   postOrder() {
 
     this.preparingJson();
-    this.http.post(this.localUrl,this.orderJson).subscribe();
-    console.log("Posting Order");
+    // this.http.post(this.localUrl, this.orderJson).subscribe();
+    console.log("Posting Order",this.orderJson);
   }
 
   preparingJson() {
-    this.orderJson['address']=this.address;
+    this.orderJson['address'] = this.address;
     this.orderJson['customerDetail'] = {
       "customerId": 1,
-      "firstName": "test",
-      "middleName": "",
-      "lastName": "test",
-      "phone": "9898989898",
-      "email": "test@test.com",
-      "addressLine1": "",
-      "addressLine2": "",
-      "city": "",
-      "zipCode": "",
-      "state": "",
-      "country": ""
+      "addressLine1": "test address 1",
+      "addressLine2": "test address 2",
+      "city": "karachi",
+      "country": "Pakistan",
+      "email": "s@s.com",
+      "firstName": "shahzad",
+      "lastName": "iqbal",
+      "middleName": "mohammad",
+      "phone": "123982212",
+      "state": "Sindh",
+      "zipCode": "00000"
     }
 
     this.orderJson['orderTotal'] = '';
@@ -141,10 +137,10 @@ export class CheckoutComponent implements OnInit {
     this.orderJson['items'] = [
 
       {
-        "itemId": 1,
-        "itemSize": "12",
-        "quantity": 12,
-        "price": 12,
+        "itemId": 4,
+        "itemSize": "Small",
+        "quantity": 10,
+        "price": 1000,
         "tax": "",
         "couponCode": "",
         "discountType": "",
@@ -155,26 +151,33 @@ export class CheckoutComponent implements OnInit {
 
     ];
     this.orderJson['couponDetail'] = {
-			"couponName":"",
-			"discountType":"",
-			"discountAmt":""
-      };
+      "couponName": "",
+      "discountType": "",
+      "discountAmt": ""
+    };
 
-      this.orderJson['paymentDetail']={
-        "paymentType":"",
-        "bankName":"",
-        "accountNo":"",
-        "ifscCode":"",
-        "cardNumber":"",
-        "cardUserName":"",
-        "cardExpiryDate":"",
-        "totalTax":"",
-        "totalPrice":"",
-        "totalAmount":""
-        }
+    this.orderJson['paymentDetail'] = {
+      "paymentType": "",
+      "bankName": "",
+      "accountNo": "",
+      "ifscCode": "",
+      "cardNumber": "",
+      "cardUserName": "",
+      "cardExpiryDate": "",
+      "totalTax": "",
+      "totalPrice": "",
+      "totalAmount": ""
+    }
 
-        console.log( "bbbbbbbb",this.orderJson)
+    console.log("bbbbbbbb", this.orderJson)
 
   }
-
+  validateForm(){
+    console.log(this.checkout)
+    if(!this.checkout.address||(this.checkout.phoneNumber.length>15||this.checkout.phoneNumber.length==0||!this.checkout.phoneNumber)||!this.checkout.pincode||
+    !this.checkout.firstName||!this.checkout.country||!this.checkout.state||!this.checkout.city
+    )
+    {return true}
+    else{false}
+  }
 }

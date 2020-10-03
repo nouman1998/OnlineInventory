@@ -1,37 +1,55 @@
-
-<div class="text-muted" style="height: 40px; background-color: gold;  text-align: center; font-weight: 600; font-size: x-large;">Checkout Page</div>
+<div class="text-muted"
+  style="height: 40px; background-color: gold;  text-align: center; font-weight: 600; font-size: x-large;">Checkout Page
+</div>
 <div *ngIf="saved" class="alert alert-success">
   <strong>Success!</strong>
 </div>
 <div class="row px-3" style="height: 1000%; ">
   <div class="col-9" style="border-right: solid ;">
-    <!-- <div  class="font-weight-bold">Select a delivery address</div>
-   -->
-    <span class="mx-2 text-muted" style="font-size: x-large; font-weight: 500;">Select a delivery address</span>
-    <a href="" data-toggle="modal" data-target="#exampleModal">
-      Add new Address
-    </a>
 
-    <div class="row m-4 py-2">
+    <p>
+      <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <span class="mx-2 text-muted" style="font-size: x-large; font-weight: 500;">Select a delivery address</span>
+      </a>
 
-      <div *ngFor="let item of addressArray" class="col-lg-6">
-        <div class="row">
-          <div class="col-1">  <input type="radio" name="gender" id="male" (change)="myFunction(item)" ></div>
-      <div class="col-11">
-        <div class=" shadow p-2 mb-3   bg-white rounded"
-            style="width: 400px; padding: 5px;">
+    <div class="collapse" id="collapseExample">
+      <div class="row m-4 py-2 ">
 
-            <h5>Address {{item.id}}</h5>
-            <div>
-              {{item.addressLine1}}
+
+
+        <div *ngFor="let item of addressArray" class="col-lg-6">
+          <div class="row">
+            <div class="col-1" style="margin-top:5%;"> <input type="radio" name="gender" id="male"
+                (change)="myFunction(item)"></div>
+            <div class="col-11 p-2  ">
+
+              <div class="card text-center">
+                <div class="card-header">
+                  Address {{item.id}}
+                </div>
+                <div class="card-body" style="height: 100px;">
+                  <h5 class="card-title">{{item.firstName}} {{item.lastName}}</h5>
+                  <p class="card-text">{{item.addressLine1}}</p>
+
+                </div>
+
+              </div>
             </div>
+
           </div>
-      </div>
+
+        </div>
+
+
+        <div class="row">
 
         </div>
 
       </div>
-
+      <button class="btn btn-primary"  data-toggle="collapse" href="#collapseExample2"
+        style="width: 117px; height: 39px;margin-left: 88%;">
+        Add Address
+      </button>
     </div>
 
   </div>
@@ -39,7 +57,8 @@
   <div class="col-3">
     <h3 style="text-align: center; font-size:x-large;" class="text-muted">Delivery Estimate</h3>
     <span class="h6 text-muted" style=" font-size: larger; padding-bottom: 5px;">Please Note:</span>
-    <p class="font-weight-normal text-muted" style="font-size:medium; padding-top: 4px;">Delivery timelines are currently taking longer than usual because of COVID.
+    <p class="font-weight-normal text-muted" style="font-size:medium; padding-top: 4px;">Delivery timelines are
+      currently taking longer than usual because of COVID.
       Please add 2-5
       days extra to estimated deliveryx
     </p>
@@ -53,7 +72,7 @@
     </div>
 
     <div class="row py-1" style="margin-left: 15px; font-weight: 500;">
-      <div class="col-7 text-muted" > <span>Delivery Charges:</span></div>
+      <div class="col-7 text-muted"> <span>Delivery Charges:</span></div>
       <div class="col-5 text-muted"> <span>Rs. 50</span></div>
 
     </div>
@@ -69,61 +88,189 @@
     </div>
 
 
-    <button (click)="postOrder()" type="button" class="btn btn-warning my-3" style=" border-radius: 30%; margin-left: 30%; ">CONTINUE</button>
+    <button (click)="postOrder()" type="button" class="btn btn-warning my-3"
+      style=" border-radius: 30%; margin-left: 30%; ">CONTINUE</button>
 
 
 
   </div>
 </div>
 
-<div *ngIf="!isShippingAddressSame" class="col-9" style="border-right: solid ;">
-    <!-- <div  class="font-weight-bold">Select a delivery address</div>
-   -->
-    <span class="mx-2 text-muted" style="font-size: x-large; font-weight: 500;">Select a Billing address</span>
-    <a href="" data-toggle="modal" data-target="#exampleModal">
-      Add new Address
-    </a>
+<div class="row p-2">
 
-    <div class="row m-4 py-2">
+<div  class="collapse col-9" id="collapseExample2">
+  <h3 style="text-align: center;">Add New Address</h3>
 
-      <div *ngFor="let item of addressArray" class="col-lg-6">
-        <div class="row">
-          <div class="col-1">  <input type="radio" name="gender1" id="male1" (change)="myFunction1(item)" ></div>
-      <div class="col-11">
-        <div class=" shadow p-2 mb-3   bg-white rounded"
-            style="width: 400px; padding: 5px;">
+  <div class="card-body" style="border:solid">
+    <div class="modal-body container">
+      <div class="row">
+        <div class="col shadow p-2 mb-3   bg-white rounded">
+          <input type="text" placeholder="Name" name="firstName" [(ngModel)]="checkout.firstName">
+        </div>
+        <div class="col shadow p-2 mb-3   bg-white rounded">
+          <input type="text" name="Middle Name" placeholder="Middle Name" [(ngModel)]="checkout.middleName">
+        </div>
 
-            <h5>Address {{item.id}}</h5>
-            <div>
-              {{item.addressLine1}}
-            </div>
-          </div>
+      </div>
+      <div class="row">
+        <div class="col shadow p-2 mb-3   bg-white rounded">
+          <input type="text" placeholder="Last Name" name="firstName" [(ngModel)]="checkout.lastName">
+        </div>
+        <div class="col shadow p-2 mb-3   bg-white rounded">
+          <input type="text" name="Phone Number" placeholder="Phone Number" [(ngModel)]="checkout.phoneNumber">
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col shadow p-2 mb-3   bg-white rounded">
+          <input type="text" placeholder="Pincode" name="pincode" [(ngModel)]="checkout.pincode">
+        </div>
+        <div class="col shadow p-2 mb-3   bg-white rounded">
+          <input type="text" name="Locality" placeholder="Locality" [(ngModel)]="checkout.Locality">
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col shadow p-2 mb-3 bg-white rounded">
+          <input type="text" placeholder="Address 1" [(ngModel)]="checkout.address">
+        </div>
+        <div class="col shadow p-2 mb-3 bg-white rounded">
+          <input type="text" placeholder="Address 2" [(ngModel)]="checkout.address1">
+        </div>
       </div>
 
+      <div class="row">
+        <div class="col shadow p-2 mb-3 bg-white rounded">
+          <input type="text" placeholder="City/District/Town" name="city" [(ngModel)]="checkout.city">
+        </div>
+        <div class="col shadow p-2 mb-3 bg-white rounded">
+          <input type="text" placeholder="State" name="state" [(ngModel)]="checkout.state">
+        </div>
+
+
+      </div>
+
+      <div class="row">
+        <div class="col shadow p-2 mb-3 bg-white roundedl">
+          <input type="text" name="landmark" [(ngModel)]="checkout.landmark" placeholder="Landmark(Optional)">
+        </div>
+        <div class="col shadow p-2 mb-3 bg-white rounded">
+          <input type="text" placeholder="Street" name="street" [(ngModel)]="checkout.street">
+        </div>
+
+
+      </div>
+
+      <div class="row">
+        <div class="col shadow p-2 mb-3 bg-white roundedl">
+          <input type="text" name="country" [(ngModel)]="checkout.country" placeholder="Country">
+        </div>
+        <div class="col shadow p-2 mb-3 bg-white rounded">
+          <input type="text" placeholder="email" name="other" [(ngModel)]="checkout.email">
+        </div>
+
+
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button [disabled]="validateForm()" (click)="saveAddress()" type="button" class="btn btn-primary">Save changes</button>
+      </div>
+
+  </div>
+</div>
+</div>
+</div>
+<!-- <div *ngIf="!isShippingAddressSame" class="col-9" style="border-right: solid ;"> -->
+  <!-- <div  class="font-weight-bold">Select a delivery address</div>
+   -->
+   <!-- <a data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+  <span class="mx-2 text-muted" style="font-size: x-large; font-weight: 500;">Select a Billing address</span>
+   </a>
+
+  <div class="row m-4 py-2 collapse" id="collapseExample1" >
+
+    <div *ngFor="let item of addressArray" class="col-lg-6">
+      <div class="row">
+        <div class="col-1" style="margin-top:5%;"> <input type="radio" name="gender1"  (change)="myFunction1(item)"></div>
+        <div class="col-11 p-2">
+          <div class="card text-center">
+            <div class="card-header">
+              Address {{item.id}}
+            </div>
+            <div class="card-body" style="height: 100px;">
+              <h5 class="card-title">{{item.firstName}} {{item.lastName}}</h5>
+              <p class="card-text">{{item.addressLine1}}</p>
+
+            </div>
+
+          </div>
         </div>
 
       </div>
 
     </div>
 
-  </div>
-  <div class="text-muted p-2" style="font-weight: 500; font-size: larger;">Address Type:</div>
-<div class="row">
-  <div class="col-6">
-<div class="input-group mb-3">
+  </div> -->
+  <div class="row">
+    <div class="col-9">
+  <div class="px-3">
+     <a data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+    <span class="mx-2 text-muted" style="font-size: x-large; font-weight: 500;">Select a Billing address</span>
+  </a>
 
-  <div class="input-group-prepend">
+<div class="collapse" id="collapseExample1">
+  <div class="row m-4 py-2 ">
 
-    <br>
-    <div class="input-group-text">
 
-      <input (change)="isShippingAddressSame=!isShippingAddressSame" type="checkbox" checked aria-label="Checkbox for following text input">
+
+    <div *ngFor="let item of addressArray" class="col-lg-6">
+      <div class="row">
+        <div class="col-1" style="margin-top:5%;"> <input type="radio" name="gender" id="male"
+            (change)="myFunction1(item)"></div>
+        <div class="col-11 p-2  ">
+
+          <div class="card text-center">
+            <div class="card-header">
+              Address {{item.id}}
+            </div>
+            <div class="card-body" style="height: 100px;">
+              <h5 class="card-title">{{item.firstName}} {{item.lastName}}</h5>
+              <p class="card-text">{{item.addressLine1}}</p>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
-  <input disabled=true type="text" style="font-weight: 500;" class="form-control" value="Is Billing Address same as Shipping Address?" aria-label="Text input with checkbox">
 </div>
 </div>
-</div>
+
+<!-- </div> -->
+<!-- <div class="text-muted p-2" style="font-weight: 500; font-size: larger;">Address Type:</div>
+<div class="row">
+  <div class="col-6">
+    <div class="input-group mb-3">
+
+      <div class="input-group-prepend">
+
+        <br>
+        <div class="input-group-text">
+
+          <input (change)="isShippingAddressSame=!isShippingAddressSame" type="checkbox" checked
+            aria-label="Checkbox for following text input">
+        </div>
+      </div>
+      <input disabled=true type="text" style="font-weight: 500;" class="form-control"
+        value="Is Billing Address same as Shipping Address?" aria-label="Text input with checkbox">
+    </div>
+  </div>
+</div> -->
 
 <!-- Button trigger modal -->
 
@@ -133,93 +280,5 @@
 
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style=" background-color: gold;">
-        <h5 class="modal-title" id="exampleModalLabel">Add Address</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body container">
-        <div class="row">
-          <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input type="text" placeholder="Name" name="firstName" [(ngModel)]="checkout.firstName">
-          </div>
-          <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input type="text" name="Middle Name"  placeholder="Middle Name"
-              [(ngModel)]="checkout.middleName">
-          </div>
 
-        </div>
-        <div class="row">
-          <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input type="text" placeholder="Last Name" name="firstName" [(ngModel)]="checkout.lastName">
-          </div>
-          <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input type="text" name="Phone Number"  placeholder="Phone Number"
-              [(ngModel)]="checkout.phoneNumber">
-          </div>
-
-        </div>
-        <div class="row">
-          <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input type="text" placeholder="Pincode" name="pincode" [(ngModel)]="checkout.pincode">
-          </div>
-          <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input type="text" name="Locality" placeholder="Locality" [(ngModel)]="checkout.Locality">
-          </div>
-
-        </div>
-        <div class="row">
-          <div class="col shadow p-2 mb-3 bg-white rounded">
-           <input type="text" placeholder="Address 1"[(ngModel)]="checkout.address" >
-          </div>
-          <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input type="text" placeholder="Address 2"[(ngModel)]="checkout.address1" >
-           </div>
-        </div>
-
-        <div class="row">
-          <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input type="text" placeholder="City/District/Town" name="city" [(ngModel)]="checkout.city">
-          </div>
-          <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input type="text" placeholder="State" name="state" [(ngModel)]="checkout.state">
-          </div>
-
-
-        </div>
-
-        <div class="row">
-          <div class="col shadow p-2 mb-3 bg-white roundedl">
-            <input type="text" name="landmark" [(ngModel)]="checkout.landmark" placeholder="Landmark(Optional)">
-          </div>
-          <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input type="text" placeholder="Street" name="street" [(ngModel)]="checkout.street">
-          </div>
-
-
-        </div>
-
-        <div class="row">
-          <div class="col shadow p-2 mb-3 bg-white roundedl">
-            <input type="text" name="country" [(ngModel)]="checkout.country" placeholder="Country">
-          </div>
-          <div class="col shadow p-2 mb-3 bg-white rounded" >
-            <input type="text" placeholder="email" name="other" [(ngModel)]="checkout.email">
-          </div>
-
-
-        </div>
-
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button (click)="saveAddress()" type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
