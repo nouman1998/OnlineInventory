@@ -16,38 +16,38 @@
       <div class="row m-4 py-2 ">
 
 
-        <div style="background-color: rgb(191, 176, 176);" id="carouselExampleIndicators" class="carousel slide col-12" data-slide="false" data-interval="false">
+        <div style="background-color: rgb(191, 176, 176);" id="carouselExampleIndicators" class="carousel slide col-12"
+          data-slide="false" data-interval="false">
 
           <div class="carousel-inner">
 
-            <div *ngFor="let item of addressArray; let i = index" class="carousel-item"  [ngClass]="{'active' : i == 0}">
+            <div *ngFor="let item of addressArray; let i = index" class="carousel-item" [ngClass]="{'active' : i == 0}">
 
-                  <div class="row" style="margin-left: 22%;" >
-                    <div class="col-1" style="margin-top:5%;">
+              <div class="row" style="margin-left: 22%;">
+                <div class="col-1" style="margin-top:5%;">
 
-                      <input checked="checked" type="radio" name="gender1"
-                        (change)="myFunction(item)">
+                  <input checked="checked" type="radio" name="gender1" (change)="myFunction(item)">
 
-                      </div>
-                    <div class="col-11 p-2  ">
+                </div>
+                <div class="col-11 p-2  ">
 
-                      <div class="card text-center">
-                        <div class="card-header">
-                          Address {{item.id}}
-                        </div>
-                        <div class="card-body" style="height: 100px;">
-                          <h5 class="card-title">{{item.firstName}} {{item.lastName}}</h5>
-                          <p class="card-text">{{item.addressLine1}}</p>
-
-                        </div>
-                      </div>
+                  <div class="card text-center">
+                    <div class="card-header">
+                      Address {{item.id}}
+                    </div>
+                    <div class="card-body" style="height: 100px;">
+                      <h5 class="card-title">{{item.firstName}} {{item.lastName}}</h5>
+                      <p class="card-text">{{item.addressLine1}}</p>
 
                     </div>
                   </div>
 
-
-
+                </div>
               </div>
+
+
+
+            </div>
 
 
 
@@ -122,28 +122,33 @@
       <div class="modal-body container">
         <div class="row">
           <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input  class="form-control" type="text" placeholder="Name" name="firstName" [(ngModel)]="checkout.firstName">
+            <input class="form-control" type="text" placeholder="Name" name="firstName"
+              [(ngModel)]="checkout.firstName">
           </div>
           <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input  class="form-control" type="text" name="Middle Name" placeholder="Middle Name" [(ngModel)]="checkout.middleName">
-          </div>
-
-        </div>
-        <div class="row">
-          <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input  class="form-control" type="text" placeholder="Last Name" name="firstName" [(ngModel)]="checkout.lastName">
-          </div>
-          <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input  class="form-control" type="text" name="Phone Number" placeholder="Phone Number" [(ngModel)]="checkout.phoneNumber">
+            <input class="form-control" type="text" name="Middle Name" placeholder="Middle Name"
+              [(ngModel)]="checkout.middleName">
           </div>
 
         </div>
         <div class="row">
           <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input  class="form-control" type="text" placeholder="Pincode" name="pincode" [(ngModel)]="checkout.pincode">
+            <input class="form-control" type="text" placeholder="Last Name" name="firstName"
+              [(ngModel)]="checkout.lastName">
           </div>
           <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input  class="form-control" type="text" name="Locality" placeholder="Locality" [(ngModel)]="checkout.Locality">
+            <input class="form-control" type="text" name="Phone Number" placeholder="Phone Number"
+              [(ngModel)]="checkout.phoneNumber">
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col shadow p-2 mb-3   bg-white rounded">
+            <input class="form-control" type="text" placeholder="Pincode" name="pincode" [(ngModel)]="checkout.pincode">
+          </div>
+          <div class="col shadow p-2 mb-3   bg-white rounded">
+            <input class="form-control" type="text" name="Locality" placeholder="Locality"
+              [(ngModel)]="checkout.Locality">
           </div>
 
         </div>
@@ -152,27 +157,17 @@
             <input class="form-control" type="text" placeholder="Address 1" [(ngModel)]="checkout.address">
           </div>
           <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input  class="form-control" type="text" placeholder="Address 2" [(ngModel)]="checkout.address1">
+            <input class="form-control" type="text" placeholder="Address 2" [(ngModel)]="checkout.address1">
           </div>
         </div>
 
         <div class="row">
           <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input  class="form-control" type="text" placeholder="City/District/Town" name="city" [(ngModel)]="checkout.city">
+            <input class="form-control" type="text" placeholder="City/District/Town" name="city"
+              [(ngModel)]="checkout.city">
           </div>
           <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input  class="form-control" type="text" placeholder="State" name="state" [(ngModel)]="checkout.state">
-          </div>
-
-
-        </div>
-
-        <div class="row">
-          <div class="col shadow p-2 mb-3 bg-white roundedl">
-            <input  class="form-control" type="text" name="landmark" [(ngModel)]="checkout.landmark" placeholder="Landmark(Optional)">
-          </div>
-          <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input  class="form-control" type="text" placeholder="Street" name="street" [(ngModel)]="checkout.street">
+            <input class="form-control" type="text" placeholder="State" name="state" [(ngModel)]="checkout.state">
           </div>
 
 
@@ -180,10 +175,22 @@
 
         <div class="row">
           <div class="col shadow p-2 mb-3 bg-white roundedl">
-            <input  class="form-control" type="text" name="country" [(ngModel)]="checkout.country" placeholder="Country">
+            <input class="form-control" type="text" name="landmark" [(ngModel)]="checkout.landmark"
+              placeholder="Landmark(Optional)">
           </div>
           <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input  class="form-control" type="text" placeholder="email" name="other" [(ngModel)]="checkout.email">
+            <input class="form-control" type="text" placeholder="Street" name="street" [(ngModel)]="checkout.street">
+          </div>
+
+
+        </div>
+
+        <div class="row">
+          <div class="col shadow p-2 mb-3 bg-white roundedl">
+            <input class="form-control" type="text" name="country" [(ngModel)]="checkout.country" placeholder="Country">
+          </div>
+          <div class="col shadow p-2 mb-3 bg-white rounded">
+            <input class="form-control" type="text" placeholder="email" name="other" [(ngModel)]="checkout.email">
           </div>
 
 
@@ -191,10 +198,11 @@
 
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary"  data-toggle="collapse" href="#collapseExample2">Close</button>
+          <button type="button" class="btn btn-secondary" data-toggle="collapse" href="#collapseExample2">Close</button>
 
-        <span data-toggle="collapse" href="#collapseExample2">  <button [disabled]="validateForm()"   (click)="saveAddress()" type="button" class="btn btn-primary">Save
-            changes</button></span>
+          <span data-toggle="collapse" href="#collapseExample2"> <button [disabled]="validateForm()"
+              (click)="saveAddress()" type="button" class="btn btn-primary">Save
+              changes</button></span>
         </div>
 
       </div>
@@ -211,10 +219,11 @@
         <br>
         <div class="input-group-text">
 
-          <input (change)="checkingToggle()" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1" type="checkbox" checked aria-label="Checkbox for following text input">
+          <input (change)="checkingToggle()" data-toggle="collapse" href="#collapseExample1" aria-expanded="false"
+            aria-controls="collapseExample1" type="checkbox" checked aria-label="Checkbox for following text input">
         </div>
       </div>
-      <input type="text" style="font-weight: 500;" class="form-control"
+      <input disabled type="text" style="font-weight: 500;" class="form-control"
         value="Is Billing Address same as Shipping Address?" aria-label="Text input with checkbox">
     </div>
   </div>
@@ -229,34 +238,35 @@
       <div class="collapse" id="collapseExample1">
         <div class="row m-4 py-2 ">
 
-          <div style="background-color: rgb(191, 176, 176);" id="carouselExampleIndicators1" class="carousel slide col-12" data-slide="false" data-ride="carousel"data-interval="false">
+          <div style="background-color: rgb(191, 176, 176);" id="carouselExampleIndicators1"
+            class="carousel slide col-12" data-slide="false" data-ride="carousel" data-interval="false">
 
-          <div class="carousel-inner">
+            <div class="carousel-inner">
 
-            <div *ngFor="let item of addressArray; let i = index" class="carousel-item"  [ngClass]="{'active' : i == 0}">
+              <div *ngFor="let item of addressArray; let i = index" class="carousel-item"
+                [ngClass]="{'active' : i == 0}">
 
-                  <div class="row" style="margin-left: 22%;" >
-                    <div class="col-1" style="margin-top:5%;">
+                <div class="row" style="margin-left: 22%;">
+                  <div class="col-1" style="margin-top:5%;">
 
-                      <input checked type="radio" name="gender" id="male"
-                        (change)="myFunction1(item)">
+                    <input checked type="radio" name="gender" id="male" (change)="myFunction1(item)">
 
-                      </div>
-                    <div class="col-11 p-2  ">
-
-                      <div class="card text-center">
-                        <div class="card-header">
-                          Address {{item.id}}
-                        </div>
-                        <div class="card-body" style="height: 100px;">
-                          <h5 class="card-title">{{item.firstName}} {{item.lastName}}</h5>
-                          <p class="card-text">{{item.addressLine1}}</p>
-
-                        </div>
-                      </div>
-
-                    </div>
                   </div>
+                  <div class="col-11 p-2  ">
+
+                    <div class="card text-center">
+                      <div class="card-header">
+                        Address {{item.id}}
+                      </div>
+                      <div class="card-body" style="height: 100px;">
+                        <h5 class="card-title">{{item.firstName}} {{item.lastName}}</h5>
+                        <p class="card-text">{{item.addressLine1}}</p>
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
 
 
 
@@ -264,48 +274,51 @@
 
 
 
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
           </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
 
         </div>
       </div>
     </div>
-</div>
+  </div>
 </div>
 
 
 <div style="margin-top: 50px" class="h3">Coupon Details</div>
-<div  class="row" >
-  <form  class="col-7 p-4">
+<div class="row">
+  <form class="col-7 p-4">
     <div class="form-group row">
       <label for="staticEmail" class="col-sm-2 col-form-label">Coupon Name</label>
       <div class="col-sm-10">
-        <input [(ngModel)]="coupon.name" name="name" type="text" class="form-control" id="coupanName" placeholder="Coupon Name">
+        <input [(ngModel)]="coupon.name" name="name" type="text" class="form-control" id="coupanName"
+          placeholder="Coupon Name">
 
       </div>
     </div>
     <div class="form-group row">
       <label for="inputPassword" class="col-sm-2 col-form-label">Discount Amount</label>
       <div class="col-sm-10">
-        <input [(ngModel)]="coupon.discountAmount" name="discountAmount" type="text" class="form-control" id="discountAmount" placeholder="Discount Amount">
+        <input [(ngModel)]="coupon.discountAmount" name="discountAmount" type="text" class="form-control"
+          id="discountAmount" placeholder="Discount Amount">
       </div>
     </div>
     <div class="form-group row">
       <label for="inputPassword" class="col-sm-2 col-form-label">Discount Type</label>
       <div class="col-sm-10">
-        <input [(ngModel)]="coupon.discountType" type="text" class="form-control" id="DiscountType" placeholder="Discount Type">
+        <input [(ngModel)]="coupon.discountType" type="text" class="form-control" id="DiscountType"
+          placeholder="Discount Type">
       </div>
     </div>
   </form>
-<!-- <form>
+  <!-- <form>
   <div class="form-group">
     <label for="exampleFormControlInput1"></label>
   </div>
