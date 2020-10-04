@@ -8,45 +8,62 @@
   <div class="col-9" style="border-right: solid ;">
 
     <p>
-      <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      <a data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
         <span class="mx-2 text-muted" style="font-size: x-large; font-weight: 500;">Select a delivery address</span>
       </a>
 
-    <div class="collapse" id="collapseExample">
+    <div class="" id="collapseExample">
       <div class="row m-4 py-2 ">
 
 
+        <div style="background-color: rgb(191, 176, 176);" id="carouselExampleIndicators" class="carousel slide col-12" data-slide="false" data-interval="false">
 
-        <div *ngFor="let item of addressArray" class="col-lg-6">
-          <div class="row">
-            <div class="col-1" style="margin-top:5%;"> <input type="radio" name="gender" id="male"
-                (change)="myFunction(item)"></div>
-            <div class="col-11 p-2  ">
+          <div class="carousel-inner">
 
-              <div class="card text-center">
-                <div class="card-header">
-                  Address {{item.id}}
-                </div>
-                <div class="card-body" style="height: 100px;">
-                  <h5 class="card-title">{{item.firstName}} {{item.lastName}}</h5>
-                  <p class="card-text">{{item.addressLine1}}</p>
+            <div *ngFor="let item of addressArray; let i = index" class="carousel-item"  [ngClass]="{'active' : i == 0}">
 
-                </div>
+                  <div class="row" style="margin-left: 22%;" >
+                    <div class="col-1" style="margin-top:5%;">
+
+                      <input checked="checked" type="radio" name="gender1"
+                        (change)="myFunction(item)">
+
+                      </div>
+                    <div class="col-11 p-2  ">
+
+                      <div class="card text-center">
+                        <div class="card-header">
+                          Address {{item.id}}
+                        </div>
+                        <div class="card-body" style="height: 100px;">
+                          <h5 class="card-title">{{item.firstName}} {{item.lastName}}</h5>
+                          <p class="card-text">{{item.addressLine1}}</p>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+
 
               </div>
-            </div>
+
+
 
           </div>
-
-        </div>
-
-
-        <div class="row">
-
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
 
       </div>
-      <button class="btn btn-primary"  data-toggle="collapse" href="#collapseExample2"
+      <button class="btn btn-primary" data-toggle="collapse" href="#collapseExample2"
         style="width: 117px; height: 39px;margin-left: 88%;">
         Add Address
       </button>
@@ -98,163 +115,95 @@
 
 <div class="row p-2">
 
-<div  class="collapse col-9" id="collapseExample2">
-  <h3 style="text-align: center;">Add New Address</h3>
+  <div class="collapse col-9" id="collapseExample2">
+    <h3 style="text-align: center;">Add New Address</h3>
 
-  <div class="card-body" style="border:solid">
-    <div class="modal-body container">
-      <div class="row">
-        <div class="col shadow p-2 mb-3   bg-white rounded">
-          <input type="text" placeholder="Name" name="firstName" [(ngModel)]="checkout.firstName">
+    <div class="card-body" style="border:solid">
+      <div class="modal-body container">
+        <div class="row">
+          <div class="col shadow p-2 mb-3   bg-white rounded">
+            <input  class="form-control" type="text" placeholder="Name" name="firstName" [(ngModel)]="checkout.firstName">
+          </div>
+          <div class="col shadow p-2 mb-3   bg-white rounded">
+            <input  class="form-control" type="text" name="Middle Name" placeholder="Middle Name" [(ngModel)]="checkout.middleName">
+          </div>
+
         </div>
-        <div class="col shadow p-2 mb-3   bg-white rounded">
-          <input type="text" name="Middle Name" placeholder="Middle Name" [(ngModel)]="checkout.middleName">
+        <div class="row">
+          <div class="col shadow p-2 mb-3   bg-white rounded">
+            <input  class="form-control" type="text" placeholder="Last Name" name="firstName" [(ngModel)]="checkout.lastName">
+          </div>
+          <div class="col shadow p-2 mb-3   bg-white rounded">
+            <input  class="form-control" type="text" name="Phone Number" placeholder="Phone Number" [(ngModel)]="checkout.phoneNumber">
+          </div>
+
         </div>
+        <div class="row">
+          <div class="col shadow p-2 mb-3   bg-white rounded">
+            <input  class="form-control" type="text" placeholder="Pincode" name="pincode" [(ngModel)]="checkout.pincode">
+          </div>
+          <div class="col shadow p-2 mb-3   bg-white rounded">
+            <input  class="form-control" type="text" name="Locality" placeholder="Locality" [(ngModel)]="checkout.Locality">
+          </div>
 
-      </div>
-      <div class="row">
-        <div class="col shadow p-2 mb-3   bg-white rounded">
-          <input type="text" placeholder="Last Name" name="firstName" [(ngModel)]="checkout.lastName">
         </div>
-        <div class="col shadow p-2 mb-3   bg-white rounded">
-          <input type="text" name="Phone Number" placeholder="Phone Number" [(ngModel)]="checkout.phoneNumber">
-        </div>
-
-      </div>
-      <div class="row">
-        <div class="col shadow p-2 mb-3   bg-white rounded">
-          <input type="text" placeholder="Pincode" name="pincode" [(ngModel)]="checkout.pincode">
-        </div>
-        <div class="col shadow p-2 mb-3   bg-white rounded">
-          <input type="text" name="Locality" placeholder="Locality" [(ngModel)]="checkout.Locality">
-        </div>
-
-      </div>
-      <div class="row">
-        <div class="col shadow p-2 mb-3 bg-white rounded">
-          <input type="text" placeholder="Address 1" [(ngModel)]="checkout.address">
-        </div>
-        <div class="col shadow p-2 mb-3 bg-white rounded">
-          <input type="text" placeholder="Address 2" [(ngModel)]="checkout.address1">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col shadow p-2 mb-3 bg-white rounded">
-          <input type="text" placeholder="City/District/Town" name="city" [(ngModel)]="checkout.city">
-        </div>
-        <div class="col shadow p-2 mb-3 bg-white rounded">
-          <input type="text" placeholder="State" name="state" [(ngModel)]="checkout.state">
-        </div>
-
-
-      </div>
-
-      <div class="row">
-        <div class="col shadow p-2 mb-3 bg-white roundedl">
-          <input type="text" name="landmark" [(ngModel)]="checkout.landmark" placeholder="Landmark(Optional)">
-        </div>
-        <div class="col shadow p-2 mb-3 bg-white rounded">
-          <input type="text" placeholder="Street" name="street" [(ngModel)]="checkout.street">
-        </div>
-
-
-      </div>
-
-      <div class="row">
-        <div class="col shadow p-2 mb-3 bg-white roundedl">
-          <input type="text" name="country" [(ngModel)]="checkout.country" placeholder="Country">
-        </div>
-        <div class="col shadow p-2 mb-3 bg-white rounded">
-          <input type="text" placeholder="email" name="other" [(ngModel)]="checkout.email">
-        </div>
-
-
-      </div>
-
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button [disabled]="validateForm()" (click)="saveAddress()" type="button" class="btn btn-primary">Save changes</button>
-      </div>
-
-  </div>
-</div>
-</div>
-</div>
-<!-- <div *ngIf="!isShippingAddressSame" class="col-9" style="border-right: solid ;"> -->
-  <!-- <div  class="font-weight-bold">Select a delivery address</div>
-   -->
-   <!-- <a data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
-  <span class="mx-2 text-muted" style="font-size: x-large; font-weight: 500;">Select a Billing address</span>
-   </a>
-
-  <div class="row m-4 py-2 collapse" id="collapseExample1" >
-
-    <div *ngFor="let item of addressArray" class="col-lg-6">
-      <div class="row">
-        <div class="col-1" style="margin-top:5%;"> <input type="radio" name="gender1"  (change)="myFunction1(item)"></div>
-        <div class="col-11 p-2">
-          <div class="card text-center">
-            <div class="card-header">
-              Address {{item.id}}
-            </div>
-            <div class="card-body" style="height: 100px;">
-              <h5 class="card-title">{{item.firstName}} {{item.lastName}}</h5>
-              <p class="card-text">{{item.addressLine1}}</p>
-
-            </div>
-
+        <div class="row">
+          <div class="col shadow p-2 mb-3 bg-white rounded">
+            <input class="form-control" type="text" placeholder="Address 1" [(ngModel)]="checkout.address">
+          </div>
+          <div class="col shadow p-2 mb-3 bg-white rounded">
+            <input  class="form-control" type="text" placeholder="Address 2" [(ngModel)]="checkout.address1">
           </div>
         </div>
 
-      </div>
-
-    </div>
-
-  </div> -->
-  <div class="row">
-    <div class="col-9">
-  <div class="px-3">
-     <a data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
-    <span class="mx-2 text-muted" style="font-size: x-large; font-weight: 500;">Select a Billing address</span>
-  </a>
-
-<div class="collapse" id="collapseExample1">
-  <div class="row m-4 py-2 ">
-
-
-
-    <div *ngFor="let item of addressArray" class="col-lg-6">
-      <div class="row">
-        <div class="col-1" style="margin-top:5%;"> <input type="radio" name="gender" id="male"
-            (change)="myFunction1(item)"></div>
-        <div class="col-11 p-2  ">
-
-          <div class="card text-center">
-            <div class="card-header">
-              Address {{item.id}}
-            </div>
-            <div class="card-body" style="height: 100px;">
-              <h5 class="card-title">{{item.firstName}} {{item.lastName}}</h5>
-              <p class="card-text">{{item.addressLine1}}</p>
-
-            </div>
-
+        <div class="row">
+          <div class="col shadow p-2 mb-3 bg-white rounded">
+            <input  class="form-control" type="text" placeholder="City/District/Town" name="city" [(ngModel)]="checkout.city">
           </div>
+          <div class="col shadow p-2 mb-3 bg-white rounded">
+            <input  class="form-control" type="text" placeholder="State" name="state" [(ngModel)]="checkout.state">
+          </div>
+
+
+        </div>
+
+        <div class="row">
+          <div class="col shadow p-2 mb-3 bg-white roundedl">
+            <input  class="form-control" type="text" name="landmark" [(ngModel)]="checkout.landmark" placeholder="Landmark(Optional)">
+          </div>
+          <div class="col shadow p-2 mb-3 bg-white rounded">
+            <input  class="form-control" type="text" placeholder="Street" name="street" [(ngModel)]="checkout.street">
+          </div>
+
+
+        </div>
+
+        <div class="row">
+          <div class="col shadow p-2 mb-3 bg-white roundedl">
+            <input  class="form-control" type="text" name="country" [(ngModel)]="checkout.country" placeholder="Country">
+          </div>
+          <div class="col shadow p-2 mb-3 bg-white rounded">
+            <input  class="form-control" type="text" placeholder="email" name="other" [(ngModel)]="checkout.email">
+          </div>
+
+
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"  data-toggle="collapse" href="#collapseExample2">Close</button>
+
+        <span data-toggle="collapse" href="#collapseExample2">  <button [disabled]="validateForm()"   (click)="saveAddress()" type="button" class="btn btn-primary">Save
+            changes</button></span>
         </div>
 
       </div>
-
     </div>
   </div>
 </div>
-</div>
 
-<!-- </div> -->
-<!-- <div class="text-muted p-2" style="font-weight: 500; font-size: larger;">Address Type:</div>
 <div class="row">
-  <div class="col-6">
+  <div class="col-9">
     <div class="input-group mb-3">
 
       <div class="input-group-prepend">
@@ -262,23 +211,114 @@
         <br>
         <div class="input-group-text">
 
-          <input (change)="isShippingAddressSame=!isShippingAddressSame" type="checkbox" checked
-            aria-label="Checkbox for following text input">
+          <input (change)="checkingToggle()" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1" type="checkbox" checked aria-label="Checkbox for following text input">
         </div>
       </div>
-      <input disabled=true type="text" style="font-weight: 500;" class="form-control"
+      <input type="text" style="font-weight: 500;" class="form-control"
         value="Is Billing Address same as Shipping Address?" aria-label="Text input with checkbox">
     </div>
   </div>
-</div> -->
+</div>
+<div class="row">
+  <div class="col-9">
+    <div class="px-3">
+      <a data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+        <span class="mx-2 text-muted" style="font-size: x-large; font-weight: 500;">Select a Billing address</span>
+      </a>
 
-<!-- Button trigger modal -->
+      <div class="collapse" id="collapseExample1">
+        <div class="row m-4 py-2 ">
+
+          <div style="background-color: rgb(191, 176, 176);" id="carouselExampleIndicators1" class="carousel slide col-12" data-slide="false" data-ride="carousel"data-interval="false">
+
+          <div class="carousel-inner">
+
+            <div *ngFor="let item of addressArray; let i = index" class="carousel-item"  [ngClass]="{'active' : i == 0}">
+
+                  <div class="row" style="margin-left: 22%;" >
+                    <div class="col-1" style="margin-top:5%;">
+
+                      <input checked type="radio" name="gender" id="male"
+                        (change)="myFunction1(item)">
+
+                      </div>
+                    <div class="col-11 p-2  ">
+
+                      <div class="card text-center">
+                        <div class="card-header">
+                          Address {{item.id}}
+                        </div>
+                        <div class="card-body" style="height: 100px;">
+                          <h5 class="card-title">{{item.firstName}} {{item.lastName}}</h5>
+                          <p class="card-text">{{item.addressLine1}}</p>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
 
 
-<!-- Modal -->
+
+              </div>
 
 
 
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+        </div>
+      </div>
+    </div>
+</div>
+</div>
 
 
+<div style="margin-top: 50px" class="h3">Coupon Details</div>
+<div  class="row" >
+  <form  class="col-7 p-4">
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">Coupon Name</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="coupon.name" name="name" type="text" class="form-control" id="coupanName" placeholder="Coupon Name">
 
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Discount Amount</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="coupon.discountAmount" name="discountAmount" type="text" class="form-control" id="discountAmount" placeholder="Discount Amount">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Discount Type</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="coupon.discountType" type="text" class="form-control" id="DiscountType" placeholder="Discount Type">
+      </div>
+    </div>
+  </form>
+<!-- <form>
+  <div class="form-group">
+    <label for="exampleFormControlInput1"></label>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Discount Amount</label>
+    <input type="email" class="form-control" id="discountAmount" placeholder="Discount Amount">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Discount Type</label>
+    <input type="email" class="form-control" id="DiscountType" placeholder="Discount Type">
+  </div>
+
+  >
+
+</form> -->
+</div>
