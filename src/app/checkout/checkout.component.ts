@@ -3,6 +3,7 @@ import { Checkout } from './checkout';
 import { HttpClient } from '@angular/common/http';
 import { ɵINTERNAL_BROWSER_PLATFORM_PROVIDERS } from '@angular/platform-browser';
 import { Coupon } from './coupon';
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -12,6 +13,12 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
   address = {}
+  myform
+  isSaving=false;
+  firstButtonSelected = true  ;
+  secondButtonSelected=false;
+  shippingMethod
+  notificationType
    initialAddress= {
     id: 1, "firstName": "Shahzad",
     "middleName": "test",
@@ -44,7 +51,9 @@ export class CheckoutComponent implements OnInit {
       "country": item.country,
     }
     this.address["billToAddress"] = billToAddress;
-    this.address['shipToAddress'] = billToAddress
+    this.address['shipToAddress'] = billToAddress;
+    this.slides = this.chunk(this.cards, 3);
+
   }
   radioButton
   isShippingAddressSame = true
@@ -56,7 +65,7 @@ export class CheckoutComponent implements OnInit {
   this.initialAddress,
 
   ]
-  saveAddress() {
+  saveAddress(funnyDayaForm) {
     console.log(this.checkout)
     let item ={
       "id": this.addressArray.length + 1,
@@ -72,8 +81,8 @@ export class CheckoutComponent implements OnInit {
       "state": this.checkout.state,
       "country": this.checkout.country
     };
-    this.addressArray.unshift(item)
-    // this.addressArray.push(item)
+    // this.addressArray.unshift(item)
+    this.addressArray.push(item)
     let billToAddress = {
       "firstName": item.firstName,
       "middleName": item.middleName,
@@ -87,18 +96,22 @@ export class CheckoutComponent implements OnInit {
       "state": item.state,
       "country": item.country,
     }
-    this.address["billToAddress"] = billToAddress;
+    this.address['shipToAddress']={...billToAddress}
+    this.address["billToAddress"] = {...billToAddress};
+    // this.myform.reset()
+    console.log(funnyDayaForm)
+    funnyDayaForm.reset()
+;    this.isSaving = true;
+    setTimeout(() => { this.isSaving = false; }, 100);
 
-    this.saved = true;
-    setTimeout(() => { this.saved = false; }, 3000);
-
-   this.eraseFormData();
+  //  this.eraseFormData();
   }
   myFunction(item) {
+    debugger
     console.log(item)
     this.radioButton = !this.radioButton
 
-    let billToAddress = {
+    let shipToAddress = {
       "firstName": item.firstName,
       "middleName": item.middleName,
       "lastName": item.lastName,
@@ -111,10 +124,10 @@ export class CheckoutComponent implements OnInit {
       "state": item.state,
       "country": item.country,
     }
-    this.address["billToAddress"] = billToAddress;
+    this.address["shipToAddress"] = {...shipToAddress};
 
     if (this.isShippingAddressSame) {
-      this.address["shipToAddress"] = billToAddress;
+      this.address["billToAddress"] = {...shipToAddress};
     }
 
     console.log(this.address)
@@ -123,20 +136,20 @@ export class CheckoutComponent implements OnInit {
   myFunction1(item) {
     debugger
     if (!this.isShippingAddressSame) {
-      let shipToAddress = {
+      let billToAddress = {
         "firstName": item.firstName,
         "middleName": item.middleName,
         "lastName": item.lastName,
         "phone": item.phoneNumber,
         "email": item.email,
-        "addressLine1": item.address,
-        "addressLine2": item.address1,
+        "addressLine1": item.addressLine1,
+      "addressLine2": item.addressLine2,
         "city": item.city,
         "zipCode": item.zipCode,
         "state": item.state,
         "country": item.country,
       }
-      this.address["billToAddress"] = shipToAddress;
+      this.address["billToAddress"] = {...billToAddress};
 
 
       console.log(this.address);
@@ -178,7 +191,7 @@ export class CheckoutComponent implements OnInit {
     this.orderJson['orderStatus'] = 1;
     this.orderJson['paymentStatus'] = "";
     this.orderJson['notificationId'] = 2;
-    this.orderJson['shippingMethod'] = "";
+    this.orderJson['shippingMethod'] = this.shippingMethod;
     this.orderJson['shippingAmt'] = "";
     this.orderJson['items'] = [
 
@@ -218,21 +231,22 @@ export class CheckoutComponent implements OnInit {
     console.log("bbbbbbbb", this.orderJson)
 
   }
-  validateForm() {
-    console.log(this.checkout)
-    if (!this.checkout.address || (this.checkout.phoneNumber.length > 15 || this.checkout.phoneNumber.length == 0 || !this.checkout.phoneNumber) || !this.checkout.pincode ||
-      !this.checkout.firstName || !this.checkout.country || !this.checkout.state || !this.checkout.city
-    ) { return true }
-    else { false }
-  }
+  // validateForm() {
+  //   console.log(this.checkout)
+  //   if (!this.checkout.address || (this.checkout.phoneNumber.length > 15 || this.checkout.phoneNumber.length == 0 || !this.checkout.phoneNumber) || !this.checkout.pincode ||
+  //     !this.checkout.firstName || !this.checkout.country || !this.checkout.state || !this.checkout.city
+  //   ) { return true }
+  //   else { false }
+  // }
 
   checkingToggle() {
 
-
+    this.secondButtonSelected=false;
+    this.firstButtonSelected=true
     this.isShippingAddressSame = !this.isShippingAddressSame;
     console.log(this.isShippingAddressSame);
     if (!this.isShippingAddressSame) {
-      this.address['billToAddress'] = {};
+
 
     }
     else{
@@ -256,5 +270,87 @@ export class CheckoutComponent implements OnInit {
     this.checkout.street="";
     this.checkout.address1=""
     this.checkout.address=""
+  }
+  hello(obj)
+  {
+    console.log(obj)
+  }
+
+
+
+
+
+
+
+
+  cards = [
+    {
+      title: 'Card Title 1',
+      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
+      buttonText: 'Button',
+      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
+    },
+    {
+      title: 'Card Title 2',
+      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
+      buttonText: 'Button',
+      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
+    },
+    {
+      title: 'Card Title 3',
+      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
+      buttonText: 'Button',
+      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
+    },
+    {
+      title: 'Card Title 4',
+      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
+      buttonText: 'Button',
+      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
+    },
+    {
+      title: 'Card Title 5',
+      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
+      buttonText: 'Button',
+      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
+    },
+    {
+      title: 'Card Title 6',
+      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
+      buttonText: 'Button',
+      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
+    },
+    {
+      title: 'Card Title 7',
+      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
+      buttonText: 'Button',
+      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
+    },
+    {
+      title: 'Card Title 8',
+      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
+      buttonText: 'Button',
+      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
+    },
+    {
+      title: 'Card Title 9',
+      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
+      buttonText: 'Button',
+      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
+    },
+  ];
+
+  slides: any = [[]];
+  chunk(arr, chunkSize) {
+    let R = [];
+    for (let i = 0, len = arr.length; i < len; i += chunkSize) {
+      R.push(arr.slice(i, i + chunkSize));
+    }
+    return R;
+  }
+
+  toggleSelection(){
+    this.firstButtonSelected=!this.firstButtonSelected;
+    this.secondButtonSelected=!this.secondButtonSelected;
   }
 }

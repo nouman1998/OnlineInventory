@@ -7,88 +7,444 @@
 <div class="row px-3" style="height: 1000%; ">
   <div class="col-9" style="border-right: solid ;">
 
-    <p>
-      <a data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
-        <span class="mx-2 text-muted" style="font-size: x-large; font-weight: 500;">Select a delivery address</span>
-      </a>
-
-    <div class="" id="collapseExample">
-      <div class="row m-4 py-2 ">
+    <div class="row">
 
 
-        <div style="background-color: rgb(191, 176, 176);" id="carouselExampleIndicators" class="carousel slide col-12"
-          data-slide="false" data-interval="false">
+      <div class="col-6 p-2">
 
-          <div class="carousel-inner">
+        <button [disabled]="firstButtonSelected" data-toggle="collapse" href="#collapseExample" class="mx-4 btn"
+          [ngClass]="{'btn-secondary':(firstButtonSelected),'btn-primary':(!firstButtonSelected)}" aria-expanded="true"
+          aria-controls="collapseExample" (click)="toggleSelection()">Select a Delivery Address</button>
+      </div>
+      <div class="col-6 p-2">
 
-            <div *ngFor="let item of addressArray; let i = index" class="carousel-item" [ngClass]="{'active' : i == 0}">
+        <button *ngIf="!isShippingAddressSame" [disabled]="secondButtonSelected" (click)="toggleSelection()"
+          data-toggle="collapse" href="#collapseExample1" class="mx-4 btn" style="float:right;" aria-expanded="true"
+          aria-controls="collapseExample1  "
+          [ngClass]="{'btn-secondary':(secondButtonSelected),'btn-primary':(!secondButtonSelected)}">Select a billing
+          Address</button>
+      </div>
 
-              <div class="row" style="margin-left: 22%;">
-                <div class="col-1" style="margin-top:5%;">
+    </div>
+    <div class="row">
+      <div class="col-7 mx-4 px-2">
+        <div class="input-group">
 
-                  <input checked="checked" type="radio" name="gender1" (change)="myFunction(item)">
+          <div class="input-group-prepend">
 
-                </div>
-                <div class="col-11 p-2  ">
+            <br>
+            <div class="" style="height: 28px;">
 
-                  <div class="card text-center">
-                    <div class="card-header">
-                      Address {{item.id}}
-                    </div>
-                    <div class="card-body" style="height: 100px;">
-                      <h5 class="card-title">{{item.firstName}} {{item.lastName}}</h5>
-                      <p class="card-text">{{item.addressLine1}}</p>
+              <input (change)="checkingToggle()" type="checkbox" checked aria-label="Checkbox for following text input">
+              <span style="height: 28px; font-size: 13px; font-weight: 400;"> &nbsp; Is Billing Address same as Shipping
+                Address?</span>
+            </div>
+          </div>
 
-                    </div>
-                  </div>
+        </div>
+      </div>
+      <div class="col-4">
+
+      </div>
+    </div>
+    <!-- <div class="" id="collapseExample"> -->
+    <div class="row mx-4 py-2 ">
+
+
+
+      <carousel id="collapseExample" cellsToShow=2 height=120 class=""
+        *ngIf="((!isSaving&&firstButtonSelected)||(!isSaving&&isShippingAddressSame))">
+
+        <div *ngFor="let item of addressArray; let i = index" class="carousel-cell">
+          <div class="row" style="margin-left: 10%;">
+            <div class="col-1" style="margin-top:5%;">
+
+              <input [attr.checked]="i==0" type="radio" id="1" name="gender1" (change)="myFunction(item)">
+
+            </div>
+            <div class="col-10 ">
+
+              <div class="card text-center" style="height: 100px;">
+
+                <div class="card-body">
+                  <h5 style="font-size: 13px;" class="card-title">{{item.firstName}} {{item.lastName}}</h5>
+                  <p style="font-size:11px;" class="card-text">{{item.addressLine1}}</p>
 
                 </div>
               </div>
 
+            </div>
+          </div>
+        </div>
+
+      </carousel>
+
+
+      <carousel id="collapseExample1" cellsToShow=2 height=120 class=""
+        *ngIf="(!isSaving && secondButtonSelected && !isShippingAddressSame)">
+        <div *ngFor="let item of addressArray;let i=index" class="carousel-cell">
+          <div class="row" style="margin-left: 10%;">
+            <div class="col-1" style="margin-top:5%;">
+
+              <input [attr.checked]="i==0" type="radio" name="gender" id="male" (change)="myFunction1(item)">
 
 
             </div>
+            <div class="col-10">
 
+              <div class="card text-center" style="height: 100px;">
 
+                <div class="card-body">
+                  <h5 style="font-size: 13px;" class="card-title">{{item.firstName}} {{item.lastName}}</h5>
+                  <p style="font-size:11px;" class="card-text">{{item.addressLine1}}</p>
 
+                </div>
+              </div>
+
+            </div>
           </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
         </div>
 
-      </div>
-      <button class="btn btn-primary" data-toggle="collapse" href="#collapseExample2"
-        style="width: 117px; height: 39px;margin-left: 88%;">
+      </carousel>
+
+      <button class="btn btn-warning" data-toggle="collapse" href="#collapseExample2"
+        style="margin-left: 88%; margin-bottom: 5px;">
         Add Address
       </button>
+      <div class="card text-center" style="width: 100%; height: 140px;">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="card" style="height: 100px;margin-left: 20%;">
+                <div class="card-body">
+                  <h5 style="font-size: 13px;" class="card-title">Delievery Address</h5>
+                  <p style="font-size:11px;" class="card-text">{{address['shipToAddress'].addressLine1}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card" style="height: 100px;margin-left: 15%;">
+                <div class="card-body">
+                  <h5 style="font-size: 13px;" class="card-title">Billing Address</h5>
+                  <p style="font-size:11px;" class="card-text">{{address['billToAddress'].addressLine1}}</p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
     </div>
 
+    <div class="row p-2">
+
+      <div class="collapse col-12" id="collapseExample2">
+        <h3 style="text-align: center;">Add New Address</h3>
+
+        <div class="card-body" style="border:solid">
+          <div class="modal-body container">
+            <form #funnyDayaForm="ngForm" name="myform">
+              <div class="row">
+
+                <div class="col-4   p-2 mb-3    ">
+                  <input required #firstName="ngModel" class="form-control" type="text" placeholder="Name"
+                    name="firstName" [(ngModel)]="checkout.firstName"
+                    [ngClass]="{'is-invalid':(firstName.invalid && (firstName.dirty || firstName.touched))}">
+
+                  <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+
+                    <small *ngIf="firstName.errors.required">
+                      First Name is required.
+                    </small>
+                  </div>
+
+                </div>
+                <div class="col-4   p-2 mb-3    ">
+                  <input class="form-control" type="text" name="MiddleName" placeholder="Middle Name"
+                    [(ngModel)]="checkout.middleName">
+                </div>
+                <div class="col-4   p-2 mb-3    ">
+                  <input required #lastName="ngModel" class="form-control" type="text" placeholder="Last Name"
+                    name="lastName" [(ngModel)]="checkout.lastName"
+                    [ngClass]="{'is-invalid':(lastName.invalid && (lastName.dirty || lastName.touched))}">
+
+
+                  <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+
+                    <small *ngIf="lastName.errors.required">
+                      Last Name is required.
+                    </small>
+                  </div>
+
+                </div>
+              </div>
+              <div class="row">
+
+                <div class="col-4   p-2 mb-3    ">
+                  <input type='number' required minlength=11 maxlength=15 class="form-control" type="text"
+                    name="PhoneNumber" placeholder="Phone Number" #PhoneNumber="ngModel"
+                    [(ngModel)]="checkout.phoneNumber"
+                    [ngClass]="{'is-invalid':(PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched))}">
+                  <div *ngIf="PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched)"
+                    class="alert alert-danger">
+
+                    <small *ngIf="PhoneNumber.errors.required">
+                      Phone Number is required.
+                    </small>
+
+                    <small *ngIf="PhoneNumber.errors?.minlength">
+                      Phone Number must be at least 11 characters long.
+                    </small>
+                    <small *ngIf="PhoneNumber.errors?.maxlength">
+                      Phone Number can be of max 15 charcters.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="col-4   p-2 mb-3    ">
+                  <input type='number' required minlength=5 maxlength=5 class="form-control" type="text"
+                    placeholder="Pincode" name="pincode" #pincode="ngModel" [(ngModel)]="checkout.pincode"
+                    [ngClass]="{'is-invalid':(pincode.invalid && (pincode.dirty || pincode.touched))}">
+                  <div *ngIf="pincode.invalid && (pincode.dirty || pincode.touched)" class="alert alert-danger">
+
+                    <small *ngIf="pincode.errors.required">
+                      Pincode is required.
+                    </small>
+
+                    <small *ngIf="pincode.errors?.minlength">
+                      Pincode must be at least 5 characters long.
+                    </small>
+                    <small *ngIf="pincode.errors?.maxlength">
+                      Pincode can be of max 5 charcters.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="col-4   p-2 mb-3    ">
+                  <input class="form-control" type="text" name="Locality" placeholder="Locality"
+                    [(ngModel)]="checkout.Locality" name="locality">
+
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-4  p-2 mb-3 ">
+                  <input required class="form-control" type="text" placeholder="Address 1" name="address1"
+                    #address1="ngModel" [(ngModel)]="checkout.address"
+                    [ngClass]="{'is-invalid':(address1.invalid && (address1.dirty || address1.touched))}">
+                  <div *ngIf="address1.invalid && (address1.dirty || address1.touched)" class="alert alert-danger">
+
+                    <small *ngIf="address1.errors.required">
+                      Address is required.
+                    </small>
+
+
+                  </div>
+                </div>
+                <div class="col-4   p-2 mb-3  ">
+                  <input name="Address2" class="form-control" type="text" placeholder="Address 2"
+                    [(ngModel)]="checkout.address1">
+                </div>
+                <div class="col-4   p-2 mb-3  ">
+                  <input required class="form-control" type="text" placeholder="City/District/Town" name="city"
+                    #city="ngModel" [(ngModel)]="checkout.city"
+                    [ngClass]="{'is-invalid':(city.invalid && (city.dirty || city.touched))}">
+                  <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+
+                    <small *ngIf="city.errors.required">
+                      City is required.
+                    </small>
+
+
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4   p-2 mb-3  ">
+                  <input required class="form-control" type="text" placeholder="State" name="state" #state="ngModel"
+                    [(ngModel)]="checkout.state"
+                    [ngClass]="{'is-invalid':(state.invalid && (state.dirty || state.touched))}">
+                  <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert alert-danger">
+
+                    <small *ngIf="state.errors.required">
+                      State is required.
+                    </small>
+
+
+                  </div>
+                </div>
+                <div class="col-4   p-2 mb-3  l">
+                  <input class="form-control" type="text" name="landmark" [(ngModel)]="checkout.landmark"
+                    placeholder="Landmark(Optional)">
+                </div>
+                <div class="col-4   p-2 mb-3  ">
+                  <input required class="form-control" type="text" placeholder="Street" name="street" #street="ngModel"
+                    [(ngModel)]="checkout.street"
+                    [ngClass]="{'is-invalid':(street.invalid && (street.dirty || street.touched))}">
+                  <div *ngIf="street.invalid && (street.dirty || street.touched)" class="alert alert-danger">
+
+                    <small *ngIf="street.errors.required">
+                      Street is required.
+                    </small>
+
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-4   p-2 mb-3  l">
+                  <input required class="form-control" type="text" name="country" [(ngModel)]="checkout.country"
+                    #country="ngModel" placeholder="Country"
+                    [ngClass]="{'is-invalid':(country.invalid && (country.dirty || country.touched))}">
+                  <div *ngIf="country.invalid && (country.dirty || country.touched)" class="alert alert-danger">
+
+                    <small *ngIf="country.errors.required">
+                      Country is required.
+                    </small>
+
+
+                  </div>
+                </div>
+
+                <div class="col-4   p-2 mb-3  ">
+                  <input email=true required type="email" class="form-control" type="text" placeholder="email"
+                    name="email" #email="ngModel" [(ngModel)]="checkout.email" (click)="hello(email)"
+                    [ngClass]="{'is-invalid':(email.invalid && (email.dirty || email.touched))}">
+                  <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+
+                    <small *ngIf="email.errors.required">
+                      Email is required.
+                    </small>
+
+                    <small *ngIf="email.errors.email">
+                      Enter a Valid Email.
+                    </small>
+
+                  </div>
+
+                </div>
+
+                <!-- <div class="row">
+
+
+
+
+          </div> -->
+                <!--
+          <div class="row">
+
+
+            </div> -->
+
+
+              </div>
+
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-toggle="collapse"
+                  href="#collapseExample2">Close</button>
+
+                <span data-toggle="collapse" href="#collapseExample2"> <button [disabled]="!(funnyDayaForm.form.valid)"
+                    (click)="saveAddress(funnyDayaForm); " type="button" class="btn btn-primary">Save
+                    changes</button></span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+    <div class="row">
+      <div class="col-7">
+        <div class="mx-4">
+          <h2 style="font-size:13px">Notification Type</h2>
+          <form>
+            <div class="form-check-inline">
+              <label class="form-check-label" for="radio1" style="font-size: 13px;">
+                <input style="height: 12px; "  [(ngModel)]="notificationType" type="radio" class="form-check-input" id="radio1" name="optradio"
+                  value="email" checked>Email
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label" for="radio2" style="font-size: 13px;">
+                <input style="height: 12px;  " [(ngModel)]="notificationType" type="radio" class="form-check-input" id="radio2" name="optradio"
+                  value="phone">Phone
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label" style="font-size: 13px;">
+                <input style="height: 12px; " [(ngModel)]="notificationType" type="radio" class="form-check-input" name="optradio" value="book">Both
+              </label>
+            </div>
+
+          </form>
+        </div>
+      </div>
+      <div class="col-5">
+        <h2 style="font-size:13px">Shipping Method</h2>
+        <select ngModel="shippingMethod" style="width: 200px;" id="sMethod" name="shippingMethod">
+          <option value="regular">Regular</option>
+          <option value="card">Credit Card</option>
+
+        </select>
+      </div>
+    </div>
+
+    <div style="margin-top: 10px; font-size: 16px;" class="h3 mx-4">Coupon Details</div>
+    <div class="row">
+      <form class="col-7 p-4">
+        <div class="form-group row">
+          <div class="col-2">  <label for="staticEmail" class="col-sm-2 col-form-label">Coupon Name</label></div>
+
+          <div class="col-sm-10">
+            <input [(ngModel)]="coupon.name" name="name" type="text" class="form-control" id="coupanName"
+              placeholder="Coupon Name">
+
+          </div>
+        </div>
+        <div class="form-group row p-3">
+          <label for="inputPassword" class="col-sm-2 col-form-label">Discount Amount</label>
+          <div class="col-sm-10">
+            <input [(ngModel)]="coupon.discountAmount" name="discountAmount" type="text" class="form-control"
+              id="discountAmount" placeholder="Discount Amount">
+          </div>
+        </div>
+        <div class="form-group row p-3">
+          <label for="inputPassword" class="col-sm-2 col-form-label">Discount Type</label>
+          <div class="col-sm-10">
+            <input [(ngModel)]="coupon.discountType" type="text" class="form-control" id="DiscountType"
+              name="discountType" placeholder="Discount Type">
+          </div>
+        </div>
+      </form>
+
+
+    </div>
   </div>
 
   <div class="col-3">
-    <h3 style="text-align: center; font-size:x-large;" class="text-muted">Delivery Estimate</h3>
-    <span class="h6 text-muted" style=" font-size: larger; padding-bottom: 5px;">Please Note:</span>
-    <p class="font-weight-normal text-muted" style="font-size:medium; padding-top: 4px;">Delivery timelines are
+    <h3 style="text-align: center; font-size:17px;" class="text-muted">Delivery Estimate</h3>
+    <span class="h6 text-muted" style=" font-size: 15px; padding-bottom: 5px;">Please Note:</span>
+    <p class="font-weight-normal text-muted" style="font-size:13px; padding-top: 4px;">Delivery timelines are
       currently taking longer than usual because of COVID.
       Please add 2-5
-      days extra to estimated deliveryx
+      days extra to estimated delivery
     </p>
-    <div class="text-muted" style="font-size: large; font-weight: 500;;">Estimate Delivery 18th Sept 2020</div>
+    <div class="text-muted" style="font-size: 14px; font-weight: 500;;">Estimate Delivery 18th Sept 2020</div>
     <br>
-    <div class="text-uppercase text-muted" style="margin-top: -15px; font-weight: 500;"> Price Details (7 Items)</div>
+    <div class="text-uppercase text-muted" style="margin-top: -15px; font-size: 14px;font-weight: 500;"> Price Details
+      (7 Items)</div>
 
-    <div class="row" style="margin-left: 15px; margin-top: 5px; font-weight: 500;">
+    <div class="row" style="margin-left: 15px; margin-top: 5px; font-weight: 500; font-size: 13px;">
       <div class="col-6 text-muted"> <span>Order Total:</span></div>
       <div class="col-5 text-muted"> <span>Rs. 5342</span></div>
     </div>
 
-    <div class="row py-1" style="margin-left: 15px; font-weight: 500;">
+    <div class="row py-1" style="margin-left: 15px; font-weight: 500; font-size: 13px;">
       <div class="col-7 text-muted"> <span>Delivery Charges:</span></div>
       <div class="col-5 text-muted"> <span>Rs. 50</span></div>
 
@@ -113,129 +469,18 @@
   </div>
 </div>
 
-<div class="row p-2">
-
-  <div class="collapse col-9" id="collapseExample2">
-    <h3 style="text-align: center;">Add New Address</h3>
-
-    <div class="card-body" style="border:solid">
-      <div class="modal-body container">
-        <div class="row">
-          <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input class="form-control" type="text" placeholder="Name" name="firstName"
-              [(ngModel)]="checkout.firstName">
-          </div>
-          <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input class="form-control" type="text" name="Middle Name" placeholder="Middle Name"
-              [(ngModel)]="checkout.middleName">
-          </div>
-
-        </div>
-        <div class="row">
-          <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input class="form-control" type="text" placeholder="Last Name" name="firstName"
-              [(ngModel)]="checkout.lastName">
-          </div>
-          <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input class="form-control" type="text" name="Phone Number" placeholder="Phone Number"
-              [(ngModel)]="checkout.phoneNumber">
-          </div>
-
-        </div>
-        <div class="row">
-          <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input class="form-control" type="text" placeholder="Pincode" name="pincode" [(ngModel)]="checkout.pincode">
-          </div>
-          <div class="col shadow p-2 mb-3   bg-white rounded">
-            <input class="form-control" type="text" name="Locality" placeholder="Locality"
-              [(ngModel)]="checkout.Locality">
-          </div>
-
-        </div>
-        <div class="row">
-          <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input class="form-control" type="text" placeholder="Address 1" [(ngModel)]="checkout.address">
-          </div>
-          <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input class="form-control" type="text" placeholder="Address 2" [(ngModel)]="checkout.address1">
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input class="form-control" type="text" placeholder="City/District/Town" name="city"
-              [(ngModel)]="checkout.city">
-          </div>
-          <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input class="form-control" type="text" placeholder="State" name="state" [(ngModel)]="checkout.state">
-          </div>
 
 
-        </div>
 
-        <div class="row">
-          <div class="col shadow p-2 mb-3 bg-white roundedl">
-            <input class="form-control" type="text" name="landmark" [(ngModel)]="checkout.landmark"
-              placeholder="Landmark(Optional)">
-          </div>
-          <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input class="form-control" type="text" placeholder="Street" name="street" [(ngModel)]="checkout.street">
-          </div>
-
-
-        </div>
-
-        <div class="row">
-          <div class="col shadow p-2 mb-3 bg-white roundedl">
-            <input class="form-control" type="text" name="country" [(ngModel)]="checkout.country" placeholder="Country">
-          </div>
-          <div class="col shadow p-2 mb-3 bg-white rounded">
-            <input class="form-control" type="text" placeholder="email" name="other" [(ngModel)]="checkout.email">
-          </div>
-
-
-        </div>
-
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-toggle="collapse" href="#collapseExample2">Close</button>
-
-          <span data-toggle="collapse" href="#collapseExample2"> <button [disabled]="validateForm()"
-              (click)="saveAddress()" type="button" class="btn btn-primary">Save
-              changes</button></span>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-9">
-    <div class="input-group mb-3">
-
-      <div class="input-group-prepend">
-
-        <br>
-        <div class="input-group-text">
-
-          <input (change)="checkingToggle()" data-toggle="collapse" href="#collapseExample1" aria-expanded="false"
-            aria-controls="collapseExample1" type="checkbox" checked aria-label="Checkbox for following text input">
-        </div>
-      </div>
-      <input disabled type="text" style="font-weight: 500;" class="form-control"
-        value="Is Billing Address same as Shipping Address?" aria-label="Text input with checkbox">
-    </div>
-  </div>
-</div>
-<div class="row">
+<!-- <div class="row">``
   <div class="col-9">
     <div class="px-3">
-      <a data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
-        <span class="mx-2 text-muted" style="font-size: x-large; font-weight: 500;">Select a Billing address</span>
-      </a>
+
 
       <div class="collapse" id="collapseExample1">
+        <a>
+          <span class="mx-2 text-muted" style="font-size: x-large; font-weight: 500;">Select a Billing address</span>
+        </a>
         <div class="row m-4 py-2 ">
 
           <div style="background-color: rgb(191, 176, 176);" id="carouselExampleIndicators1"
@@ -289,49 +534,4 @@
       </div>
     </div>
   </div>
-</div>
-
-
-<div style="margin-top: 50px" class="h3">Coupon Details</div>
-<div class="row">
-  <form class="col-7 p-4">
-    <div class="form-group row">
-      <label for="staticEmail" class="col-sm-2 col-form-label">Coupon Name</label>
-      <div class="col-sm-10">
-        <input [(ngModel)]="coupon.name" name="name" type="text" class="form-control" id="coupanName"
-          placeholder="Coupon Name">
-
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">Discount Amount</label>
-      <div class="col-sm-10">
-        <input [(ngModel)]="coupon.discountAmount" name="discountAmount" type="text" class="form-control"
-          id="discountAmount" placeholder="Discount Amount">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">Discount Type</label>
-      <div class="col-sm-10">
-        <input [(ngModel)]="coupon.discountType" type="text" class="form-control" id="DiscountType"
-          placeholder="Discount Type">
-      </div>
-    </div>
-  </form>
-  <!-- <form>
-  <div class="form-group">
-    <label for="exampleFormControlInput1"></label>
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Discount Amount</label>
-    <input type="email" class="form-control" id="discountAmount" placeholder="Discount Amount">
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Discount Type</label>
-    <input type="email" class="form-control" id="DiscountType" placeholder="Discount Type">
-  </div>
-
-  >
-
-</form> -->
-</div>
+</div> -->
