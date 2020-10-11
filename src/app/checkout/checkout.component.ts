@@ -4,8 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { ɵINTERNAL_BROWSER_PLATFORM_PROVIDERS } from '@angular/platform-browser';
 import { Coupon } from './coupon';
 import csc from 'country-state-city'
-import { CssSelector } from '@angular/compiler';
-
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -172,8 +170,6 @@ export class CheckoutComponent implements OnInit {
     // this.myform.reset()
     console.log(funnyDayaForm)
     funnyDayaForm.reset()
-      ; this.isSaving = true;
-    setTimeout(() => { this.isSaving = false; }, 100);
   }
   myFunction(item) {
     debugger

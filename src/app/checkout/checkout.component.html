@@ -51,7 +51,7 @@
 
           <div class="row">
             <div class="col-1"></div>
-            <div class="col-lg" style="margin-top: 6px; "> <a href="#" data-toggle="modal" data-target="#exampleModal"
+            <div class="col-lg" style="margin-top: 6px;"> <a href="#" data-toggle="modal" data-target="#exampleModal"
                 style="font-size: 10px; font-weight: 700;margin-left: 9px;">Add New Address</a></div>
           </div>
 
@@ -510,8 +510,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" [disabled]="!(funnyDayaForm.form.valid)"
-          (click)="saveShippingAddress(funnyDayaForm)" data-dismiss="modal">Save changes</button>
+        <button data-dismiss="modal" type="button" class="btn btn-primary"[disabled]="(!(funnyDayaForm.form.valid)||!checkout.country||!checkout.city||!checkout.state)"
+          (click)="saveShippingAddress(funnyDayaForm)" >Save changes</button>
       </div>
     </div>
   </div>
@@ -802,8 +802,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" [disabled]="!(funnyDayaForm.form.valid)"
-          (click)="saveBillingAddress(funnyDayaForm)" data-dismiss="modal">Save changes</button>
+        <button data-dismiss="modal" type="button" class="btn btn-primary"
+          (click)="saveBillingAddress(funnyDayaForm)" >Save changes</button>
       </div>
     </div>
   </div>
