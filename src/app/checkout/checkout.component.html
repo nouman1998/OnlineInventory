@@ -494,7 +494,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"  (click)="saveAddress(funnyDayaForm)" data-dismiss="modal">Save changes</button>
+        <button type="button" class="btn btn-primary"  [disabled]="!(funnyDayaForm.form.valid)" (click)="saveAddress(funnyDayaForm)" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
