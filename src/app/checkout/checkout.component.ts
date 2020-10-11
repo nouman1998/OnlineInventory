@@ -64,7 +64,7 @@ export class CheckoutComponent implements OnInit {
     this.initialAddress,
 
   ]
-  saveAddress(funnyDayaForm) {
+  saveShippingAddress(funnyDayaForm) {
     console.log(this.checkout)
     let item = {
       "id": this.addressArray.length + 1,
@@ -105,6 +105,47 @@ export class CheckoutComponent implements OnInit {
 
     //  this.eraseFormData();
   }
+  billingAddress=[this.initialAddress]
+  saveBillingAddress(funnyDayaForm){
+    console.log(this.checkout)
+    let item = {
+      "id": this.addressArray.length + 1,
+      "firstName": this.checkout.firstName,
+      "middleName": this.checkout.middleName,
+      "lastName": this.checkout.lastName,
+      "phone": this.checkout.phoneNumber,
+      "email": this.checkout.email,
+      "addressLine1": this.checkout.address,
+      "addressLine2": this.checkout.address1,
+      "city": this.checkout.city,
+      "zipCode": this.checkout.pincode,
+      "state": this.checkout.state,
+      "country": this.checkout.country
+    };
+    this.billingAddress.unshift(item)
+    // this.billingAddress.push(item)
+    // this.addressArray.push(item)
+    let billToAddress = {
+      "firstName": item.firstName,
+      "middleName": item.middleName,
+      "lastName": item.lastName,
+      "phone": item.phone,
+      "email": item.email,
+      "addressLine1": item.addressLine1,
+      "addressLine2": item.addressLine2,
+      "city": item.city,
+      "zipCode": item.zipCode,
+      "state": item.state,
+      "country": item.country,
+    }
+    this.address['billToAddress'] = { ...billToAddress }
+    // this.address["billToAddress"] = {...billToAddress};
+    // this.myform.reset()
+    console.log(funnyDayaForm)
+    funnyDayaForm.reset()
+      ; this.isSaving = true;
+    setTimeout(() => { this.isSaving = false; }, 100);
+  }
   myFunction(item) {
     debugger
     console.log(item)
@@ -125,9 +166,9 @@ export class CheckoutComponent implements OnInit {
     }
     this.address["shipToAddress"] = { ...shipToAddress };
 
-    if (this.isShippingAddressSame) {
-      this.address["billToAddress"] = { ...shipToAddress };
-    }
+    // if (this.isShippingAddressSame) {
+    //   this.address["billToAddress"] = { ...shipToAddress };
+    // }
 
     console.log(this.address)
   }
