@@ -14,18 +14,18 @@ export class CheckoutComponent implements OnInit {
   constructor(private http: HttpClient) { }
   address = {}
   myform
-  isSaving=false;
-  firstButtonSelected = true  ;
-  secondButtonSelected=false;
+  isSaving = false;
+  firstButtonSelected = true;
+  secondButtonSelected = false;
   shippingMethod
   notificationType
-   initialAddress= {
+  initialAddress = {
     id: 1, "firstName": "Shahzad",
     "middleName": "test",
     "lastName": "Iqbal",
     "phone": "test",
     "email": "n@n.com",
-    "addressLine1": "House S-33 Street 4 Allama Iqbal Colony Mehmoodabad Gate",
+    "addressLine1": "House S-33 Street 4 Allama Iqbal Colony Mehmoodabad Gate KHI ACHa",
     "addressLine2": "test",
     "city": "test",
     "zipCode": "test",
@@ -52,22 +52,21 @@ export class CheckoutComponent implements OnInit {
     }
     this.address["billToAddress"] = billToAddress;
     this.address['shipToAddress'] = billToAddress;
-    this.slides = this.chunk(this.cards, 3);
 
   }
   radioButton
-  isShippingAddressSame = true
+  isShippingAddressSame = false
   coupon = new Coupon();
   orderJson = {}
   checkout = new Checkout();
   saved = false
   addressArray = [
-  this.initialAddress,
+    this.initialAddress,
 
   ]
   saveAddress(funnyDayaForm) {
     console.log(this.checkout)
-    let item ={
+    let item = {
       "id": this.addressArray.length + 1,
       "firstName": this.checkout.firstName,
       "middleName": this.checkout.middleName,
@@ -81,8 +80,8 @@ export class CheckoutComponent implements OnInit {
       "state": this.checkout.state,
       "country": this.checkout.country
     };
-    // this.addressArray.unshift(item)
-    this.addressArray.push(item)
+    this.addressArray.unshift(item)
+    // this.addressArray.push(item)
     let billToAddress = {
       "firstName": item.firstName,
       "middleName": item.middleName,
@@ -96,15 +95,15 @@ export class CheckoutComponent implements OnInit {
       "state": item.state,
       "country": item.country,
     }
-    this.address['shipToAddress']={...billToAddress}
-    this.address["billToAddress"] = {...billToAddress};
+    this.address['shipToAddress'] = { ...billToAddress }
+    // this.address["billToAddress"] = {...billToAddress};
     // this.myform.reset()
     console.log(funnyDayaForm)
     funnyDayaForm.reset()
-;    this.isSaving = true;
+      ; this.isSaving = true;
     setTimeout(() => { this.isSaving = false; }, 100);
 
-  //  this.eraseFormData();
+    //  this.eraseFormData();
   }
   myFunction(item) {
     debugger
@@ -124,10 +123,10 @@ export class CheckoutComponent implements OnInit {
       "state": item.state,
       "country": item.country,
     }
-    this.address["shipToAddress"] = {...shipToAddress};
+    this.address["shipToAddress"] = { ...shipToAddress };
 
     if (this.isShippingAddressSame) {
-      this.address["billToAddress"] = {...shipToAddress};
+      this.address["billToAddress"] = { ...shipToAddress };
     }
 
     console.log(this.address)
@@ -143,13 +142,13 @@ export class CheckoutComponent implements OnInit {
         "phone": item.phoneNumber,
         "email": item.email,
         "addressLine1": item.addressLine1,
-      "addressLine2": item.addressLine2,
+        "addressLine2": item.addressLine2,
         "city": item.city,
         "zipCode": item.zipCode,
         "state": item.state,
         "country": item.country,
       }
-      this.address["billToAddress"] = {...billToAddress};
+      this.address["billToAddress"] = { ...billToAddress };
 
 
       console.log(this.address);
@@ -160,7 +159,7 @@ export class CheckoutComponent implements OnInit {
     console.log(this.isShippingAddressSame)
     console.log(this.address['billToAddress'])
 
-    if (this.isShippingAddressSame==false && !this.address['billToAddress'] ) {
+    if (this.isShippingAddressSame == false && !this.address['billToAddress']) {
       alert("Select Billing Addres First")
     }
     else {
@@ -212,7 +211,7 @@ export class CheckoutComponent implements OnInit {
     this.orderJson['couponDetail'] = {
       "couponName": this.coupon.name,
       "discountType": this.coupon.discountType,
-      "discountAmt":this.coupon.discountAmount
+      "discountAmt": this.coupon.discountAmount
     };
 
     this.orderJson['paymentDetail'] = {
@@ -241,116 +240,59 @@ export class CheckoutComponent implements OnInit {
 
   checkingToggle() {
 
-    this.secondButtonSelected=false;
-    this.firstButtonSelected=true
+    this.secondButtonSelected = false;
+    this.firstButtonSelected = true
     this.isShippingAddressSame = !this.isShippingAddressSame;
     console.log(this.isShippingAddressSame);
     if (!this.isShippingAddressSame) {
 
 
     }
-    else{
-      this.address['billToAddress']={...this.address['shipToAddress']};
+    else {
+      this.address['billToAddress'] = { ...this.address['shipToAddress'] };
     }
 
   }
 
-  eraseFormData(){
-    this.checkout.email="";
-    this.checkout.firstName="";
-    this.checkout.lastName="";
-    this.checkout.middleName="";
-    this.checkout.phoneNumber="";
-    this.checkout.landmark="";
-    this.checkout.city="";
-    this.checkout.state="";
-    this.checkout.country="";
-    this.checkout.other="";
-    this.checkout.pincode="";
-    this.checkout.street="";
-    this.checkout.address1=""
-    this.checkout.address=""
+  eraseFormData() {
+    this.checkout.email = "";
+    this.checkout.firstName = "";
+    this.checkout.lastName = "";
+    this.checkout.middleName = "";
+    this.checkout.phoneNumber = "";
+    this.checkout.landmark = "";
+    this.checkout.city = "";
+    this.checkout.state = "";
+    this.checkout.country = "";
+    this.checkout.other = "";
+    this.checkout.pincode = "";
+    this.checkout.street = "";
+    this.checkout.address1 = ""
+    this.checkout.address = ""
   }
-  hello(obj)
-  {
+  hello(obj) {
     console.log(obj)
   }
 
 
+  changeFunction = false
+  toggleChange() {
+    this.changeFunction = true;
 
-
-
-
-
-
-  cards = [
-    {
-      title: 'Card Title 1',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Card Title 2',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Card Title 3',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Card Title 4',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Card Title 5',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Card Title 6',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Card Title 7',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Card Title 8',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Card Title 9',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-  ];
-
-  slides: any = [[]];
-  chunk(arr, chunkSize) {
-    let R = [];
-    for (let i = 0, len = arr.length; i < len; i += chunkSize) {
-      R.push(arr.slice(i, i + chunkSize));
-    }
-    return R;
+  }
+  changeBillingFunction = false
+  toggleBillingChange() {
+    this.changeBillingFunction = true;
   }
 
-  toggleSelection(){
-    this.firstButtonSelected=!this.firstButtonSelected;
-    this.secondButtonSelected=!this.secondButtonSelected;
+
+
+
+
+
+
+  toggleSelection() {
+    this.firstButtonSelected = !this.firstButtonSelected;
+    this.secondButtonSelected = !this.secondButtonSelected;
   }
 }
