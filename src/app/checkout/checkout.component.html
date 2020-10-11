@@ -58,7 +58,8 @@
 
         </div>
         <div class="card-footer text-muted">
-          <button class="btn btn-warning" style="height: 30px; font-weight: 700; font-size: 10px; font-family: Arial;" (click)="changeFunction=false">Use this address</button>
+          <button class="btn btn-warning" style="height: 30px; font-weight: 700; font-size: 10px; font-family: Arial;"
+            (click)="changeFunction=false">Use this address</button>
         </div>
       </div>
     </div>
@@ -78,7 +79,8 @@
               instructions</small></a></div>
       </div>
       <div class="col-lg-2">
-        <a href="#" *ngIf="addressArray.length!=0" (click)="changeBillingFunction=true"> <small style="font-weight: 500;">Change</small> </a>
+        <a href="#" *ngIf="addressArray.length!=0" (click)="changeBillingFunction=true"> <small
+            style="font-weight: 500;">Change</small> </a>
         <a href="#" *ngIf="addressArray.length==0" data-toggle="modal" data-target="#exampleModal"> <small
             style="font-weight: 500;">Add Address</small> </a>
       </div>
@@ -110,8 +112,9 @@
                 style="font-size: 10px; font-weight: 700;margin-left: 9px;">Add New Address</a></div>
           </div>
         </div>
-           <div class="card-footer text-muted">
-          <button class="btn btn-warning" style="height: 30px; font-weight: 700; font-size: 10px; font-family: Arial;" (click)="changeBillingFunction=false">Use this address</button>
+        <div class="card-footer text-muted">
+          <button class="btn btn-warning" style="height: 30px; font-weight: 700; font-size: 10px; font-family: Arial;"
+            (click)="changeBillingFunction=false">Use this address</button>
         </div>
 
       </div>
@@ -381,6 +384,7 @@
 
             </div>
           </div>
+
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700;font-family: Arial; margin-left: 7px;">Address Lane 2</small> </label>
           <div class="row" style="   margin-left: 1px;">
@@ -388,37 +392,63 @@
               [(ngModel)]="checkout.address1">
           </div>
 
+
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial; margin-left: 7px;">City</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input required class="form-control" type="text" placeholder="City/District/Town" name="city"
-              #city="ngModel" [(ngModel)]="checkout.city"
-              [ngClass]="{'is-invalid':(city.invalid && (city.dirty || city.touched))}">
-            <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
-
-              <small *ngIf="city.errors.required">
-                City is required.
-              </small>
+              style="font-weight: 700;font-family: Arial; margin-left: 7px;">Country</small> </label>
+          <div class="row " style="   margin-left: 1px;">
 
 
+            <div>
+              <select style="        width: 339px;
+    height: 28px;
+    font-size: 10px;" name="country1" [(ngModel)]="checkout.country" class="form-control"
+                (change)="countryChange()">
+                <option [value]="country.id" *ngFor="let country of countries;let i=index">
+                  {{country.name}}
+                </option>
+
+              </select>
             </div>
+
+
+
+
+            <!-- </div>  -->
           </div>
 
-          <!-- <div class="row"> -->
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700; font-family: Arial;margin-left: 7px;">State</small> </label>
           <div class="row" style="   margin-left: 1px;">
-            <input required class="form-control" type="text" placeholder="State" name="state" #state="ngModel"
-              [(ngModel)]="checkout.state" [ngClass]="{'is-invalid':(state.invalid && (state.dirty || state.touched))}">
-            <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert alert-danger">
 
-              <small *ngIf="state.errors.required">
-                State is required.
-              </small>
+            <select style="    width: 339px;
+          height: 28px;
+          font-size: 10px;" [(ngModel)]="checkout.state" name="state" required class="form-control"
+              id="exampleFormControlSelect1" (change)="provinceChange()">
+              <option [value]="province.id" *ngFor="let province of provinces">
+                {{province.name}}
+              </option>
 
+            </select>
 
-            </div>
           </div>
+          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+              style="font-weight: 700;font-family: Arial; margin-left: 7px;">City</small> </label>
+          <div class="row" style="   margin-left: 1px;">
+
+            <select style="    width: 339px;
+              height: 33px;
+              font-size: 13px;" [(ngModel)]="checkout.city" name="state" required class="form-control"
+              id="exampleFormControlSelect1">
+              <option [value]="city.id" *ngFor="let city of cities">
+                {{city.name}}
+              </option>
+
+            </select>
+
+          </div>
+
+          <!-- <div class="row"> -->
+
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700;font-family: Arial; margin-left: 7px;">Landmark</small> </label>
           <div class="row" style="   margin-left: 1px;">
@@ -443,21 +473,7 @@
           <!-- </div> -->
 
           <!-- <div class="row"> -->
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial; margin-left: 7px;">Country</small> </label>
-          <div class="row " style="   margin-left: 1px;">
-            <input required class="form-control" type="text" name="country" [(ngModel)]="checkout.country"
-              #country="ngModel" placeholder="Country"
-              [ngClass]="{'is-invalid':(country.invalid && (country.dirty || country.touched))}">
-            <div *ngIf="country.invalid && (country.dirty || country.touched)" class="alert alert-danger">
 
-              <small *ngIf="country.errors.required">
-                Country is required.
-              </small>
-
-
-            </div>
-          </div>
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700;font-family: Arial, Helvetica, sans-serif; margin-left: 7px;">Email</small>
           </label>
@@ -494,7 +510,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"  [disabled]="!(funnyDayaForm.form.valid)" (click)="saveShippingAddress(funnyDayaForm)" data-dismiss="modal">Save changes</button>
+        <button type="button" class="btn btn-primary" [disabled]="!(funnyDayaForm.form.valid)"
+          (click)="saveShippingAddress(funnyDayaForm)" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
@@ -658,38 +675,72 @@
             <input name="Address2" class="form-control" type="text" placeholder="Address 2"
               [(ngModel)]="checkout.address1">
           </div>
-
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial; margin-left: 7px;">City</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input required class="form-control" type="text" placeholder="City/District/Town" name="city"
-              #city="ngModel" [(ngModel)]="checkout.city"
-              [ngClass]="{'is-invalid':(city.invalid && (city.dirty || city.touched))}">
-            <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
-
-              <small *ngIf="city.errors.required">
-                City is required.
-              </small>
+              style="font-weight: 700;font-family: Arial; margin-left: 7px;">Country</small> </label>
+          <div class="row " style="   margin-left: 1px;">
 
 
+            <div>
+              <select style="    width: 339px;
+          height: 28px;
+          font-size: 10px;" name="country1" [(ngModel)]="checkout.country" class="form-control"
+                (change)="countryChange()">
+                <option [value]="country.id" *ngFor="let country of countries;let i=index">
+                  {{country.name}}
+                </option>
+
+              </select>
             </div>
+
+
+
+
+            <!-- </div>  -->
           </div>
 
-          <!-- <div class="row"> -->
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700; font-family: Arial;margin-left: 7px;">State</small> </label>
           <div class="row" style="   margin-left: 1px;">
-            <input required class="form-control" type="text" placeholder="State" name="state" #state="ngModel"
-              [(ngModel)]="checkout.state" [ngClass]="{'is-invalid':(state.invalid && (state.dirty || state.touched))}">
-            <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert alert-danger">
 
-              <small *ngIf="state.errors.required">
-                State is required.
-              </small>
+            <select style="    width: 339px;
+        height: 28px;
+        font-size: 10px;" [(ngModel)]="checkout.state" name="state" required class="form-control"
+              id="exampleFormControlSelect1" (change)="provinceChange()">
+              <option [value]="province.id" *ngFor="let province of provinces">
+                {{province.name}}
+              </option>
 
+            </select>
 
-            </div>
           </div>
+          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+              style="font-weight: 700;font-family: Arial; margin-left: 7px;">City</small> </label>
+          <div class="row" style="   margin-left: 1px;">
+            <!-- <input required class="form-control" type="text" placeholder="City/District/Town" name="city"
+            #city="ngModel" [(ngModel)]="checkout.city"
+            [ngClass]="{'is-invalid':(city.invalid && (city.dirty || city.touched))}"> -->
+            <select style="        width: 339px;
+    height: 28px;
+    font-size: 10px;" [(ngModel)]="checkout.city" name="state" required class="form-control"
+              id="exampleFormControlSelect1">
+              <option [value]="city.id" *ngFor="let city of cities">
+                {{city.name}}
+              </option>
+
+            </select>
+            <!-- <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+
+            <small *ngIf="city.errors.required">
+              City is required.
+            </small>
+
+
+          </div> -->
+          </div>
+
+
+          <!-- <div class="row"> -->
+
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700;font-family: Arial; margin-left: 7px;">Landmark</small> </label>
           <div class="row" style="   margin-left: 1px;">
@@ -714,21 +765,7 @@
           <!-- </div> -->
 
           <!-- <div class="row"> -->
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial; margin-left: 7px;">Country</small> </label>
-          <div class="row " style="   margin-left: 1px;">
-            <input required class="form-control" type="text" name="country" [(ngModel)]="checkout.country"
-              #country="ngModel" placeholder="Country"
-              [ngClass]="{'is-invalid':(country.invalid && (country.dirty || country.touched))}">
-            <div *ngIf="country.invalid && (country.dirty || country.touched)" class="alert alert-danger">
 
-              <small *ngIf="country.errors.required">
-                Country is required.
-              </small>
-
-
-            </div>
-          </div>
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700;font-family: Arial, Helvetica, sans-serif; margin-left: 7px;">Email</small>
           </label>
@@ -765,7 +802,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"  [disabled]="!(funnyDayaForm.form.valid)" (click)="saveBillingAddress(funnyDayaForm)" data-dismiss="modal">Save changes</button>
+        <button type="button" class="btn btn-primary" [disabled]="!(funnyDayaForm.form.valid)"
+          (click)="saveBillingAddress(funnyDayaForm)" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>

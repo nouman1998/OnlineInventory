@@ -3,6 +3,8 @@ import { Checkout } from './checkout';
 import { HttpClient } from '@angular/common/http';
 import { ɵINTERNAL_BROWSER_PLATFORM_PROVIDERS } from '@angular/platform-browser';
 import { Coupon } from './coupon';
+import csc from 'country-state-city'
+import { CssSelector } from '@angular/compiler';
 
 @Component({
   selector: 'app-checkout',
@@ -34,8 +36,10 @@ export class CheckoutComponent implements OnInit {
   }
 
   localUrl = 'http://localhost:8080/order/';
-
+  countries
   ngOnInit(): void {
+   this.countries=csc.getAllCountries()
+   this.countries.length=10;
     let item = this.initialAddress;
     let billToAddress = {
       "firstName": item.firstName,
@@ -64,6 +68,29 @@ export class CheckoutComponent implements OnInit {
     this.initialAddress,
 
   ]
+  provinces
+  cities
+  provinceChange(): void {
+
+      this.cities = csc.getCitiesOfState(this.checkout.state);
+      // this.checkout.state = provinceObj.value.name
+      console.log(this.cities);
+
+
+  }
+  countryChange(): void {
+
+    console.log(this.checkout.country);
+      this.provinces = csc.getStatesOfCountry(this.checkout.country)
+      // this.checkout.country = countryObj.value.name
+
+      this.cities = null
+
+    // else {
+    //   this.provinces = null;
+    //   this.cities = null
+    // }
+  }
   saveShippingAddress(funnyDayaForm) {
     console.log(this.checkout)
     let item = {
@@ -75,10 +102,11 @@ export class CheckoutComponent implements OnInit {
       "email": this.checkout.email,
       "addressLine1": this.checkout.address,
       "addressLine2": this.checkout.address1,
-      "city": this.checkout.city,
       "zipCode": this.checkout.pincode,
-      "state": this.checkout.state,
-      "country": this.checkout.country
+      "city": csc.getCityById(this.checkout.city).name ,
+
+      "state": csc.getStateById(this.checkout.state).name  ,
+      "country": csc.getCountryById(this.checkout.country).name
     };
     this.addressArray.unshift(item)
     // this.addressArray.push(item)
@@ -117,10 +145,11 @@ export class CheckoutComponent implements OnInit {
       "email": this.checkout.email,
       "addressLine1": this.checkout.address,
       "addressLine2": this.checkout.address1,
-      "city": this.checkout.city,
       "zipCode": this.checkout.pincode,
-      "state": this.checkout.state,
-      "country": this.checkout.country
+      "city": csc.getCityById(this.checkout.city).name ,
+
+      "state": csc.getStateById(this.checkout.state).name  ,
+      "country": csc.getCountryById(this.checkout.country).name
     };
     this.billingAddress.unshift(item)
     // this.billingAddress.push(item)
