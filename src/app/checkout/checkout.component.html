@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <nav class="navbar navbar-light bg-light" style="background-color: #ffc107 !important;">
-      <a class="navbar-brand m-auto">Checkout (3 Items)</a>
+      <a class="navbar-brand m-auto">Checkout Page</a>
     </nav>
   </div>
 </div>
@@ -12,7 +12,7 @@
     <div [hidden]="changeFunction" class="row">
       <div class="col-lg-1 font-weight-bold">1</div>
       <div class="col-lg-3 font-weight-bold">Shipping address</div>
-      <div class="col-lg-4" style="font-family: Arial;font-size: 13px;font-weight: 400;">
+      <div  class="col-lg-4" style="font-family: Arial;font-size: 13px;font-weight: 400;">
         <div class="row" style="margin-left: 1px; font-weight: 500 ">
           {{address['shipToAddress'].firstName +" "+address['shipToAddress'].lastName}} </div>
         {{address['shipToAddress'].addressLine1}}
@@ -160,12 +160,12 @@
       <div class="col-lg-1 font-weight-bold">4</div>
       <div class="col-lg-3 font-weight-bold"><s></s> Shipping Method </div>
       <div class="col-lg-4" style="font-family: Arial;font-size: 13px;font-weight: 400;">
-        <div class="row" style="margin-left: 1px;  ">
+        <div class="row">
           <div class="col-5">
 
             <select ngModel="shippingMethod" style="width: 200px;" id="sMethod" name="shippingMethod">
               <option value="regular">Regular</option>
-              <option value="card">Credit Card</option>
+              <option value="card">Extra</option>
 
             </select>
           </div>
@@ -182,28 +182,21 @@
       <div class="col-lg-2 font-weight-bold">Coupon Detail</div>
       <div class="col-lg-9" style="font-family: Arial;font-size: 13px;font-weight: 400;">
         <div class="row" style="margin-left: 1px;  ">
-          <div class='col-12'>
+          <div class="col-1"></div>
+          <div class='col-5'>
             <form>
 
-              <!-- <div class="col-2">  <label for="staticEmail" class="col-sm-2 col-form-label">Coupon Name</label></div> -->
-              <div class="row">
-                <div class="col-6">
-                  <input [(ngModel)]="coupon.name" name="name" type="text" class="form-control" id="coupanName"
-                    placeholder="Coupon Name">
 
-                </div>
-                <div class="col-6">
-                  <input [(ngModel)]="coupon.discountType" type="text" class="form-control" id="DiscountType"
-                    name="discountType" placeholder="Discount Type">
-                </div>
-              </div>
+
+
+              <input [(ngModel)]="coupon.name" name="name" type="text" class="form-control" id="coupanName"
+                placeholder="Coupon Name" style="    margin-left: 7px;">
 
 
 
 
-              <!-- <label for="inputPassword" class="col-sm-2 col-form-label">Discount Type</label> -->
 
-              <!-- </div> -->
+
             </form>
           </div>
         </div>
@@ -234,7 +227,7 @@
     </div>
 
     <div class="row py-1" style="margin-left: 15px; font-weight: 500; font-size: 13px;">
-      <div class="col-7 "> <span>Delivery Charges:</span></div>
+      <div class="col-6 "> <span>Delivery Charges:</span></div>
       <div class="col-5 "> <span>Rs. 50</span></div>
 
     </div>
@@ -401,8 +394,7 @@
             <div>
               <select style="        width: 339px;
     height: 28px;
-    font-size: 10px;" name="country1" [(ngModel)]="checkout.country" class="form-control"
-                (change)="countryChange()">
+    font-size: 10px;" name="country1" [(ngModel)]="checkout.country" class="form-control" (change)="countryChange()">
                 <option [value]="country.id" *ngFor="let country of countries;let i=index">
                   {{country.name}}
                 </option>
@@ -510,8 +502,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button data-dismiss="modal" type="button" class="btn btn-primary"[disabled]="(!(funnyDayaForm.form.valid)||!checkout.country||!checkout.city||!checkout.state)"
-          (click)="saveShippingAddress(funnyDayaForm)" >Save changes</button>
+        <button data-dismiss="modal" type="button" class="btn btn-primary"
+          [disabled]="(!(funnyDayaForm.form.valid)||!checkout.country||!checkout.city||!checkout.state)"
+          (click)="saveShippingAddress(funnyDayaForm)">Save changes</button>
       </div>
     </div>
   </div>
@@ -803,7 +796,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button data-dismiss="modal" type="button" class="btn btn-primary"
-          (click)="saveBillingAddress(funnyDayaForm)" >Save changes</button>
+          (click)="saveBillingAddress(funnyDayaForm)">Save changes</button>
       </div>
     </div>
   </div>
