@@ -36,8 +36,10 @@ export class CheckoutComponent implements OnInit {
   localUrl = 'http://localhost:8080/order/';
   countries
   ngOnInit(): void {
-   this.countries=csc.getAllCountries()
-   this.countries.length=10;
+    // this.countries = csc.getAllCountries()
+    this.countries=this.getCountries()
+    console.log(csc.getAllCountries())
+    //  this.countries.length=10;
     let item = this.initialAddress;
     let billToAddress = {
       "firstName": item.firstName,
@@ -70,19 +72,29 @@ export class CheckoutComponent implements OnInit {
   cities
   provinceChange(): void {
 
-      this.cities = csc.getCitiesOfState(this.checkout.state);
-      // this.checkout.state = provinceObj.value.name
-      console.log(this.cities);
+    this.cities = csc.getCitiesOfState(this.checkout.state);
+    // this.checkout.state = provinceObj.value.name
+    console.log(this.cities);
 
 
+  }
+  getCountries() {
+    return [
+      { id: "166", sortname: "PK", name: "Pakistan", phonecode: "92" },
+      { id: "101", sortname: "IN", name: "India", phonecode: "91" },
+      { id: "191", sortname: "SA", name: "Saudi Arabia", phonecode: "966" },
+      { id: "196", sortname: "SG", name: "Singapore", phonecode: "65" },
+      {id: "202", sortname: "ZA", name: "South Africa", phonecode: "27"},
+      {id: "206", sortname: "LK", name: "Sri Lanka", phonecode: "94"}
+    ]
   }
   countryChange(): void {
 
     console.log(this.checkout.country);
-      this.provinces = csc.getStatesOfCountry(this.checkout.country)
-      // this.checkout.country = countryObj.value.name
+    this.provinces = csc.getStatesOfCountry(this.checkout.country)
+    // this.checkout.country = countryObj.value.name
 
-      this.cities = null
+    this.cities = null
 
     // else {
     //   this.provinces = null;
@@ -101,9 +113,9 @@ export class CheckoutComponent implements OnInit {
       "addressLine1": this.checkout.address,
       "addressLine2": this.checkout.address1,
       "zipCode": this.checkout.pincode,
-      "city": csc.getCityById(this.checkout.city).name ,
+      "city": csc.getCityById(this.checkout.city).name,
 
-      "state": csc.getStateById(this.checkout.state).name  ,
+      "state": csc.getStateById(this.checkout.state).name,
       "country": csc.getCountryById(this.checkout.country).name
     };
     this.addressArray.unshift(item)
@@ -131,8 +143,8 @@ export class CheckoutComponent implements OnInit {
 
     //  this.eraseFormData();
   }
-  billingAddress=[this.initialAddress]
-  saveBillingAddress(funnyDayaForm){
+  billingAddress = [this.initialAddress]
+  saveBillingAddress(funnyDayaForm) {
     console.log(this.checkout)
     let item = {
       "id": this.addressArray.length + 1,
@@ -144,9 +156,9 @@ export class CheckoutComponent implements OnInit {
       "addressLine1": this.checkout.address,
       "addressLine2": this.checkout.address1,
       "zipCode": this.checkout.pincode,
-      "city": csc.getCityById(this.checkout.city).name ,
+      "city": csc.getCityById(this.checkout.city).name,
 
-      "state": csc.getStateById(this.checkout.state).name  ,
+      "state": csc.getStateById(this.checkout.state).name,
       "country": csc.getCountryById(this.checkout.country).name
     };
     this.billingAddress.unshift(item)
