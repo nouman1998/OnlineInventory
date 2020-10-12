@@ -12,20 +12,20 @@
     <div [hidden]="changeFunction" class="row">
       <div class="col-lg-1 font-weight-bold">1</div>
       <div class="col-lg-3 font-weight-bold">Shipping address</div>
-      <div  class="col-lg-4" style="font-family: Arial;font-size: 13px;font-weight: 400;">
+      <div class="col-lg-4" style="font-family: Arial;font-size: 13px;font-weight: 400;">
         <div class="row" style="margin-left: 1px; font-weight: 500 ">
           {{address['shipToAddress'].firstName +" "+address['shipToAddress'].lastName}} </div>
         {{address['shipToAddress'].addressLine1}}
-        <div class="row" style="margin-left: 1px; "> <a   data-toggle="modal"
-            data-target="#exampleModalCenter"><small style="font-weight: 400;">Add a delievery
+        <div class="row" style="margin-left: 1px; "> <a data-toggle="modal" data-target="#exampleModalCenter"><small
+              style="font-weight: 400;">Add a delievery
               instructions</small></a></div>
       </div>
       <div class="col-lg-2">
-        <a *ngIf="addressArray.length!=0"  (click)="toggleChange()"> <small
-            style="font-weight: 500;">Change</small>
+        <a *ngIf="addressArray.length!=0" (click)="toggleChange()"> <small
+            style="font-weight: 500; color: blue;">Change</small>
         </a>
-        <a   *ngIf="addressArray.length==0" data-toggle="modal" data-target="#exampleModal"> <small
-            style="font-weight: 500;">Add Address </small>
+        <a *ngIf="addressArray.length==0" data-toggle="modal" data-target="#exampleModal"> <small
+            style="font-weight: 500; color: blue;">Add Address </small>
         </a>
       </div>
     </div>
@@ -51,8 +51,8 @@
 
           <div class="row">
             <div class="col-1"></div>
-            <div class="col-lg" style="margin-top: 6px;"> <a   data-toggle="modal" data-target="#exampleModal"
-                style="font-size: 10px; font-weight: 700;margin-left: 9px;">Add New Address</a></div>
+            <div class="col-lg" style="margin-top: 6px;"> <a data-toggle="modal" data-target="#exampleModal" style="font-size: 10px; font-weight: 700;margin-left: 9px; color: blue;
+                cursor: pointer;">Add New Address</a></div>
           </div>
 
 
@@ -74,15 +74,15 @@
             style="font-weight: 500;font-size: 13px; ">{{address['billToAddress'].firstName +" "+address['billToAddress'].lastName}}</small>
         </div>
         {{address['billToAddress'].addressLine1}}
-        <div class="row" style="margin-left: 1px; "> <a   data-toggle="modal"
-            data-target="#exampleModalCenter"><small style="font-weight: 400;">Add a delievery
+        <div class="row" style="margin-left: 1px; "> <a data-toggle="modal" data-target="#exampleModalCenter"><small
+              style="font-weight: 400;">Add a delievery
               instructions</small></a></div>
       </div>
       <div class="col-lg-2">
-        <a   *ngIf="addressArray.length!=0" (click)="changeBillingFunction=true"> <small
-            style="font-weight: 500;">Change</small> </a>
-        <a   *ngIf="addressArray.length==0" data-toggle="modal" data-target="#exampleModal"> <small
-            style="font-weight: 500;">Add Address</small> </a>
+        <a *ngIf="addressArray.length!=0" (click)="changeBillingFunction=true"> <small
+            style="font-weight: 500; color: blue;">Change</small> </a>
+        <a *ngIf="addressArray.length==0" data-toggle="modal" data-target="#exampleModal"> <small
+            style="font-weight: 500; color: blue;">Add Address</small> </a>
       </div>
 
     </div>
@@ -108,8 +108,8 @@
 
           <div class="row">
             <div class="col-1"></div>
-            <div class="col-lg" style="margin-top: 6px; "> <a   data-toggle="modal" data-target="#exampleModal1"
-                style="font-size: 10px; font-weight: 700;margin-left: 9px;">Add New Address</a></div>
+            <div class="col-lg" style="margin-top: 6px; "> <a data-toggle="modal" data-target="#exampleModal1" style="font-size: 10px; font-weight: 700;margin-left: 9px;  color: blue;
+                cursor: pointer;">Add New Address</a></div>
           </div>
         </div>
         <div class="card-footer text-muted">
