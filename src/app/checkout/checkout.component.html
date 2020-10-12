@@ -16,15 +16,15 @@
         <div class="row" style="margin-left: 1px; font-weight: 500 ">
           {{address['shipToAddress'].firstName +" "+address['shipToAddress'].lastName}} </div>
         {{address['shipToAddress'].addressLine1}}
-        <div class="row" style="margin-left: 1px; "> <a href="#" data-toggle="modal"
+        <div class="row" style="margin-left: 1px; "> <a   data-toggle="modal"
             data-target="#exampleModalCenter"><small style="font-weight: 400;">Add a delievery
               instructions</small></a></div>
       </div>
       <div class="col-lg-2">
-        <a *ngIf="addressArray.length!=0" href="#" (click)="toggleChange()"> <small
+        <a *ngIf="addressArray.length!=0"  (click)="toggleChange()"> <small
             style="font-weight: 500;">Change</small>
         </a>
-        <a href="#" *ngIf="addressArray.length==0" data-toggle="modal" data-target="#exampleModal"> <small
+        <a   *ngIf="addressArray.length==0" data-toggle="modal" data-target="#exampleModal"> <small
             style="font-weight: 500;">Add Address </small>
         </a>
       </div>
@@ -51,7 +51,7 @@
 
           <div class="row">
             <div class="col-1"></div>
-            <div class="col-lg" style="margin-top: 6px;"> <a href="#" data-toggle="modal" data-target="#exampleModal"
+            <div class="col-lg" style="margin-top: 6px;"> <a   data-toggle="modal" data-target="#exampleModal"
                 style="font-size: 10px; font-weight: 700;margin-left: 9px;">Add New Address</a></div>
           </div>
 
@@ -74,14 +74,14 @@
             style="font-weight: 500;font-size: 13px; ">{{address['billToAddress'].firstName +" "+address['billToAddress'].lastName}}</small>
         </div>
         {{address['billToAddress'].addressLine1}}
-        <div class="row" style="margin-left: 1px; "> <a href="#" data-toggle="modal"
+        <div class="row" style="margin-left: 1px; "> <a   data-toggle="modal"
             data-target="#exampleModalCenter"><small style="font-weight: 400;">Add a delievery
               instructions</small></a></div>
       </div>
       <div class="col-lg-2">
-        <a href="#" *ngIf="addressArray.length!=0" (click)="changeBillingFunction=true"> <small
+        <a   *ngIf="addressArray.length!=0" (click)="changeBillingFunction=true"> <small
             style="font-weight: 500;">Change</small> </a>
-        <a href="#" *ngIf="addressArray.length==0" data-toggle="modal" data-target="#exampleModal"> <small
+        <a   *ngIf="addressArray.length==0" data-toggle="modal" data-target="#exampleModal"> <small
             style="font-weight: 500;">Add Address</small> </a>
       </div>
 
@@ -108,7 +108,7 @@
 
           <div class="row">
             <div class="col-1"></div>
-            <div class="col-lg" style="margin-top: 6px; "> <a href="#" data-toggle="modal" data-target="#exampleModal1"
+            <div class="col-lg" style="margin-top: 6px; "> <a   data-toggle="modal" data-target="#exampleModal1"
                 style="font-size: 10px; font-weight: 700;margin-left: 9px;">Add New Address</a></div>
           </div>
         </div>

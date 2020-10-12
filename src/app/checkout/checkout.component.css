@@ -17,4 +17,9 @@ body{
 select{
   height: 20px;
 }
-
+small{
+  color: blue;
+}
+small:hover{
+  cursor: pointer;
+}
