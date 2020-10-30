@@ -1,69 +1,243 @@
 <div class="row">
-    <div class="col-lg-12">
-      <nav class="navbar navbar-light bg-light" style="background-color: #ffc107 !important;">
-        <a class="navbar-brand m-auto">View Order Details</a>
-      </nav>
+  <div class="col-lg-12">
+    <nav class="navbar navbar-light bg-light" style="background-color: #ffc107 !important;">
+      <a class="navbar-brand m-auto">View Order Details</a>
+    </nav>
+  </div>
+</div>
+<div class="row"
+  style="border-style: solid; border-width: 1px; margin-top: 10px; margin-left: 40px; margin-right: 40px;"></div>
+
+<div class="row" style="width: 95%; margin-top: 10px; ">
+  <!-- <div class="col-1"></div> -->
+  <div class="col-lg-12" style="border-style:solid; border-width: 0.1em; margin-left: 4%;">
+    <div class="row">
+      <!--  style="margin-top: 30px; margin-left: 70px; margin-bottom: 140px;" -->
+      <div class="col-lg-1 col-md-0 col-sm-0"></div>
+      <div class="col-lg-4  col-md-6 col-sm-6" style="margin-top: 10px; ">
+
+        <div class="row">
+          <div class="col-lg-3">
+            <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Order Date : </span>
+          </div>
+          <div class="col-lg-7">
+            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{order.createDate}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3">
+            <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Order# </span>
+          </div>
+          <div class="col-lg-6">
+            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{order.order_id}}</span>
+          </div>
+        </div>
+        <!-- <h6 style="font-size: 14px;font-family: Arial; font-weight:500 ;">Order Date &nbsp; &nbsp; &nbsp; &nbsp; {{order.createDate}}</h6>
+          <h6 style="font-size: 14px;font-family: Arial; font-weight:500 ;">Order#  &nbsp; &nbsp; &nbsp;  &nbsp; {{order.order_id}}</h6> -->
+        <!-- </div> -->
+      </div>
+
+      <!-- style="float: right; margin-top: 35px; margin-right: 100px; position: relative; bottom: 220px;" -->
+      <div class="col-lg-3 col-mg-1"></div>
+      <div class="col-lg-3 col-md-5">
+        <div>
+          <div class="row">
+            <div class="col-lg-6">
+              <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Items: </span>
+            </div>
+            <div class="col-lg-6">
+              <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{totalItemAmount}}.00</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Shipping & Handling: </span>
+            </div>
+            <div class="col-lg-6">
+              <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{shippingAmount}}.00</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Total before Tax: </span>
+            </div>
+            <div class="col-lg-6">
+              <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{totalBeforeTax}}.00</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Tax Collected: </span>
+            </div>
+            <div class="col-lg-6">
+              <span style="font-size: 13px;font-family: Arial; font-weight:500 ;">
+                {{order.orderDetailList.taxAmount||0}}.00</span>
+            </div>
+          </div>
+          <!-- <h6 style="font-size: 13px;font-family: Arial; font-weight:500 ;"><span>Items: {{totalItemAmount}}</span> </h6> -->
+          <!-- <h6 style="font-size: 13px;font-family: Arial; font-weight:500 ;">Shipping & Handling: {{shippingAmount}}</h6>
+            <h6 style="font-size: 13px;font-family: Arial; font-weight:500 ;">Total before Tax: {{totalBeforeTax}}</h6>
+            <h6 style="font-size: 13px;font-family: Arial; font-weight:500 ;">Tax Collected: {{order.orderDetailList.taxAmount||0}}</h6> -->
+        </div>
+        <hr style="border:1px solid p black;width: 100%; padding:0; margin: 0;">
+        <div class="row" style="margin-bottom: 10px;">
+          <div class="col-lg-6">
+            <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Order Total: </span>
+          </div>
+          <div class="col-lg-6">
+            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{orderTotalAmount}}.00</span> <span
+              *ngIf="returnParam">(Return)</span>
+          </div>
+        </div>
+        <!-- <h6 style="font-size: 13px;font-family: Arial; font-weight:500 ; margin-left: 15px;"><b>Order Total: <span style="font-weight:400; margin-left: 10px;" >{{orderTotalAmount}}$</span>  <span *ngIf="returnParam">(Return)</span></b></h6> -->
+      </div>
+
     </div>
   </div>
-  <div style="border-style: solid; border-width: 1px; margin-top: 10px; margin-left: 40px; margin-right: 40px;"></div>
-  <div  style="border-style: solid; border-width: 1px; margin-top: 10px; margin-left: 40px; margin-right: 40px;" >
-   <div  style="margin-top: 30px; margin-left: 100px; margin-bottom: 140px;">
-   <h6>Order Date &nbsp; &nbsp; &nbsp; &nbsp; Sep 3, 2020</h6> 
-   <h6>Order#  &nbsp; &nbsp; &nbsp;  &nbsp; 123456789</h6>
-   </div>
-   <div  style="float: right; margin-top: 35px; margin-right: 100px; position: relative; bottom: 220px;">
-   <h6>Items: 110.00</h6> 
-   <h6>Shipping & Handling: 50.00</h6>
-   <h6>Total before Tax: 110.00</h6>
-   <h6>Tax Collected: 10.00</h6>
-   <hr>
-   <h6><b>Order Total:</b></h6> 
-  </div>
-  </div>  
-  <div style="border-style:solid; border-width: 0.1em; border-radius: 20px; margin-top: 10px; margin-left: 40px; margin-right: 40px;">
-    <table style="width:100%; bottom: 180px; position: relative;" >
-        <tr style="border-style: solid; border-left: 0; border-right: 0; border-top: 0.1em; border-width:  0.12em; border-color: black; ">
+
+</div>
+
+<!-- <div  style="border-style: solid; border-width: 1px; margin-top: 10px; margin-left: 40px; margin-right: 40px; height: 167px;" >
+
+
+  </div> -->
+  <div class="row" style="border-style:solid; border-width: 0.1em; border-radius: 20px; margin-top: 15px; margin-left: 2.5%; width: 95%; ">
+
+    <div class="col-lg-12" style="margin-bottom: 15px;" >
+
+      <h5 style=" width:120px;
+        margin-top:-10px;
+        margin-left:20px;
+        background:white;
+        font-size:15px;
+        padding-left:10px
+        ">Item Details</h5>
+      <table style="width:100%;  font-size: 13px; font-family: Arial;">
+        <tr
+          style="border-style: solid; border-left: 0; border-right: 0; border-top: 0.1em; border-width:  0.12em; border-color: black; ">
           <th></th>
           <th>Description</th>
           <th>Quantity</th>
           <th>Size</th>
           <th>Price/Pcs</th>
           <th>Total</th>
+          <th *ngIf="returnParam">Return</th>
         </tr>
-        <tr style="border-style: solid;  border-left: 0; border-right: 0; border-top: 0.1em; border-width: 0.1em">
-          <td> 
-              <img width="100px" height="100px" src="https://image.made-in-china.com/2f0j00fpQYBhNcgiqM/Eruoep-Ladies-Latest-Short-Dress-Party-Dress-for-Women.jpg" alt="">
+        <tr *ngFor="let orderdetail of order.orderDetailList"
+          style="border-style: solid;  border-left: 0; border-right: 0; border-top: 0.1em; border-width: 0.1em; margin-bottom: 10px;">
+          <td>
+            <img width="50px" height="50px"
+              src="https://image.made-in-china.com/2f0j00fpQYBhNcgiqM/Eruoep-Ladies-Latest-Short-Dress-Party-Dress-for-Women.jpg"
+              alt="">
           </td>
-          <td>Women Top Green Color</td>
-          <td>20</td>
-          <td>M</td>
-          <td>4</td>
-          <td>80</td>        
+          <td>{{orderdetail.item.description||"NAN"}}</td>
+          <td>{{orderdetail.quantity}}</td>
+          <td>{{orderdetail.item.itemSize}}</td>
+          <td>{{orderdetail.itemPrice}}</td>
+          <td>{{orderdetail.itemTotalAmount}}</td>
+          <td *ngIf="returnParam"><input type="checkbox" name="" id=""></td>
         </tr>
       </table>
+
+    </div>
   </div>
-  <div style="border-style: solid; border-width: 1px; margin-top: 10px; margin-left: 40px; margin-right: 40px;" >
-    <div style="margin-top: 30px; margin-left: 100px; margin-bottom: 50px;">
-    <h6>Payment Details:</h6> 
+
+<div
+  style="border-style: solid; border-width: 1px; margin-top: 10px; margin-left: 40px; margin-right: 40px; font-size: 13px; font-family: Arial; height: 40px;">
+  <!-- style="" -->
+  <!-- style="margin-top: 30px; margin-left: 100px; margin-bottom: 50px;" -->
+
+  <div class="row" style="margin-top: 10px;" >
+    <div class="col-lg-1"></div>
+    <div class="col-lg-7">
+      <h6 style="font-size: 13px ; font-weight: bold;">Payment Details:</h6>
     </div>
-    <div style="float: right; margin-top: 35px; margin-right: 100px; position: relative; bottom: 105px;">
-    <h6>Card ends with: xxxx-xxxx-xxxx-1234</h6>  
-   </div>
-   </div>
-   
-   <div style="border-style: solid; border-width: 0.1em; border-radius: 20px; margin-top: 10px; margin-left: 40px; margin-right: 40px;" >
-    <div style="margin-top: 30px; margin-left: 100px; margin-bottom: 50px;">
-    <h6>Billing Address</h6>
+    <div class="col-lg-4" >
+      <h6 style="font-size: 13px ; font-weight: bold;">Card ends with: xxxx-xxxx-xxxx-{{cardNumbers}}</h6>
+    </div>
+
+  </div>
+
+  <!-- style="float: right; margin-top: 35px; margin-right: 100px; position: relative; bottom: 105px;" -->
+
+</div>
+
+<div
+  style="border-style: solid; border-width: 0.1em; border-radius: 20px; margin-top: 15px; margin-left: 40px; margin-right: 40px;">
+  <h5 style=" width:120px;
+    margin-top:-10px;
+    margin-left:20px;
+    background:white;
+    font-size:15px;
+    padding-left: 10px;
+    ">Address Details</h5>
+  <div style="margin-top: 30px; margin-left: 100px; margin-bottom: 50px;">
+    <h6 style="font-size: 13px ; font-weight: bold;">Billing Address</h6>
     <hr size="5" width="250" align="left">
-    <h6>Apt# 241, Street No.44, Socity Name</h6> 
-    </div>
-    <div style="float: right; margin-top: 8px; margin-right: 100px; position: relative; bottom: 130px;">
-    <h6>Shipping Address</h6> 
+    <h6 style="font-size: 13px ; font-weight: 500;">{{order.orderAddressDetails.billToAddLine1}}</h6>
+  </div>
+  <div style="float: right; margin-top: 8px; margin-right: 100px; position: relative; bottom: 130px;">
+    <h6 style="font-size: 13px ; font-weight: bold;">Shipping Address</h6>
     <hr>
-    <h6>Apt# 241, Street No.44, Socity Name</h6>
-   </div>
-   </div>
+    <h6 style="font-size: 13px ; font-weight: 500;">{{order.orderAddressDetails.shipToAddLine1}}</h6>
+  </div>
+</div>
 
- 
 
-  
+
+
+<!-- <div class="row">
+  <div class="col-lg-12">
+    <nav class="navbar navbar-light bg-light" style="background-color: #ffc107 !important;">
+      <a class="navbar-brand m-auto">View Order Details</a>
+    </nav>
+  </div>
+</div>
+
+<div class="row">
+<div class="col-lg-12">
+<div style="border-style: solid; border-width: 1px; margin-top: 2px;"></div>
+</div>
+</div>
+
+<div class="col-lg-12">
+<div class="top">
+  <div class="topleft">
+  Order Date &nbsp; &nbsp; &nbsp; &nbsp; Sep 3, 2020<br> Order#  &nbsp; &nbsp; &nbsp;  &nbsp; 123456789
+</div>
+</div>
+<div class="order">
+Items: 110.00 <br>Shipping & Handling: 50.00<br>Total before Tax: 110.00<br>Tax Collected: 10.00<br><hr><br><b>Order Total:</b>
+</div>
+</div>
+
+<div class="col-lg-12">
+ <div class="mid-table">
+   <div class="container">
+    <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Age</th>
+          <th>City</th>
+          <th>Country</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Anna</td>
+          <td>Pitt</td>
+          <td>35</td>
+          <td>New York</td>
+          <td>USA</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+</div>
+</div>
+</div> -->

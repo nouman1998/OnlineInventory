@@ -204,7 +204,35 @@
       </div>
 
     </div>
+    <div class="row">
+      <div class="col-lg-1 font-weight-bold">6</div>
+      <div class="col-lg-2 font-weight-bold">View Order</div>
+      <div class="col-lg-9" style="font-family: Arial;font-size: 13px;font-weight: 400;">
+        <div class="row" style="margin-left: 1px;  ">
+          <div class="col-1"></div>
+          <div class='col-5'>
+            <form>
+
+
+
+
+             <button (click)="routeToViewOrder()">View Order</button>
+             <button (click)="routeToReturnOrder()">Return Order</button>
+
+
+
+
+
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
   </div>
+
 
 
   <div class="col-lg-3" style="font-family: Arial;font-size: 13px;font-weight: 400;">
@@ -274,12 +302,15 @@
 
             <input required #firstName="ngModel" class="form-control" type="text" placeholder="First Name"
               name="firstName" [(ngModel)]="checkout.firstName"
-              [ngClass]="{'is-invalid':(firstName.invalid && (firstName.dirty || firstName.touched))}">
+              [ngClass]="{'is-invalid':(firstName.invalid && (firstName.dirty || firstName.touched))}" pattern="([a-zA-Z]{1,30}\s*)+">
 
             <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
 
               <small *ngIf="firstName.errors.required">
                 First Name is required.
+              </small>
+              <small class="alert alert-danger" *ngIf="firstName.errors.pattern">
+                First Name should not contain special characters.
               </small>
             </div>
 
@@ -288,9 +319,16 @@
               style="font-weight: 700; margin-left: 7px;">Middle Name</small> </label>
 
           <div class="row" style="   margin-left: 1px;">
-            <input class="form-control" type="text" name="MiddleName" placeholder="Middle Name"
-              [(ngModel)]="checkout.middleName">
+            <input #middleName="ngModel"class="form-control" type="text" name="middleName" placeholder="Middle Name"
+              [(ngModel)]="checkout.middleName" pattern="([a-zA-Z]{1,30}\s*)+">
           </div>
+          <div *ngIf="middleName.invalid && (middleName.dirty || middleName.touched)" class="alert alert-danger">
+
+            <small *ngIf="(middleName.errors&&middleName.errors.pattern)">
+              Middle Name should not contain special characters.
+            </small>
+          </div>
+
 
 
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
@@ -298,13 +336,16 @@
           <div class="row" style="   margin-left: 1px;">
             <input required #lastName="ngModel" class="form-control" type="text" placeholder="Last Name" name="lastName"
               [(ngModel)]="checkout.lastName"
-              [ngClass]="{'is-invalid':(lastName.invalid && (lastName.dirty || lastName.touched))}">
+              [ngClass]="{'is-invalid':(lastName.invalid && (lastName.dirty || lastName.touched))}" pattern="([a-zA-Z]{1,30}\s*)+">
 
 
             <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
 
               <small *ngIf="lastName.errors.required">
                 Last Name is required.
+              </small>
+              <small *ngIf="lastName.errors.pattern">
+                Last Name should not contain special characters.
               </small>
             </div>
 
