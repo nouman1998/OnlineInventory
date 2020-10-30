@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ɵINTERNAL_BROWSER_PLATFORM_PROVIDERS } from '@angular/platform-browser';
 import { Coupon } from './coupon';
 import csc from 'country-state-city'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -11,7 +12,7 @@ import csc from 'country-state-city'
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
   address = {}
   myform
   isSaving = false;
@@ -372,5 +373,12 @@ export class CheckoutComponent implements OnInit {
   toggleSelection() {
     this.firstButtonSelected = !this.firstButtonSelected;
     this.secondButtonSelected = !this.secondButtonSelected;
+  }
+  id=1
+  routeToViewOrder(){
+    this.router.navigate(['order-detail'])
+  }
+  routeToReturnOrder(){
+    this.router.navigate(['order-detail/return'])
   }
 }
