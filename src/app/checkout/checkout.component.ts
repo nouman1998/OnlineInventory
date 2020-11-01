@@ -390,7 +390,7 @@ export class CheckoutComponent implements OnInit {
     this.router.navigate(['/order-detail'], { queryParams: { id: 46 }});
   }
   routeToReturnOrder() {
-    this.router.navigate(['order-detail/return'])
+    this.router.navigate(['order-detail/return'],{ queryParams: { id: 46 }})
   }
 
   couponArray = [
