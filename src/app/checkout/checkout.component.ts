@@ -17,9 +17,9 @@ export class CheckoutComponent implements OnInit {
   myform
   isSaving = false;
   firstButtonSelected = true;
-
+  deliveryInstrution=""
   secondButtonSelected = false;
-  shippingMethod="regular"
+  shippingMethod="1"
   backupTotalOrderAmount
   notificaionId="1"
   initialAddress = {
@@ -64,7 +64,7 @@ export class CheckoutComponent implements OnInit {
     this.orderJson['items'] = [
       {
         "productId": "2345",
-        "itemId": "123",
+        "itemId": "4",
         "itemDetail": "description",
         "itemImageUrl": "http://nknv.jpg",
         "quantity": 5,
@@ -73,7 +73,7 @@ export class CheckoutComponent implements OnInit {
       },
       {
         "productId": "17838",
-        "itemId": "345",
+        "itemId": "5",
         "itemDetail": "description",
         "itemImageUrl": "http://nk2nv.jpg",
         "quantity": 5,
@@ -270,14 +270,18 @@ export class CheckoutComponent implements OnInit {
     }
     else {
       this.preparingJson();
-      // this.http.post(this.localUrl, this.orderJson).subscribe();
-      this.router.navigate(['thankyou'])
+      this.http.post(this.localUrl, this.orderJson).subscribe();
+      setTimeout(() => {
+        this.router.navigate(['thankyou'])
+      }, 500);
+
       console.log("Posting Order", this.orderJson);
     }
   }
 
   preparingJson() {
     this.orderJson['address'] = this.address;
+    this.orderJson['deliveryInstruction']=this.deliveryInstrution;
     this.orderJson['customerDetail'] = {
       "customerId": 1,
       "addressLine1": "test address 1",
@@ -298,7 +302,7 @@ export class CheckoutComponent implements OnInit {
     this.orderJson['paymentStatus'] = "";
     this.orderJson['notificationId'] = this.notificaionId;
     this.orderJson['shippingMethod'] = this.shippingMethod;
-    this.orderJson['shippingAmt'] = "";
+    this.orderJson['shippingAmt'] = "50";
 
     this.orderJson['couponDetail'] = {
       "couponName": this.coupon.name,
@@ -315,8 +319,7 @@ export class CheckoutComponent implements OnInit {
       "cardUserName": "",
       "cardExpiryDate": "",
       "totalTax": "",
-      "totalPrice": "",
-      "totalAmount": ""
+      "totalPrice":""
     }
 
     console.log("bbbbbbbb", this.orderJson)
@@ -383,7 +386,8 @@ export class CheckoutComponent implements OnInit {
   }
   id = 1
   routeToViewOrder() {
-    this.router.navigate(['order-detail'])
+    // this.router.navigate(['order-detail?id=46'])
+    this.router.navigate(['/order-detail'], { queryParams: { id: 46 }});
   }
   routeToReturnOrder() {
     this.router.navigate(['order-detail/return'])

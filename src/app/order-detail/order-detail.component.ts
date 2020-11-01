@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./order-detail.component.css']
 })
 export class OrderDetailComponent implements OnInit {
-  baseUrl = "http://localhost:8080/order";
+  baseUrl = "http://localhost:8080/order/";
   order;
   taxAmount = 0;
   totalItemAmount = 0;
@@ -17,22 +17,27 @@ export class OrderDetailComponent implements OnInit {
   orderTotalAmount = 0;
   shippingAmount = 0;
   cardNumbers = ""
+  userId
   constructor(
     private activatedRoute: ActivatedRoute,
     private http: HttpClient
   ) { }
   returnParam = false
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+       this.userId = params['id'];
+      console.log(this.userId);
+    });
     this.gettingParamInfo();
     this.getOrderById();
   }
   getOrderById() {
-    this.http.get(this.baseUrl + "/46").subscribe((d: any) => {
+    this.http.get(this.baseUrl + this.userId).subscribe((d: any) => {
       console.log(d)
 
       this.order = d;
       this.shippingAmount = d.shippingAmount;
-      this.cardNumbers= this.order.paymentDetails[0].cardNumber.substr(this.order.paymentDetails[0].cardNumber.length - 4)
+      this.cardNumbers = this.order.paymentDetails[0].cardNumber.substr(this.order.paymentDetails[0].cardNumber.length - 4)
       // this.taxAmount=this.order.orderDetailList.taxAmount||0;
       // this.totalItemAmount=this.order.orderDetailList.
       this.order.orderDetailList.map(item => {
@@ -44,7 +49,7 @@ export class OrderDetailComponent implements OnInit {
       this.totalBeforeTax = this.totalItemAmount + (this.shippingAmount | 0);
       this.orderTotalAmount = (this.totalItemAmount + this.shippingAmount + this.taxAmount);
 
-    },error=>{
+    }, error => {
       console.log(error);
     })
   }

@@ -172,8 +172,8 @@
           <div class="col-5">
 
             <select [(ngModel)]="shippingMethod" style="width: 200px;" id="sMethod" name="shippingMethod">
-              <option selected="selected"  value="regular">Regular</option>
-              <option value="card">Extra</option>
+              <option selected="selected"  value="1">Regular</option>
+              <option value="card" value="2">Extra</option>
 
             </select>
           </div>
@@ -274,7 +274,7 @@
     <br>
     <div class="text-uppercase font-weight-bold" style="margin-top: -15px; font-size: 14px;font-weight: 500;"> Price
       Details
-      ({{orderJson['items'].length}})</div>
+      ({{orderJson['items'].length}} items)</div>
 
     <div class="row" style="margin-left: 15px; margin-top: 5px; font-weight: 500; font-size: 13px;">
       <div class="col-6 "> <span>Order Total:</span></div>
@@ -595,7 +595,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <textarea rows="10" cols="62" placeholder="Add Delievery Instructions here"></textarea>
+        <textarea [(ngModel)]="deliveryInstrution" rows="10" cols="62" placeholder="Add Delievery Instructions here"></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
