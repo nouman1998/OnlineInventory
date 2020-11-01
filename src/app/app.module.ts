@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { ThankyouOrderComponent } from './thankyou-order/thankyou-order.component';
 
 // import { CarouselModule, WavesModule } from 'angular-bootstrap-md'
 
@@ -15,7 +16,8 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
   declarations: [
     AppComponent,
     CheckoutComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    ThankyouOrderComponent
   ],
   imports: [
     BrowserModule,

@@ -130,22 +130,30 @@
           <form>
             <div class="form-check-inline">
               <label class="form-check-label" for="radio1" style="font-size: 13px;">
-                <input style="height: 12px; " [(ngModel)]="notificationType" type="radio" class="form-check-input"
-                  id="radio1" name="optradio" value="email" checked>Email
+                <input   style="height: 12px; " [(ngModel)]="notificaionId" type="radio" class="form-check-input" name="radiobutton"
+                  value="1" >Email
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label" for="radio2" style="font-size: 13px;">
-                <input style="height: 12px;  " [(ngModel)]="notificationType" type="radio" class="form-check-input"
-                  id="radio2" name="optradio" value="phone">Phone
+                <input style="height: 12px;  " [(ngModel)]="notificaionId" type="radio" class="form-check-input" name="radiobutton"
+                 value="2">Phone
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label" style="font-size: 13px;">
-                <input style="height: 12px; " [(ngModel)]="notificationType" type="radio" class="form-check-input"
-                  name="optradio" value="book">Both
+                <input style="height: 12px; " [(ngModel)]="notificaionId" type="radio" class="form-check-input" name="radiobutton"
+                value="3">Both
               </label>
             </div>
+
+            <!-- <div *ngIf="optradio.invalid && (optradio.dirty || optradio.touched)" class="alert alert-danger">
+
+              <small *ngIf="couponName.errors.required">
+                Coupon Name is required.
+              </small>
+
+            </div> -->
 
           </form>
         </div>
@@ -163,8 +171,8 @@
         <div class="row">
           <div class="col-5">
 
-            <select ngModel="shippingMethod" style="width: 200px;" id="sMethod" name="shippingMethod">
-              <option value="regular">Regular</option>
+            <select [(ngModel)]="shippingMethod" style="width: 200px;" id="sMethod" name="shippingMethod">
+              <option selected="selected"  value="regular">Regular</option>
               <option value="card">Extra</option>
 
             </select>
@@ -183,28 +191,46 @@
       <div class="col-lg-9" style="font-family: Arial;font-size: 13px;font-weight: 400;">
         <div class="row" style="margin-left: 1px;  ">
           <div class="col-1"></div>
-          <div class='col-5'>
-            <form>
+          <div class='col-10'>
+            <div class="row">
+              <div class="col-lg-5">
+                <form>
 
 
 
 
-              <input [(ngModel)]="coupon.name" name="name" type="text" class="form-control" id="coupanName"
-                placeholder="Coupon Name" style="    margin-left: 7px;">
+                  <input required  [(ngModel)]="coupon.name" name="couponName" #couponName="ngModel" type="text" class="form-control" id="coupanName"
+                    placeholder="Coupon Name" style="    margin-left: 7px;">
 
 
 
+                    <div *ngIf="couponName.invalid && (couponName.dirty || couponName.touched)" class="alert alert-danger">
+
+                      <small *ngIf="couponName.errors.required">
+                        Coupon Name is required.
+                      </small>
+
+                    </div>
 
 
 
-            </form>
+                </form>
+              </div>
+              <div class="col-lg-2">
+                <button *ngIf="!isCouponMatched" (click)="checkCoupon()" class=" btn-warning">Apply</button>
+                <button *ngIf="isCouponMatched" (click)="cancelCoupon()" class=" btn-danger">Cancel</button>
+
+              </div>
+            </div>
+
           </div>
+
         </div>
 
       </div>
 
     </div>
-    <div class="row">
+    <div class="row" style="margin-top: 15px;">
       <div class="col-lg-1 font-weight-bold">6</div>
       <div class="col-lg-2 font-weight-bold">View Order</div>
       <div class="col-lg-9" style="font-family: Arial;font-size: 13px;font-weight: 400;">
@@ -216,8 +242,9 @@
 
 
 
-             <button (click)="routeToViewOrder()">View Order</button>
-             <button (click)="routeToReturnOrder()">Return Order</button>
+              <button style=" height: 34px; " class="btn btn-warning" (click)="routeToViewOrder()">View Order</button>
+              <button style=" height: 34px; margin-left: 10px; " class="btn btn-warning"
+                (click)="routeToReturnOrder()">Return Order</button>
 
 
 
@@ -247,11 +274,11 @@
     <br>
     <div class="text-uppercase font-weight-bold" style="margin-top: -15px; font-size: 14px;font-weight: 500;"> Price
       Details
-      (7 Items)</div>
+      ({{orderJson['items'].length}})</div>
 
     <div class="row" style="margin-left: 15px; margin-top: 5px; font-weight: 500; font-size: 13px;">
       <div class="col-6 "> <span>Order Total:</span></div>
-      <div class="col-5 "> <span>Rs. 5342</span></div>
+      <div class="col-5 "> <span>Rs. {{totalOrderAmount}}</span></div>
     </div>
 
     <div class="row py-1" style="margin-left: 15px; font-weight: 500; font-size: 13px;">
@@ -266,12 +293,12 @@
 
     <div class="row " style="margin-left: 13px;font-weight: 500;">
       <div class="col-6"> <span>Total:</span></div>
-      <div class="col-5 "> <span>Rs. 5392</span></div>
+      <div class="col-5 "> <span>Rs. {{totalOrderAmount+50}}</span></div>
 
     </div>
 
 
-    <button (click)="postOrder()" type="button" class="btn btn-warning my-3"
+    <button  (click)="postOrder()" type="button" class="btn btn-warning my-3"
       style=" margin-left: 30%; height: 34px; ">Continue</button>
 
 
@@ -302,7 +329,8 @@
 
             <input required #firstName="ngModel" class="form-control" type="text" placeholder="First Name"
               name="firstName" [(ngModel)]="checkout.firstName"
-              [ngClass]="{'is-invalid':(firstName.invalid && (firstName.dirty || firstName.touched))}" pattern="([a-zA-Z]{1,30}\s*)+">
+              [ngClass]="{'is-invalid':(firstName.invalid && (firstName.dirty || firstName.touched))}"
+              pattern="([a-zA-Z]{1,30}\s*)+">
 
             <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
 
@@ -319,7 +347,7 @@
               style="font-weight: 700; margin-left: 7px;">Middle Name</small> </label>
 
           <div class="row" style="   margin-left: 1px;">
-            <input #middleName="ngModel"class="form-control" type="text" name="middleName" placeholder="Middle Name"
+            <input #middleName="ngModel" class="form-control" type="text" name="middleName" placeholder="Middle Name"
               [(ngModel)]="checkout.middleName" pattern="([a-zA-Z]{1,30}\s*)+">
           </div>
           <div *ngIf="middleName.invalid && (middleName.dirty || middleName.touched)" class="alert alert-danger">
@@ -336,7 +364,8 @@
           <div class="row" style="   margin-left: 1px;">
             <input required #lastName="ngModel" class="form-control" type="text" placeholder="Last Name" name="lastName"
               [(ngModel)]="checkout.lastName"
-              [ngClass]="{'is-invalid':(lastName.invalid && (lastName.dirty || lastName.touched))}" pattern="([a-zA-Z]{1,30}\s*)+">
+              [ngClass]="{'is-invalid':(lastName.invalid && (lastName.dirty || lastName.touched))}"
+              pattern="([a-zA-Z]{1,30}\s*)+">
 
 
             <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">

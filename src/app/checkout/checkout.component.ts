@@ -17,9 +17,11 @@ export class CheckoutComponent implements OnInit {
   myform
   isSaving = false;
   firstButtonSelected = true;
+
   secondButtonSelected = false;
-  shippingMethod
-  notificationType
+  shippingMethod="regular"
+  backupTotalOrderAmount
+  notificaionId="1"
   initialAddress = {
     id: 1, "firstName": "Shahzad",
     "middleName": "test",
@@ -36,11 +38,12 @@ export class CheckoutComponent implements OnInit {
 
   localUrl = 'http://localhost:8080/order/';
   countries
+  totalOrderAmount = 0
   ngOnInit(): void {
-    // this.countries = csc.getAllCountries()
-    this.countries=this.getCountries()
+
+    this.countries = this.getCountries()
     console.log(csc.getAllCountries())
-    //  this.countries.length=10;
+
     let item = this.initialAddress;
     let billToAddress = {
       "firstName": item.firstName,
@@ -58,6 +61,35 @@ export class CheckoutComponent implements OnInit {
     this.address["billToAddress"] = billToAddress;
     this.address['shipToAddress'] = billToAddress;
 
+    this.orderJson['items'] = [
+      {
+        "productId": "2345",
+        "itemId": "123",
+        "itemDetail": "description",
+        "itemImageUrl": "http://nknv.jpg",
+        "quantity": 5,
+        "price": 200,
+        "total": 1050
+      },
+      {
+        "productId": "17838",
+        "itemId": "345",
+        "itemDetail": "description",
+        "itemImageUrl": "http://nk2nv.jpg",
+        "quantity": 5,
+        "price": 200,
+        "total": 1050
+      }
+    ];
+    this.getTotalOrderAmount()
+  }
+  getTotalOrderAmount() {
+    this.totalOrderAmount = 0;
+    this.orderJson['items'].map(item => {
+      this.totalOrderAmount += ((item.price) * (item.quantity))
+
+    })
+    this.backupTotalOrderAmount=this.totalOrderAmount
   }
   radioButton
   isShippingAddressSame = false
@@ -85,22 +117,19 @@ export class CheckoutComponent implements OnInit {
       { id: "101", sortname: "IN", name: "India", phonecode: "91" },
       { id: "191", sortname: "SA", name: "Saudi Arabia", phonecode: "966" },
       { id: "196", sortname: "SG", name: "Singapore", phonecode: "65" },
-      {id: "202", sortname: "ZA", name: "South Africa", phonecode: "27"},
-      {id: "206", sortname: "LK", name: "Sri Lanka", phonecode: "94"}
+      { id: "202", sortname: "ZA", name: "South Africa", phonecode: "27" },
+      { id: "206", sortname: "LK", name: "Sri Lanka", phonecode: "94" }
     ]
   }
   countryChange(): void {
 
     console.log(this.checkout.country);
     this.provinces = csc.getStatesOfCountry(this.checkout.country)
-    // this.checkout.country = countryObj.value.name
+
 
     this.cities = null
 
-    // else {
-    //   this.provinces = null;
-    //   this.cities = null
-    // }
+
   }
   saveShippingAddress(funnyDayaForm) {
     console.log(this.checkout)
@@ -185,7 +214,7 @@ export class CheckoutComponent implements OnInit {
     funnyDayaForm.reset()
   }
   myFunction(item) {
-    debugger
+    // debugger
     console.log(item)
     this.radioButton = !this.radioButton
 
@@ -204,9 +233,7 @@ export class CheckoutComponent implements OnInit {
     }
     this.address["shipToAddress"] = { ...shipToAddress };
 
-    // if (this.isShippingAddressSame) {
-    //   this.address["billToAddress"] = { ...shipToAddress };
-    // }
+
 
     console.log(this.address)
   }
@@ -244,6 +271,7 @@ export class CheckoutComponent implements OnInit {
     else {
       this.preparingJson();
       // this.http.post(this.localUrl, this.orderJson).subscribe();
+      this.router.navigate(['thankyou'])
       console.log("Posting Order", this.orderJson);
     }
   }
@@ -268,29 +296,14 @@ export class CheckoutComponent implements OnInit {
     this.orderJson['orderTotal'] = '';
     this.orderJson['orderStatus'] = 1;
     this.orderJson['paymentStatus'] = "";
-    this.orderJson['notificationId'] = 2;
+    this.orderJson['notificationId'] = this.notificaionId;
     this.orderJson['shippingMethod'] = this.shippingMethod;
     this.orderJson['shippingAmt'] = "";
-    this.orderJson['items'] = [
 
-      {
-        "itemId": 4,
-        "itemSize": "Small",
-        "quantity": 10,
-        "price": 1000,
-        "tax": "",
-        "couponCode": "",
-        "discountType": "",
-        "couponAmt": "",
-        "itemTotal": "",
-        "itemStatus": ""
-      }
-
-    ];
     this.orderJson['couponDetail'] = {
       "couponName": this.coupon.name,
-      "discountType": this.coupon.discountType,
-      "discountAmt": this.coupon.discountAmount
+      "discountType": "",
+      "discountAmt": ""
     };
 
     this.orderJson['paymentDetail'] = {
@@ -309,13 +322,7 @@ export class CheckoutComponent implements OnInit {
     console.log("bbbbbbbb", this.orderJson)
 
   }
-  // validateForm() {
-  //   console.log(this.checkout)
-  //   if (!this.checkout.address || (this.checkout.phoneNumber.length > 15 || this.checkout.phoneNumber.length == 0 || !this.checkout.phoneNumber) || !this.checkout.pincode ||
-  //     !this.checkout.firstName || !this.checkout.country || !this.checkout.state || !this.checkout.city
-  //   ) { return true }
-  //   else { false }
-  // }
+
 
   checkingToggle() {
 
@@ -374,11 +381,43 @@ export class CheckoutComponent implements OnInit {
     this.firstButtonSelected = !this.firstButtonSelected;
     this.secondButtonSelected = !this.secondButtonSelected;
   }
-  id=1
-  routeToViewOrder(){
+  id = 1
+  routeToViewOrder() {
     this.router.navigate(['order-detail'])
   }
-  routeToReturnOrder(){
+  routeToReturnOrder() {
     this.router.navigate(['order-detail/return'])
+  }
+
+  couponArray = [
+    { name: "code50", type: "percent", amount: 50 },
+    { name: "code30", type: "flat", amount: 30 }
+  ]
+  isCouponMatched = false;
+
+
+  checkCoupon() {
+    this.isCouponMatched = false;
+    this.couponArray.map(item => {
+      if (item.name === this.coupon.name) {
+        this.isCouponMatched = true;
+        if (item.type == "percent") {
+          this.totalOrderAmount -= ((this.totalOrderAmount / 100) * item.amount)
+        }
+        else if (item.type == "flat") {
+          this.totalOrderAmount -= item.amount
+        }
+
+      }
+    });
+    if (!this.isCouponMatched) {
+      alert("Invalid Coupon Code")
+    }
+
+  }
+
+  cancelCoupon() {
+    this.isCouponMatched = false;
+    this.totalOrderAmount = this.backupTotalOrderAmount;
   }
 }

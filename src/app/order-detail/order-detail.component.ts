@@ -44,6 +44,8 @@ export class OrderDetailComponent implements OnInit {
       this.totalBeforeTax = this.totalItemAmount + (this.shippingAmount | 0);
       this.orderTotalAmount = (this.totalItemAmount + this.shippingAmount + this.taxAmount);
 
+    },error=>{
+      console.log(error);
     })
   }
   gettingParamInfo() {

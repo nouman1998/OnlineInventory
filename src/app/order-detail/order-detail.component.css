@@ -44,3 +44,12 @@ body{
   margin-left: 5px;
   margin-right: 5px;
   }
+
+  .addressDetails{
+    width:120px;
+    margin-top:-10px;
+    margin-left:20px;
+    background:white;
+    font-size:15px;
+    padding-left: 10px;
+  }
