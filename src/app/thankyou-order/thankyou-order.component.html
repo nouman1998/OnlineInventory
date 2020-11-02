@@ -4,11 +4,14 @@
   <div class="col-lg-12">
     <nav class="navbar navbar-light bg-light" style="background-color: #ffc107 !important;">
       <a class="navbar-brand m-auto">Thank You for Ordering</a>
+
     </nav>
   </div>
 </div>
   <div class="jumbotron text-xs-center">
   <h1 class="display-3">Thank You!</h1>
+  <p class="lead"><strong>Your Order #</strong> {{userId}}  &nbsp;&nbsp;&nbsp; <button (click)="routeToViewOrder() " style="font-size:12px" class="btn-warning">View Order</button></p>
+
   <p class="lead"><strong>Please check your email</strong> for further instructions on delivery timing .</p>
   <hr>
   <p>

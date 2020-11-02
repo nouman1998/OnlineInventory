@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-thankyou-order',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ThankyouOrderComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private activatedRoute: ActivatedRoute, private router:Router) { }
+  userId
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.userId = params['id'];
+     console.log(this.userId);
+   });
+  }
+
+  routeToViewOrder() {
+    this.router.navigate(['/order-detail'], { queryParams: { id: this.userId }});
   }
 
 }

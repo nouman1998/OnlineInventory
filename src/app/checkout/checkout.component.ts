@@ -270,10 +270,12 @@ export class CheckoutComponent implements OnInit {
     }
     else {
       this.preparingJson();
-      this.http.post(this.localUrl, this.orderJson).subscribe();
-      setTimeout(() => {
-        this.router.navigate(['thankyou'])
-      }, 500);
+      this.http.post(this.localUrl, this.orderJson).subscribe(response=>{
+        setTimeout(() => {
+          this.router.navigate(['thankyou'],{ queryParams: { id: response }})
+        }, 500);
+      });
+
 
       console.log("Posting Order", this.orderJson);
     }
@@ -297,29 +299,30 @@ export class CheckoutComponent implements OnInit {
       "zipCode": "00000"
     }
 
-    this.orderJson['orderTotal'] = '';
+    this.orderJson['orderTotal'] = this.backupTotalOrderAmount;
     this.orderJson['orderStatus'] = 1;
-    this.orderJson['paymentStatus'] = "";
+    this.orderJson['paymentStatus'] = 1;
     this.orderJson['notificationId'] = this.notificaionId;
     this.orderJson['shippingMethod'] = this.shippingMethod;
     this.orderJson['shippingAmt'] = "50";
+    this.orderJson['shippingId']=this.shippingMethod;
 
     this.orderJson['couponDetail'] = {
       "couponName": this.coupon.name,
-      "discountType": "",
-      "discountAmt": ""
+      "discountType": this.discountType,
+      "discountAmt": this.discountAmount
     };
 
     this.orderJson['paymentDetail'] = {
-      "paymentType": "",
-      "bankName": "",
-      "accountNo": "",
-      "ifscCode": "",
-      "cardNumber": "",
-      "cardUserName": "",
-      "cardExpiryDate": "",
-      "totalTax": "",
-      "totalPrice":""
+      "paymentType": "1",
+      "bankName": "Habib",
+      "accountNo": "12345",
+      "ifscCode": "123",
+      "cardNumber": "123456",
+      "cardUserName": "Nouman Ejaz",
+      "cardExpiryDate": "22/03",
+      "totalTax": "124",
+      "totalPrice":this.totalOrderAmount
     }
 
     console.log("bbbbbbbb", this.orderJson)
@@ -394,21 +397,27 @@ export class CheckoutComponent implements OnInit {
   }
 
   couponArray = [
-    { name: "code50", type: "percent", amount: 50 },
-    { name: "code30", type: "flat", amount: 30 }
+    { id: 1,name: "code50", type: "percent", amount: 50 },
+    { id:2,name: "code30", type: "flat", amount: 30 }
   ]
   isCouponMatched = false;
 
-
+discountAmount=0;
+discountType
   checkCoupon() {
+    this.discountAmount=0
     this.isCouponMatched = false;
     this.couponArray.map(item => {
       if (item.name === this.coupon.name) {
         this.isCouponMatched = true;
         if (item.type == "percent") {
-          this.totalOrderAmount -= ((this.totalOrderAmount / 100) * item.amount)
+          this.discountAmount=((this.totalOrderAmount / 100) * item.amount)
+          this.discountType=item.id;
+          this.totalOrderAmount -= this.discountAmount;
         }
         else if (item.type == "flat") {
+          this.discountAmount=item.amount;
+          this.discountType=item.id;
           this.totalOrderAmount -= item.amount
         }
 
