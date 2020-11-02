@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { OrderServiceService } from '../order-service.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -20,9 +21,11 @@ export class OrderDetailComponent implements OnInit {
   userId
   constructor(
     private activatedRoute: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private service :OrderServiceService
   ) { }
   returnParam = false
+  sucessfullCall=false;
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
        this.userId = params['id'];
@@ -32,7 +35,13 @@ export class OrderDetailComponent implements OnInit {
     this.getOrderById();
   }
   getOrderById() {
-    this.http.get(this.baseUrl + this.userId).subscribe((d: any) => {
+    this.service.getOrderById(this.userId).subscribe((response) => {
+      console.log(response);
+
+      if(response.status==200)
+      {
+        this.sucessfullCall=true;
+      let d = response.body
       console.log(d)
 
       this.order = d;
@@ -49,10 +58,13 @@ export class OrderDetailComponent implements OnInit {
       this.totalBeforeTax = this.totalItemAmount + (this.shippingAmount | 0);
       this.orderTotalAmount = (this.totalItemAmount + this.shippingAmount + this.taxAmount);
 
-    }, error => {
-      console.log(error);
-    })
-  }
+    }
+    else{
+      this.sucessfullCall=false;
+      alert("Unsucessfull Network call");
+    }
+  })
+}
   gettingParamInfo() {
     this.activatedRoute.paramMap.subscribe((d: any) => {
       console.log(d)

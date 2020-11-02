@@ -5,6 +5,7 @@ import { ɵINTERNAL_BROWSER_PLATFORM_PROVIDERS } from '@angular/platform-browser
 import { Coupon } from './coupon';
 import csc from 'country-state-city'
 import { Router } from '@angular/router';
+import { OrderServiceService } from '../order-service.service';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,private service:OrderServiceService) { }
   address = {}
   myform
   isSaving = false;
@@ -270,11 +271,22 @@ export class CheckoutComponent implements OnInit {
     }
     else {
       this.preparingJson();
-      this.http.post(this.localUrl, this.orderJson).subscribe(response=>{
-        setTimeout(() => {
-          this.router.navigate(['thankyou'],{ queryParams: { id: response }})
-        }, 500);
-      });
+
+      this.service.postOrder(this.orderJson).subscribe(response=>{
+        console.log(response)
+        if(response.status==200)
+        {
+          setTimeout(() => {
+            this.router.navigate(['thankyou'],{ queryParams: { id: response.body }})
+          }, 500);
+        }
+        else{
+          alert("Posting Unsucessfull")
+        }
+
+      },error=>{
+        alert("Something Went Wrong. Try Again")
+      } )
 
 
       console.log("Posting Order", this.orderJson);

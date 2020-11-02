@@ -1,3 +1,4 @@
+<div *ngIf="sucessfullCall">
 <div class="row">
   <div class="col-lg-12">
     <nav class="navbar navbar-light bg-light" style="background-color: #ffc107 !important;">
@@ -189,16 +190,16 @@
 
   </div>
 
+</div>
+</div>
 
-
-
-  <!--  <div style="margin-top: 30px; margin-left: 100px; margin-bottom: 50px;">
-    <h6 style="font-size: 13px ; font-weight: bold;">Billing Address</h6>
-    <hr size="5" width="250" align="left">
-    <h6 style="font-size: 13px ; font-weight: 500;">{{order.orderAddressDetails.billToAddLine1}}</h6>
+<div id="notfound">
+  <div class="notfound">
+    <div class="notfound-404"></div>
+    <h1>404</h1>
+    <h2>Oops! Page Not Be Found</h2>
+    <p>Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily unavailable</p>
+    <a href="#">Back to homepage</a>
   </div>
-  <div style="float: right; margin-top: 8px; margin-right: 100px; position: relative; bottom: 130px;">
-    <h6 style="font-size: 13px ; font-weight: bold;">Shipping Address</h6>
-    <hr>
-    <h6 style="font-size: 13px ; font-weight: 500;">{{order.orderAddressDetails.shipToAddLine1}}</h6>
-  </div> -->
+</div>
+
