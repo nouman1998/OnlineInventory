@@ -1,4 +1,4 @@
-<div *ngIf="sucessfullCall">
+<div  *ngIf="(sucessfullCall&&isLoadDone)">
 <div class="row">
   <div class="col-lg-12">
     <nav class="navbar navbar-light bg-light" style="background-color: #ffc107 !important;">
@@ -35,7 +35,7 @@
       </div>
 
 
-      <div class="col-lg-5 ">
+      <div *ngIf="!returnParam" class="col-lg-5 ">
         <div>
           <div class="row">
             <div class="col-lg-6">
@@ -77,13 +77,62 @@
             <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Order Total: </span>
           </div>
           <div class="col-lg-6">
-            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{orderTotalAmount}}.00</span> <span
-              *ngIf="returnParam">(Return)</span>
+            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{orderTotalAmount}}.00</span>
           </div>
         </div>
       </div>
 
     </div>
+
+    <div *ngIf="returnParam" class="col-lg-5 ">
+      <div>
+        <div class="row">
+          <div class="col-lg-6">
+            <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Items: </span>
+          </div>
+          <div class="col-lg-6">
+            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{totalReturnItemAmount||0}}.00</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Shipping & Handling: </span>
+          </div>
+          <div class="col-lg-6">
+            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{shippingAmount}}.00</span>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-lg-6">
+            <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Total before Tax: </span>
+          </div>
+          <div class="col-lg-6">
+            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{totalReturnBeforeTax}}.00</span>
+          </div>
+        </div> -->
+        <!-- <div class="row">
+          <div class="col-lg-6">
+            <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Tax Collected: </span>
+          </div>
+          <div class="col-lg-6">
+            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;">
+              {{order.orderDetailList.taxAmount||0}}.00</span>
+          </div>
+        </div> -->
+
+      <hr style="border:1px solid p black;width: 100%; padding:0; margin: 0;">
+      <div class="row" style="margin-bottom: 10px;">
+        <div class="col-lg-6">
+          <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Order Total: </span>
+        </div>
+        <div class="col-lg-6">
+          <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{orderReturnTotalAmount||0}}.00</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
     <div class="col-lg-1 "></div>
 </div>
 </div>
@@ -124,8 +173,19 @@
         <td>{{orderdetail.item.itemSize}}</td>
         <td>{{orderdetail.itemPrice}}</td>
         <td>{{orderdetail.itemTotalAmount}}</td>
-        <td *ngIf="returnParam"><input type="checkbox" name="" id=""></td>
-      </tr>
+        <td *ngIf="returnParam"><input type="checkbox" (change)="changeCheckbox($event,orderdetail )" name="returnCheckbox" id=""></td>
+
+      </tr><tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td *ngIf="returnParam">  <button (click)="prepareReturnOrderJson()" class="btn btn-warning" >Return</button></td>
+
+    </tr>
+
     </table>
 
   </div>
@@ -193,7 +253,7 @@
 </div>
 </div>
 
-<div id="notfound">
+<div   *ngIf="(!sucessfullCall&&isLoadDone)" id="notfound">
   <div class="notfound">
     <div class="notfound-404"></div>
     <h1>404</h1>

@@ -97,7 +97,12 @@ export class CheckoutComponent implements OnInit {
   coupon = new Coupon();
   orderJson = {}
   checkout = new Checkout();
-  saved = false
+  saved = false;
+   monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+  last = new Date(new Date().getTime()+(7 * 24 * 60 * 60 * 1000))
+  deliveryDate= this.last.getDate() +" - "+ this.monthNames[this.last.getMonth()] + " - "+ this.last.getFullYear();
   addressArray = [
     this.initialAddress,
 
