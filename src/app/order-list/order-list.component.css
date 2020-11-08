@@ -1,0 +1,165 @@
+ .example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    width: 85%;
+    margin-left: 100px;
+    height:auto ;
+  }
+  
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+    width: 300px;
+    margin-left: 150px;
+    text-align:right;
+    align-items: center;
+    text-align-last: right;
+    align-self: right;
+    -moz-box-align: right;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 40%;
+    width: 100%;
+  }
+
+  .mat-cell,
+  .mat-footer-cell{
+    width: 20%;
+  }
+
+
+
+  table {
+    width: 100%;
+  }
+  
+  tr.example-detail-row {
+    height: 0;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):hover {
+    background: whitesmoke;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+  }
+  
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
+  
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .example-element-diagram {
+    min-width: 80px;
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+  }
+  
+  .example-element-symbol {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 10px;
+  }
+  
+  .example-element-description {
+    padding: 6px;
+  }
+  
+  .example-element-description-attribution {
+    opacity: 0.5;
+  }
+
+  fieldset 
+	{
+		border: 1px solid #ddd !important;
+		margin: 40px;
+		padding: 10px;       
+		border-radius:4px;
+    padding-left:10px!important;
+    height: fit-content;
+	}	
+	
+		legend
+		{
+			font-size:20px;
+			font-weight:bold;
+			margin-bottom: 0px; 
+			width: 4%;
+    }
+    
+    .example-custom-date-class {
+      background: gold;
+      border-radius: 40%;
+    }
+
+    .Row {
+      display: table;
+      width: 100%; /*Optional*/
+      table-layout: fixed; /*Optional*/
+      border-spacing: 20px; /*Optional*/
+      /*text-align: right;*/
+      margin-left: 1%;
+  }
+  .Column {
+      display: table-cell;
+      text-align: right;
+      width: 100%;
+  }
+
+#div-wrapper {
+    max-width: 80%;
+    text-align: right;
+    margin-left: 10%;
+}
+
+.single-div {
+    width: 15%;
+    display: inline-block;
+    text-align: right;
+    vertical-align: right;
+    margin: 0 1%;
+}
+
+.button-div {
+  width: 6%;
+  display: inline-block;
+  text-align: right;
+  vertical-align: right;
+  margin: 0 1%;
+}
+
+@media screen and (max-width: 480px) {
+
+  .single-div {
+      display: block;
+      width: 65%;
+      margin: 0 auto;
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+
+  .button-div {
+      display: block;
+      width: 65%;
+      margin: 0 10px;
+  }
+
+}

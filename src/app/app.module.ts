@@ -4,11 +4,24 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { ThankyouOrderComponent } from './thankyou-order/thankyou-order.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatPaginatorModule} from '@angular/material/paginator'
+import { OrderListComponent } from './order-list/order-list.component';
+import {MatFormFieldModule } from '@angular/material/form-field';
+import {MatTableModule} from '@angular/material/table';
+import {  MatInputModule } from '@angular/material/input';
+
+import {MatDatepickerModule } from '@angular/material/datepicker';
+// import {MatNativeDateModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+
+import { ReactiveFormsModule  } from '@angular/forms'
+import { OrderServiceService } from './order-service.service';
 
 // import { CarouselModule, WavesModule } from 'angular-bootstrap-md'
 
@@ -17,7 +30,8 @@ import { ThankyouOrderComponent } from './thankyou-order/thankyou-order.componen
     AppComponent,
     CheckoutComponent,
     OrderDetailComponent,
-    ThankyouOrderComponent
+    ThankyouOrderComponent,
+    OrderListComponent
   ],
   imports: [
     BrowserModule,
@@ -25,10 +39,20 @@ import { ThankyouOrderComponent } from './thankyou-order/thankyou-order.componen
     FormsModule,
     HttpClientModule,
     IvyCarouselModule,
-    CommonModule
-
+    CommonModule,
+    NoopAnimationsModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatTableModule
+    ,MatDatepickerModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
-  providers: [],
+  exports:[
+    MatFormFieldModule,MatInputModule
+  ],
+  providers: [DatePipe, OrderServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

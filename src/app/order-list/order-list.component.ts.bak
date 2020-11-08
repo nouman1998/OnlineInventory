@@ -1,0 +1,76 @@
+import {OnInit,AfterViewInit, Component, ViewChild, Injectable} from '@angular/core';
+//import {Sort} from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+var $ = require('jquery');
+var dt = require('datatables.net');
+
+import {OrderserviceService} from '../orderservice.service';
+
+/*export interface Food {
+  calories: number;
+  carbs: number;
+  fat: number;
+  name: string;
+  protein: number;
+}*/
+
+
+@Component({
+  selector: 'app-order-list',
+  templateUrl: './order-list.component.html',
+  styleUrls: ['./order-list.component.css']
+})
+export class OrderListComponent implements OnInit,AfterViewInit{
+
+  
+   /*dataSource1: Food[] = [
+  {name: 'Yogurt', calories: 159, fat: 6, carbs: 24, protein: 4},
+  {name: 'Sandwich', calories: 237, fat: 9, carbs: 37, protein: 4},
+  {name: 'Eclairs', calories: 262, fat: 16, carbs: 24, protein: 6},
+  {name: 'Cupcakes', calories: 305, fat: 4, carbs: 67, protein: 4},
+  {name: 'Gingerbreads', calories: 356, fat: 16, carbs: 49, protein: 4},
+];
+displayedColumns: string[] = ['name', 'calories', 'fat', 'carbs','protein'];
+dataSource = new MatTableDataSource(this.dataSource1);
+
+//@ViewChild(MatSort) sort: MatSort;
+@ViewChild(MatSort) sort: MatSort;
+*/
+
+constructor(private orderService: OrderserviceService) { }
+public addressList = [];
+public orderList = [];
+
+
+ngAfterViewInit() {
+  //this.dataSource.sort = this.sort;
+
+  
+}
+
+ngOnInit(): void {
+  this.orderService.getCustomerAddress(1).subscribe((data) => {
+    this.addressList = Array.from(Object.keys(data), k=>data[k]);
+    console.log(this.addressList);
+ });
+
+ 
+ this.orderService.getOrderList(1).subscribe((data) => {
+  this.orderList = Array.from(Object.keys(data), k=>data[k]);
+  console.log(this.orderList);
+});
+
+$(document).ready(function () {
+  $('#selectedColumn').DataTable({
+    "aaSorting": [],
+    columnDefs: [{
+    orderable: true,
+    targets: 5,
+    order:[this.orderList]
+    }]
+  });this.orderList
+    $('.dataTables_length').addClass('bs-select');
+  });
+}
+}

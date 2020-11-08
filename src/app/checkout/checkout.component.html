@@ -38,7 +38,7 @@
           <div class="col-lg" *ngFor="let item of addressArray; let i=index;">
 
             <div class="row">
-              <div class="col-1"> <span><input [attr.checked]="i==0" (change)="myFunction(item)" id="1" name="gender1"
+              <div class="col-1"> <span><input style="width: 10px;" [attr.checked]="i==0" (change)="myFunction(item)" id="1" name="gender1"
                     type="radio"></span></div>
               <div class="col" style="margin-top: 6px;">
                 <span
@@ -96,7 +96,7 @@
           <div class="col-lg" *ngFor="let item of billingAddress; let i=index;">
 
             <div class="row">
-              <div class="col-1"> <span><input [attr.checked]="i===0" (change)="myFunction1(item)" name="billingradio"
+              <div class="col-1"> <span><input style="width: 10px;" [attr.checked]="i===0" (change)="myFunction1(item)" name="billingradio"
                     type="radio"></span></div>
               <div class="col" style="margin-top: 6px;">
                 <span
@@ -204,13 +204,13 @@
 
 
 
-                    <div *ngIf="couponName.invalid && (couponName.dirty || couponName.touched)" class="alert alert-danger">
+                    <!-- <div *ngIf="couponName.invalid && (couponName.dirty || couponName.touched)" class="alert alert-danger">
 
                       <small *ngIf="couponName.errors.required">
                         Coupon Name is required.
                       </small>
 
-                    </div>
+                    </div> -->
 
 
 
@@ -309,7 +309,7 @@
 
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div  class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -379,25 +379,27 @@
             </div>
 
           </div>
-          <!-- </div> -->
-          <!-- <div class="row"> -->
+
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700; margin-left: 7px;">Phone Number</small> </label>
           <div class="row" style="   margin-left: 1px;">
-            <input type="number" required minlength=11 maxlength=15 class="form-control" name="PhoneNumber"
+            <input type="text" required minlength=11 maxlength=15 class="form-control" name="PhoneNumber" pattern="/^[0-9]+$/"
               placeholder="Phone Number" #PhoneNumber="ngModel" [(ngModel)]="checkout.phoneNumber"
               [ngClass]="{'is-invalid':(PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched))}">
             <div *ngIf="PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched)" class="alert alert-danger">
 
               <small *ngIf="PhoneNumber.errors.required">
-                Phone Number is required.
+                <div> Phone Number is required.</div>
               </small>
 
               <small *ngIf="PhoneNumber.errors?.minlength">
-                Phone Number must be at least 11 characters long.
+             <div>  Phone Number must be at least 11 characters long.</div>
               </small>
               <small *ngIf="PhoneNumber.errors?.maxlength">
-                Phone Number can be of max 15 charcters.
+              <div>  Phone Number can be of max 15 charcters.</div>
+              </small>
+              <small *ngIf="PhoneNumber.errors?.pattern">
+              <div> Phone Number can contain numbers only.</div>
               </small>
             </div>
           </div>
@@ -405,7 +407,7 @@
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700; font-family: Arial;margin-left: 7px;">Pin Code</small> </label>
           <div class="row" style="   margin-left: 1px;">
-            <input type='number' required minlength=5 maxlength=5 class="form-control" placeholder="Pincode"
+            <input type='text' required minlength=5 maxlength=5 class="form-control" placeholder="Pincode"
               name="pincode" #pincode="ngModel" [(ngModel)]="checkout.pincode"
               [ngClass]="{'is-invalid':(pincode.invalid && (pincode.dirty || pincode.touched))}">
             <div *ngIf="pincode.invalid && (pincode.dirty || pincode.touched)" class="alert alert-danger">
@@ -598,7 +600,7 @@
         <textarea [(ngModel)]="deliveryInstrution" rows="10" cols="62" placeholder="Add Delievery Instructions here"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
       </div>
     </div>
@@ -608,7 +610,7 @@
 
 
 
-
+<!-- //BillingModal -->
 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -627,13 +629,13 @@
               style="font-weight: 700; margin-left: 7px;">First Name</small> </label>
           <div class="row" style="   margin-left: 1px;">
 
-            <input required #firstName="ngModel" class="form-control" type="text" placeholder="First Name"
-              name="firstName" [(ngModel)]="checkout.firstName"
-              [ngClass]="{'is-invalid':(firstName.invalid && (firstName.dirty || firstName.touched))}">
+            <input required #firstName1="ngModel" class="form-control" type="text" placeholder="First Name"
+              name="firstName1" [(ngModel)]="checkout1.firstName"
+              [ngClass]="{'is-invalid':(firstName1.invalid && (firstName1.dirty || firstName1.touched))}">
 
-            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+            <div *ngIf="firstName1.invalid && (firstName1.dirty || firstName1.touched)" class="alert alert-danger">
 
-              <small *ngIf="firstName.errors.required">
+              <small *ngIf="firstName1.errors.required">
                 First Name is required.
               </small>
             </div>
@@ -643,22 +645,22 @@
               style="font-weight: 700; margin-left: 7px;">Middle Name</small> </label>
 
           <div class="row" style="   margin-left: 1px;">
-            <input class="form-control" type="text" name="MiddleName" placeholder="Middle Name"
-              [(ngModel)]="checkout.middleName">
+            <input class="form-control" type="text" name="MiddleName1" placeholder="Middle Name"
+              [(ngModel)]="checkout1.middleName">
           </div>
 
 
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700; margin-left: 7px;">Last Name</small> </label>
           <div class="row" style="   margin-left: 1px;">
-            <input required #lastName="ngModel" class="form-control" type="text" placeholder="Last Name" name="lastName"
-              [(ngModel)]="checkout.lastName"
-              [ngClass]="{'is-invalid':(lastName.invalid && (lastName.dirty || lastName.touched))}">
+            <input required #lastName1="ngModel" class="form-control" type="text" placeholder="Last Name" name="lastName1"
+              [(ngModel)]="checkout1.lastName"
+              [ngClass]="{'is-invalid':(lastName1.invalid && (lastName1.dirty || lastName1.touched))}">
 
 
-            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+            <div *ngIf="lastName1.invalid && (lastName1.dirty || lastName1.touched)" class="alert alert-danger">
 
-              <small *ngIf="lastName.errors.required">
+              <small *ngIf="lastName1.errors.required">
                 Last Name is required.
               </small>
             </div>
@@ -669,20 +671,23 @@
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700; margin-left: 7px;">Phone Number</small> </label>
           <div class="row" style="   margin-left: 1px;">
-            <input type="number" required minlength=11 maxlength=15 class="form-control" name="PhoneNumber"
-              placeholder="Phone Number" #PhoneNumber="ngModel" [(ngModel)]="checkout.phoneNumber"
-              [ngClass]="{'is-invalid':(PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched))}">
-            <div *ngIf="PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched)" class="alert alert-danger">
+            <input type="text" required minlength=9 maxlength=11 class="form-control" name="PhoneNumber1" (change)="changePhone(PhoneNumber)"
+              placeholder="Phone Number" #PhoneNumber1="ngModel" [(ngModel)]="checkout1.phoneNumber"  pattern="/^[0-9]+$/"
+              [ngClass]="{'is-invalid':(PhoneNumber1.invalid && (PhoneNumber1.dirty || PhoneNumber1.touched))}">
+            <div *ngIf="PhoneNumber1.invalid && (PhoneNumber1.dirty ||PhoneNumber1.touched)" class="alert alert-danger">
 
-              <small *ngIf="PhoneNumber.errors.required">
+              <small *ngIf="PhoneNumber1.errors.required">
                 Phone Number is required.
               </small>
 
-              <small *ngIf="PhoneNumber.errors?.minlength">
-                Phone Number must be at least 11 characters long.
+              <small *ngIf="PhoneNumber1.errors?.minlength">
+               <div> Phone Number must be at least 9 characters long.</div>
               </small>
-              <small *ngIf="PhoneNumber.errors?.maxlength">
-                Phone Number can be of max 15 charcters.
+              <small *ngIf="PhoneNumber1.errors?.maxlength">
+              <div>  Phone Number can be of max 11 charcters.</div>
+              </small>
+              <small *ngIf="PhoneNumber1.errors?.pattern">
+             <div> Phone Number can contain numbers only</div>
               </small>
             </div>
           </div>
@@ -691,18 +696,18 @@
               style="font-weight: 700; font-family: Arial;margin-left: 7px;">Pin Code</small> </label>
           <div class="row" style="   margin-left: 1px;">
             <input type='number' required minlength=5 maxlength=5 class="form-control" placeholder="Pincode"
-              name="pincode" #pincode="ngModel" [(ngModel)]="checkout.pincode"
+              name="pincode1" #pincode1="ngModel" [(ngModel)]="checkout1.pincode"
               [ngClass]="{'is-invalid':(pincode.invalid && (pincode.dirty || pincode.touched))}">
             <div *ngIf="pincode.invalid && (pincode.dirty || pincode.touched)" class="alert alert-danger">
 
-              <small *ngIf="pincode.errors.required">
+              <small *ngIf="pincode1.errors.required">
                 Pincode is required.
               </small>
 
-              <small *ngIf="pincode.errors?.minlength">
+              <small *ngIf="pincode1.errors?.minlength">
                 Pincode must be at least 5 characters long.
               </small>
-              <small *ngIf="pincode.errors?.maxlength">
+              <small *ngIf="pincode1.errors?.maxlength">
                 Pincode can be of max 5 charcters.
               </small>
             </div>
@@ -712,7 +717,7 @@
 
           <div class="row" style="   margin-left: 1px;">
             <input class="form-control" type="text" name="Locality" placeholder="Locality"
-              [(ngModel)]="checkout.Locality" name="locality">
+              [(ngModel)]="checkout1.Locality" name="locality">
 
           </div>
 
@@ -720,12 +725,12 @@
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700; font-family: Arial;margin-left: 7px;">Address Lane 1</small> </label>
           <div class="row" style="   margin-left: 1px;">
-            <input required class="form-control" type="text" placeholder="Address 1" name="address1" #address1="ngModel"
-              [(ngModel)]="checkout.address"
-              [ngClass]="{'is-invalid':(address1.invalid && (address1.dirty || address1.touched))}">
-            <div *ngIf="address1.invalid && (address1.dirty || address1.touched)" class="alert alert-danger">
+            <input required class="form-control" type="text" placeholder="Address 1" name="address1b" #address1b="ngModel"
+              [(ngModel)]="checkout1.address"
+              [ngClass]="{'is-invalid':(address1b.invalid && (address1b.dirty || address1b.touched))}">
+            <div *ngIf="address1b.invalid && (address1b.dirty || address1b.touched)" class="alert alert-danger">
 
-              <small *ngIf="address1.errors.required">
+              <small *ngIf="address1b.errors.required">
                 Address is required.
               </small>
 
@@ -736,7 +741,7 @@
               style="font-weight: 700;font-family: Arial; margin-left: 7px;">Address Lane 2</small> </label>
           <div class="row" style="   margin-left: 1px;">
             <input name="Address2" class="form-control" type="text" placeholder="Address 2"
-              [(ngModel)]="checkout.address1">
+              [(ngModel)]="checkout1.address1">
           </div>
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700;font-family: Arial; margin-left: 7px;">Country</small> </label>
@@ -746,7 +751,7 @@
             <div>
               <select style="    width: 339px;
           height: 28px;
-          font-size: 10px;" name="country1" [(ngModel)]="checkout.country" class="form-control"
+          font-size: 10px;" name="country1b" [(ngModel)]="checkout1.country" class="form-control"
                 (change)="countryChange()">
                 <option [value]="country.id" *ngFor="let country of countries;let i=index">
                   {{country.name}}
@@ -767,7 +772,7 @@
 
             <select style="    width: 339px;
         height: 28px;
-        font-size: 10px;" [(ngModel)]="checkout.state" name="state" required class="form-control"
+        font-size: 10px;" [(ngModel)]="checkout1.state" name="state" required class="form-control"
               id="exampleFormControlSelect1" (change)="provinceChange()">
               <option [value]="province.id" *ngFor="let province of provinces">
                 {{province.name}}
@@ -784,7 +789,7 @@
             [ngClass]="{'is-invalid':(city.invalid && (city.dirty || city.touched))}"> -->
             <select style="        width: 339px;
     height: 28px;
-    font-size: 10px;" [(ngModel)]="checkout.city" name="state" required class="form-control"
+    font-size: 10px;" [(ngModel)]="checkout1.city" name="state" required class="form-control"
               id="exampleFormControlSelect1">
               <option [value]="city.id" *ngFor="let city of cities">
                 {{city.name}}
@@ -807,18 +812,18 @@
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700;font-family: Arial; margin-left: 7px;">Landmark</small> </label>
           <div class="row" style="   margin-left: 1px;">
-            <input class="form-control" type="text" name="landmark" [(ngModel)]="checkout.landmark"
+            <input class="form-control" type="text" name="landmark1" [(ngModel)]="checkout1.landmark"
               placeholder="Landmark(Optional)">
           </div>
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700;font-family: Arial; margin-left: 7px;">Street</small> </label>
           <div class="row" style="   margin-left: 1px;">
-            <input required class="form-control" type="text" placeholder="Street" name="street" #street="ngModel"
-              [(ngModel)]="checkout.street"
-              [ngClass]="{'is-invalid':(street.invalid && (street.dirty || street.touched))}">
-            <div *ngIf="street.invalid && (street.dirty || street.touched)" class="alert alert-danger">
+            <input required class="form-control" type="text" placeholder="Street" name="street1" #street1="ngModel"
+              [(ngModel)]="checkout1.street"
+              [ngClass]="{'is-invalid':(street1.invalid && (street1.dirty || street1.touched))}">
+            <div *ngIf="street1.invalid && (street1.dirty || street1.touched)" class="alert alert-danger">
 
-              <small *ngIf="street.errors.required">
+              <small *ngIf="street1.errors.required">
                 Street is required.
               </small>
 
@@ -833,16 +838,16 @@
               style="font-weight: 700;font-family: Arial, Helvetica, sans-serif; margin-left: 7px;">Email</small>
           </label>
           <div class="row" style="   margin-left: 1px;">
-            <input email=true required type="email" class="form-control" type="text" placeholder="email" name="email"
-              #email="ngModel" [(ngModel)]="checkout.email" (click)="hello(email)"
-              [ngClass]="{'is-invalid':(email.invalid && (email.dirty || email.touched))}">
-            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+            <input email=true required type="email" class="form-control" type="text" placeholder="email" name="email1"
+              #email1="ngModel" [(ngModel)]="checkout1.email" (click)="hello(email)"
+              [ngClass]="{'is-invalid':(email1.invalid && (email1.dirty || email1.touched))}">
+            <div *ngIf="email1.invalid && (email1.dirty || email1.touched)" class="alert alert-danger">
 
-              <small *ngIf="email.errors.required">
+              <small *ngIf="email1.errors.required">
                 Email is required.
               </small>
 
-              <small *ngIf="email.errors.email">
+              <small *ngIf="email1.errors.email">
                 Enter a Valid Email.
               </small>
 
@@ -864,7 +869,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="funnyDayaForm.reset();">Close</button>
         <button data-dismiss="modal" type="button" class="btn btn-primary"
           (click)="saveBillingAddress(funnyDayaForm)">Save changes</button>
       </div>
