@@ -383,7 +383,7 @@
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700; margin-left: 7px;">Phone Number</small> </label>
           <div class="row" style="   margin-left: 1px;">
-            <input type="text" required minlength=11 maxlength=15 class="form-control" name="PhoneNumber" pattern="/^[0-9]+$/"
+            <input (keypress)="numberOnly($event)" type="text" required minlength=11 maxlength=15 class="form-control" name="PhoneNumber"
               placeholder="Phone Number" #PhoneNumber="ngModel" [(ngModel)]="checkout.phoneNumber"
               [ngClass]="{'is-invalid':(PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched))}">
             <div *ngIf="PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched)" class="alert alert-danger">
@@ -398,9 +398,9 @@
               <small *ngIf="PhoneNumber.errors?.maxlength">
               <div>  Phone Number can be of max 15 charcters.</div>
               </small>
-              <small *ngIf="PhoneNumber.errors?.pattern">
+              <!-- <small *ngIf="PhoneNumber.errors?.pattern">
               <div> Phone Number can contain numbers only.</div>
-              </small>
+              </small> -->
             </div>
           </div>
 
@@ -671,8 +671,8 @@
           <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
               style="font-weight: 700; margin-left: 7px;">Phone Number</small> </label>
           <div class="row" style="   margin-left: 1px;">
-            <input type="text" required minlength=9 maxlength=11 class="form-control" name="PhoneNumber1" (change)="changePhone(PhoneNumber)"
-              placeholder="Phone Number" #PhoneNumber1="ngModel" [(ngModel)]="checkout1.phoneNumber"  pattern="/^[0-9]+$/"
+            <input (keypress)="numberOnly($event)" type="text" required minlength=11 maxlength=15 class="form-control" name="PhoneNumber1" (change)="changePhone(PhoneNumber)"
+              placeholder="Phone Number" #PhoneNumber1="ngModel" [(ngModel)]="checkout1.phoneNumber"
               [ngClass]="{'is-invalid':(PhoneNumber1.invalid && (PhoneNumber1.dirty || PhoneNumber1.touched))}">
             <div *ngIf="PhoneNumber1.invalid && (PhoneNumber1.dirty ||PhoneNumber1.touched)" class="alert alert-danger">
 
@@ -681,14 +681,14 @@
               </small>
 
               <small *ngIf="PhoneNumber1.errors?.minlength">
-               <div> Phone Number must be at least 9 characters long.</div>
+               <div> Phone Number must be at least 11 characters long.</div>
               </small>
               <small *ngIf="PhoneNumber1.errors?.maxlength">
-              <div>  Phone Number can be of max 11 charcters.</div>
+              <div>  Phone Number can be of max 15 charcters.</div>
               </small>
-              <small *ngIf="PhoneNumber1.errors?.pattern">
+              <!-- <small *ngIf="PhoneNumber1.errors?.pattern">
              <div> Phone Number can contain numbers only</div>
-              </small>
+              </small> -->
             </div>
           </div>
 

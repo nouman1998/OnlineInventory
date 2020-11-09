@@ -393,7 +393,7 @@ export class CheckoutComponent implements OnInit {
         "discountAmt": this.discountAmount
       };
     }
-    else{
+    else {
       this.orderJson['couponDetail'] = {
         "couponName": null,
         "discountType": null,
@@ -530,6 +530,15 @@ export class CheckoutComponent implements OnInit {
 
   changePhone(abc) {
     console.log(abc);
+
+  }
+
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
 
   }
 }
