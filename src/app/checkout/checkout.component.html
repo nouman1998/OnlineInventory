@@ -204,14 +204,6 @@
 
 
 
-                    <!-- <div *ngIf="couponName.invalid && (couponName.dirty || couponName.touched)" class="alert alert-danger">
-
-                      <small *ngIf="couponName.errors.required">
-                        Coupon Name is required.
-                      </small>
-
-                    </div> -->
-
 
 
                 </form>
@@ -230,8 +222,46 @@
       </div>
 
     </div>
+    <hr>
+      <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
+        <div class="col-lg-1 font-weight-bold">6</div>
+        <div class="col-lg-2 font-weight-bold">Items</div>
+        <div class="col-lg-9"  style="font-family: Arial;font-size: 13px;font-weight: 400;">
+          <table style="width:100%;  font-size: 13px; font-family: Arial;">
+            <tr
+              style="border-style: solid; border-left: 0; border-right: 0; border-top: 0.1em; border-width:  0.12em; border-color: black; ">
+              <th></th>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Description</th>
+              <th>Price/Pcs</th>
+              <th>Total</th>
+              <th>Checkout</th>
+
+            </tr>
+
+            <tr *ngFor="let orderdetail of items "
+              style="border-style: solid;  border-left: 0; border-right: 0; border-top: 0.1em; border-width: 0.1em; margin-bottom: 10px; padding:0px ">
+              <td>
+                <img width="50px" height="50px"
+                  [src]="orderdetail.itemImageUrl"
+                  alt="">
+              </td>
+              <td>{{"-"}}</td>
+              <td>{{orderdetail.quantity}}</td>
+              <td>{{orderdetail.itemDetail}}</td>
+              <td>{{orderdetail.price}}</td>
+              <td>{{orderdetail.total}}</td>
+              <td><input checked (change)="changeCheckbox($event,orderdetail )" style="height: 20px;" type="checkbox"></td>
+
+          </tr>
+
+          </table>
+        </div>
+      </div>
+      <hr>
     <div class="row" style="margin-top: 15px;">
-      <div class="col-lg-1 font-weight-bold">6</div>
+      <div class="col-lg-1 font-weight-bold">7</div>
       <div class="col-lg-2 font-weight-bold">View Order</div>
       <div class="col-lg-9" style="font-family: Arial;font-size: 13px;font-weight: 400;">
         <div class="row" style="margin-left: 1px;  ">
@@ -280,7 +310,10 @@
       <div class="col-6 "> <span>Order Total:</span></div>
       <div class="col-5 "> <span>Rs. {{totalOrderAmount}}</span></div>
     </div>
-
+    <div class="row" style="margin-left: 15px; margin-top: 5px; font-weight: 500; font-size: 13px;">
+      <div class="col-6 "> <span>Tax</span></div>
+      <div class="col-5 "> <span>Rs. {{totalTax}}</span></div>
+    </div>
     <div class="row py-1" style="margin-left: 15px; font-weight: 500; font-size: 13px;">
       <div class="col-6 "> <span>Delivery Charges:</span></div>
       <div class="col-5 "> <span>Rs. 50</span></div>
@@ -293,12 +326,12 @@
 
     <div class="row " style="margin-left: 13px;font-weight: 500;">
       <div class="col-6"> <span>Total:</span></div>
-      <div class="col-5 "> <span>Rs. {{totalOrderAmount+50}}</span></div>
+      <div class="col-5 "> <span>Rs. {{totalOrderAmount+50+totalTax}}</span></div>
 
     </div>
 
 
-    <button  (click)="postOrder()" type="button" class="btn btn-warning my-3"
+    <button [disabled]="orderJson['items'].length==0" (click)="postOrder()" type="button" class="btn btn-warning my-3"
       style=" margin-left: 30%; height: 34px; ">Continue</button>
 
 

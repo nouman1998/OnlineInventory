@@ -24,6 +24,7 @@ export class CheckoutComponent implements OnInit {
   shippingMethod = "1"
   backupTotalOrderAmount
   notificaionId = "1"
+  totalTax=100;
   initialAddress = {
     id: 1, "firstName": "Shahzad",
     "middleName": "test",
@@ -70,21 +71,23 @@ export class CheckoutComponent implements OnInit {
         "productId": "2345",
         "itemId": "4",
         "itemDetail": "description",
-        "itemImageUrl": "http://nknv.jpg",
+        "itemImageUrl": "http://pngimg.com/uploads/pentacle/pentacle_PNG51.png",
         "quantity": 5,
         "price": 200,
-        "total": 1050
+        "total": 1000
       },
       {
         "productId": "17838",
         "itemId": "5",
         "itemDetail": "description",
-        "itemImageUrl": "http://nk2nv.jpg",
+        "itemImageUrl": "http://pngimg.com/uploads/pentacle/pentacle_PNG51.png",
         "quantity": 5,
         "price": 200,
-        "total": 1050
+        "total": 1000
       }
     ];
+
+    this.items=[...  this.orderJson['items']]
     this.getTotalOrderAmount()
 
     this.getCustomerAddress(this.createdByCustomer);
@@ -163,7 +166,7 @@ export class CheckoutComponent implements OnInit {
 
 
     this.cities = null
-
+// totalOrderAmount
 
   }
   isAddressSaved = false;
@@ -408,7 +411,7 @@ export class CheckoutComponent implements OnInit {
       "cardNumber": "123456",
       "cardUserName": "Nouman Ejaz",
       "cardExpiryDate": "22/03",
-      "totalTax": "124",
+      "totalTax": this.totalTax,
       "totalPrice": this.totalOrderAmount
     }
 
@@ -539,6 +542,23 @@ export class CheckoutComponent implements OnInit {
       return false;
     }
     return true;
+
+  }
+items=[];
+  changeCheckbox($event, obj){
+    this.totalOrderAmount=0;
+    console.log($event);
+
+    if ($event.target.checked) {
+      this.orderJson['items'].push(obj);
+
+
+    }
+    else {
+      let index = this.orderJson['items'].indexOf(obj);
+      this.orderJson['items'].splice(index, 1);
+    }
+    this.getTotalOrderAmount();
 
   }
 }
