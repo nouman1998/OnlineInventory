@@ -6,7 +6,7 @@
     margin-left: 100px;
     height:auto ;
   }
-  
+
   .example-header {
     min-height: 64px;
     padding: 8px 24px 0;
@@ -18,12 +18,12 @@
     align-self: right;
     -moz-box-align: right;
   }
-  
+
   .mat-form-field {
     font-size: 14px;
     width: 100%;
   }
-  
+
   .mat-table {
     overflow: auto;
     max-height: 40%;
@@ -40,28 +40,28 @@
   table {
     width: 100%;
   }
-  
+
   tr.example-detail-row {
     height: 0;
   }
-  
+
   tr.example-element-row:not(.example-expanded-row):hover {
     background: whitesmoke;
   }
-  
+
   tr.example-element-row:not(.example-expanded-row):active {
     background: #efefef;
   }
-  
+
   .example-element-row td {
     border-bottom-width: 0;
   }
-  
+
   .example-element-detail {
     overflow: hidden;
     display: flex;
   }
-  
+
   .example-element-diagram {
     min-width: 80px;
     border: 2px solid black;
@@ -70,39 +70,39 @@
     margin: 8px 0;
     height: 104px;
   }
-  
+
   .example-element-symbol {
     font-weight: bold;
     font-size: 40px;
     line-height: 10px;
   }
-  
+
   .example-element-description {
     padding: 6px;
   }
-  
+
   .example-element-description-attribution {
     opacity: 0.5;
   }
 
-  fieldset 
+  fieldset
 	{
 		border: 1px solid #ddd !important;
 		margin: 40px;
-		padding: 10px;       
+		padding: 10px;
 		border-radius:4px;
     padding-left:10px!important;
     height: fit-content;
-	}	
-	
+	}
+
 		legend
 		{
 			font-size:20px;
 			font-weight:bold;
-			margin-bottom: 0px; 
+			margin-bottom: 0px;
 			width: 4%;
     }
-    
+
     .example-custom-date-class {
       background: gold;
       border-radius: 40%;
@@ -123,9 +123,9 @@
   }
 
 #div-wrapper {
-    max-width: 80%;
+    max-width: 90%;
     text-align: right;
-    margin-left: 10%;
+    margin-left: 5%;
 }
 
 .single-div {
