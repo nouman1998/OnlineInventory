@@ -270,7 +270,7 @@
               </select> </td>
               <td>{{orderdetail.itemDetail}}</td>
               <td>{{orderdetail.price}}</td>
-              <td>{{orderdetail.total}}</td>
+              <td>{{orderdetail.quantity*orderdetail.price}}</td>
               <td><input checked (change)="changeCheckbox($event,orderdetail )" style="height: 20px;" type="checkbox"></td>
 
           </tr>
