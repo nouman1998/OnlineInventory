@@ -6,6 +6,7 @@ import { Coupon } from './coupon';
 import csc from 'country-state-city'
 import { Router } from '@angular/router';
 import { OrderServiceService } from '../order-service.service';
+import { debug } from 'console';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -18,6 +19,7 @@ export class CheckoutComponent implements OnInit {
   address = {}
   myform
   isSaving = false;
+  itemQuantity=[]
   firstButtonSelected = true;
   deliveryInstrution = ""
   secondButtonSelected = false;
@@ -88,9 +90,13 @@ export class CheckoutComponent implements OnInit {
     ];
 
     this.items=[...  this.orderJson['items']]
+    this.orderJson['items'].map(item=>{
+      this.itemQuantity.push(item.quantity)
+    })
     this.getTotalOrderAmount()
 
     this.getCustomerAddress(this.createdByCustomer);
+
   }
 
   getCustomerAddress(customerId) {
@@ -115,12 +121,26 @@ export class CheckoutComponent implements OnInit {
 
 
   getTotalOrderAmount() {
+    debugger
+
     this.totalOrderAmount = 0;
-    this.orderJson['items'].map(item => {
-      this.totalOrderAmount += ((item.price) * (item.quantity))
+    this.orderJson['items'].map((item,index) => {
+
+      this.totalOrderAmount += ((item.price) * (parseInt( this.itemQuantity[index])))
 
     })
     this.backupTotalOrderAmount = this.totalOrderAmount
+    if(this.orderJson['items'].length==0)
+    {
+      this.totalOrderAmount=0;
+
+      this.totalTax=0;
+    }
+    else{
+
+      this.totalTax=100;
+    }
+    // this.totalOrderAmount=120
   }
   radioButton
   isShippingAddressSame = false
@@ -559,6 +579,12 @@ items=[];
       this.orderJson['items'].splice(index, 1);
     }
     this.getTotalOrderAmount();
+
+  }
+
+  abc(){
+    this.getTotalOrderAmount()
+    console.log(this.itemQuantity);
 
   }
 }
