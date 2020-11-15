@@ -1,266 +1,255 @@
-<div style="margin:0 auto;margin-top: 4%; width: 90%;">
-<div  *ngIf="(sucessfullCall&&isLoadDone)">
-<div class="row">
-  <div class="col-lg-12">
-    <nav class="navbar navbar-light bg-light" style="background-color: #ffc107 !important;">
-      <a class="navbar-brand m-auto">View Order Details</a>
-    </nav>
-  </div>
-</div>
-<div
-  style="border-style: solid; border-width: 1px; margin-top: 10px; margin-left: 40px; margin-right: 40px;"></div>
 
-<div  style="border-style: solid; border-width: 1px; width: 95%; margin-left:2.5%;margin-top: 10px;">
+  <div style="margin:0 auto;margin-top: 4%; width: 70%;">
+  <div *ngIf="(sucessfullCall&&isLoadDone)">
     <div class="row">
-      <!--  style="margin-top: 30px; margin-left: 70px; margin-bottom: 140px;" -->
-      <div class="col-lg-1 "></div>
-      <div class="col-lg-5">
-
-        <div class="row">
-          <div class="col-lg-3">
-            <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Order Date : </span>
-          </div>
-          <div class="col-lg-7">
-            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{order.createDate}}</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-3">
-            <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Order# </span>
-          </div>
-          <div class="col-lg-6">
-            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{order.order_id}}</span>
-          </div>
-        </div>
-
-      </div>
-
-
-      <div *ngIf="!returnParam" class="col-lg-5 ">
-        <div>
-          <div class="row">
-            <div class="col-lg-6">
-              <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Items: </span>
-            </div>
-            <div class="col-lg-6">
-              <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{totalItemAmount}}.00</span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Shipping & Handling: </span>
-            </div>
-            <div class="col-lg-6">
-              <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{shippingAmount}}.00</span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Total before Tax: </span>
-            </div>
-            <div class="col-lg-6">
-              <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{totalBeforeTax}}.00</span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Tax Collected: </span>
-            </div>
-            <div class="col-lg-6">
-              <span style="font-size: 13px;font-family: Arial; font-weight:500 ;">
-                {{order.orderDetailList.taxAmount||0}}.00</span>
-            </div>
-          </div>
-
-        <hr style="border:1px solid p black;width: 100%; padding:0; margin: 0;">
-        <div class="row" style="margin-bottom: 10px;">
-          <div class="col-lg-6">
-            <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Order Total: </span>
-          </div>
-          <div class="col-lg-6">
-            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{orderTotalAmount}}.00</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div *ngIf="returnParam" class="col-lg-5 ">
-      <div>
-        <div class="row">
-          <div class="col-lg-6">
-            <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Items: </span>
-          </div>
-          <div class="col-lg-6">
-            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{totalReturnItemAmount||0}}.00</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Shipping & Handling: </span>
-          </div>
-          <div class="col-lg-6">
-            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{shippingAmount}}.00</span>
-          </div>
-        </div>
-        <!-- <div class="row">
-          <div class="col-lg-6">
-            <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Total before Tax: </span>
-          </div>
-          <div class="col-lg-6">
-            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{totalReturnBeforeTax}}.00</span>
-          </div>
-        </div> -->
-        <!-- <div class="row">
-          <div class="col-lg-6">
-            <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Tax Collected: </span>
-          </div>
-          <div class="col-lg-6">
-            <span style="font-size: 13px;font-family: Arial; font-weight:500 ;">
-              {{order.orderDetailList.taxAmount||0}}.00</span>
-          </div>
-        </div> -->
-
-      <hr style="border:1px solid p black;width: 100%; padding:0; margin: 0;">
-      <div class="row" style="margin-bottom: 10px;">
-        <div class="col-lg-6">
-          <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Order Total: </span>
-        </div>
-        <div class="col-lg-6">
-          <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{orderReturnTotalAmount||0}}.00</span>
-        </div>
+      <div class="col-lg-12">
+        <nav class="navbar navbar-light bg-light" style="background-color: #ffc107 !important;">
+          <a class="navbar-brand m-auto">View Order Details</a>
+        </nav>
       </div>
     </div>
+    <div style="border-style: solid; border-width: 1px; margin-top: 10px; margin-left: 40px; margin-right: 40px;"></div>
 
-  </div>
+    <div style="border-style: solid; border-width: 1px; width: 85%; margin-left:7.6%;margin-top: 10px;">
+      <div class="row">
+        <div class="col-lg-1 "></div>
+        <div class="col-lg-5">
 
-    <div class="col-lg-1 "></div>
-</div>
-</div>
+          <div class="row">
+            <div class="col-lg-3">
+              <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Order Date : </span>
+            </div>
+            <div class="col-lg-7">
+              <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{order.createDate}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">
+              <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Order# </span>
+            </div>
+            <div class="col-lg-6">
+              <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{order.order_id}}</span>
+            </div>
+          </div>
+
+        </div>
 
 
-<div class="row"
-  style="border-style:solid; border-width: 0.1em; border-radius: 20px; margin-top: 15px; margin-left: 2.5%; width: 95%; ">
+        <div *ngIf="!returnParam" class="col-lg-5 ">
+          <div>
+            <div class="row">
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Items: </span>
+              </div>
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{totalItemAmount}}.00</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Shipping & Handling: </span>
+              </div>
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{shippingAmount}}.00</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Total before Tax: </span>
+              </div>
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{totalBeforeTax}}.00</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Tax Collected: </span>
+              </div>
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:500 ;">
+                  {{order.orderDetailList.taxAmount||0}}.00</span>
+              </div>
+            </div>
 
-  <div class="col-lg-12" style="margin-bottom: 15px;">
+            <hr style="border:1px solid p black;width: 100%; padding:0; margin: 0;">
+            <div class="row" style="margin-bottom: 10px;">
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Order Total: </span>
+              </div>
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{orderTotalAmount}}.00</span>
+              </div>
+            </div>
+          </div>
 
-    <h5 style=" width:120px;
+        </div>
+
+        <div *ngIf="returnParam" class="col-lg-5 ">
+          <div>
+            <div class="row">
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Items: </span>
+              </div>
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:500 ;">
+                  {{totalReturnItemAmount||0}}.00</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Shipping & Handling: </span>
+              </div>
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{shippingAmount}}.00</span>
+              </div>
+            </div>
+
+
+            <hr style="border:1px solid p black;width: 100%; padding:0; margin: 0;">
+            <div class="row" style="margin-bottom: 10px;">
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Order Total: </span>
+              </div>
+              <div class="col-lg-6">
+                <span style="font-size: 13px;font-family: Arial; font-weight:500 ;">
+                  {{orderReturnTotalAmount||0}}.00</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-1 "></div>
+      </div>
+    </div>
+
+
+    <div class="row"
+      style="border-style:solid; border-width: 0.1em; border-radius: 20px; margin-top: 15px; margin-left: 7.6%; width: 85%; ">
+
+      <div class="col-lg-12" style="margin-bottom: 15px;">
+
+        <h5 style=" width:120px;
         margin-top:-10px;
         margin-left:20px;
         background:white;
         font-size:15px;
         padding-left:10px
         ">Item Details</h5>
-    <table style="width:100%;  font-size: 13px; font-family: Arial;">
-      <tr
-        style="border-style: solid; border-left: 0; border-right: 0; border-top: 0.1em; border-width:  0.12em; border-color: black; ">
-        <th></th>
-        <th>Name</th>
-        <th>Quantity</th>
-        <th>Size</th>
-        <th>Price/Pcs</th>
-        <th>Total</th>
-        <th *ngIf="returnParam">Return</th>
-      </tr>
-      <tr *ngFor="let orderdetail of order.orderDetailList"
-        style="border-style: solid;  border-left: 0; border-right: 0; border-top: 0.1em; border-width: 0.1em; margin-bottom: 10px;">
-        <td>
-          <img width="50px" height="50px"
-            src="https://image.made-in-china.com/2f0j00fpQYBhNcgiqM/Eruoep-Ladies-Latest-Short-Dress-Party-Dress-for-Women.jpg"
-            alt="">
-        </td>
-        <td>{{orderdetail.item.name||"-"}}</td>
-        <td>{{orderdetail.quantity}}</td>
-        <td>{{orderdetail.item.itemSize}}</td>
-        <td>{{orderdetail.itemPrice}}</td>
-        <td>{{orderdetail.itemTotalAmount}}</td>
-        <td *ngIf="returnParam"><input type="checkbox" (change)="changeCheckbox($event,orderdetail )" name="returnCheckbox" id=""></td>
+        <table style="width:100%;  font-size: 13px; font-family: Arial;">
+          <tr
+            style="border-style: solid; border-left: 0; border-right: 0; border-top: 0.1em; border-width:  0.12em; border-color: black; ">
+            <th></th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Size</th>
+            <th>Price/Pcs</th>
+            <th>Total</th>
+            <th *ngIf="returnParam">Return</th>
+          </tr>
+          <tr *ngFor="let orderdetail of order.orderDetailList"
+            style="border-style: solid;  border-left: 0; border-right: 0; border-top: 0.1em; border-width: 0.1em; margin-bottom: 10px;">
+            <td>
+              <img width="50px" height="50px"
+                src="https://image.made-in-china.com/2f0j00fpQYBhNcgiqM/Eruoep-Ladies-Latest-Short-Dress-Party-Dress-for-Women.jpg"
+                alt="">
+            </td>
+            <td>{{orderdetail.item.name||"-"}}</td>
+            <td>{{orderdetail.quantity}}</td>
+            <td>{{orderdetail.item.itemSize}}</td>
+            <td>{{orderdetail.itemPrice}}</td>
+            <td>{{orderdetail.itemTotalAmount}}</td>
+            <td *ngIf="returnParam"><input type="checkbox" (change)="changeCheckbox($event,orderdetail )"
+                name="returnCheckbox" id=""></td>
 
-      </tr><tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td *ngIf="returnParam">  <button (click)="prepareReturnOrderJson()" class="btn btn-warning" >Return</button></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td *ngIf="returnParam"> <button (click)="prepareReturnOrderJson()" class="btn btn-warning">Return</button>
+            </td>
 
-    </tr>
+          </tr>
 
-    </table>
+        </table>
 
-  </div>
-</div>
-
-<div
-  style="border-style: solid; border-width: 1px; margin-top: 10px; margin-left: 2.5%; width: 95%;  font-size: 13px; font-family: Arial;">
-  <!-- style="" -->
-  <!-- style="margin-top: 30px; margin-left: 100px; margin-bottom: 50px;" -->
-
-  <div class="row">
-    <div class="col-lg-1"></div>
-    <div class="col-lg-5">
-
-      <div>
-        <h6 style="font-size: 13px ; font-weight: bold; margin-top: 10px; text-align: center;">Payment Details:</h6>
       </div>
     </div>
 
-    <div class="col-lg-5">
-      <div>
-        <h6 style="font-size: 13px ; font-weight: bold; margin-top: 10px;text-align: center;">Card ends with:
-          xxxx-xxxx-xxxx-{{cardNumbers}}
-        </h6>
+    <div
+      style="border-style: solid; border-width: 1px; margin-top: 10px; margin-left: 7.6%; width: 85%;  font-size: 13px; font-family: Arial;">
+
+      <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-5">
+
+          <div>
+            <h6 style="font-size: 13px ; font-weight: bold; margin-top: 10px; text-align: center;">Payment Details:</h6>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div>
+            <h6 style="font-size: 13px ; font-weight: bold; margin-top: 10px;text-align: center;">Card ends with:
+              xxxx-xxxx-xxxx-{{cardNumbers}}
+            </h6>
+          </div>
+        </div>
+        <div class="col-lg-1"></div>
+
       </div>
-    </div>
-    <div class="col-lg-1"></div>
-
-  </div>
 
 
-
-</div>
-
-<div
-  style="border-style: solid; border-width: 0.1em; border-radius: 20px; margin-top: 15px; margin-left: 40px; margin-right: 40px;">
-  <h5 class="addressDetails">Address Details</h5>
-
-  <div class="row">
-    <div class="col-lg-1"></div>
-    <div class="col-lg-5">
-      <div >
-        <h6 style="font-size: 13px ; font-weight: bold;text-align:  center">Billing Address</h6>
-
-        <h6 style="font-size: 13px ; font-weight: 500;text-align:  center">{{order.orderAddressDetails.billToAddLine1}}
-        </h6>
-      </div>
 
     </div>
 
-    <div class="col-lg-5">
+    <div
+      style="border-style: solid; border-width: 0.1em; border-radius: 20px;width: 85%; margin-top: 15px; margin-left: 7.6%; margin-right: 40px;">
+      <h5 class="addressDetails">Address Details</h5>
 
-      <div>
-        <h6 style="font-size: 13px ; font-weight: bold;text-align:  center">Shipping Address</h6>
+      <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-5">
+          <div>
+            <h6 style="font-size: 13px ; font-weight: bold;text-align:  center">Billing Address</h6>
 
-        <h6 style="font-size: 13px ; font-weight: 500;text-align:  center;">{{order.orderAddressDetails.shipToAddLine1}}
-        </h6>
+            <h6 style="font-size: 13px ; font-weight: 500;text-align:  center">
+              {{order.orderAddressDetails.billToAddLine1}}
+            </h6>
+          </div>
+
+        </div>
+
+        <div class="col-lg-5">
+
+          <div>
+            <h6 style="font-size: 13px ; font-weight: bold;text-align:  center">Shipping Address</h6>
+
+            <h6 style="font-size: 13px ; font-weight: 500;text-align:  center;">
+              {{order.orderAddressDetails.shipToAddLine1}}
+            </h6>
+          </div>
+          <div class="col-lg-1"></div>
+        </div>
+
+
       </div>
-      <div class="col-lg-1"></div>
+
     </div>
-
-
   </div>
 
-</div>
-</div>
-
-<div   *ngIf="(!sucessfullCall&&isLoadDone)" id="notfound">
-  <div class="notfound">
-    <div class="notfound-404"></div>
-    <h1>404</h1>
-    <h2>Oops! Page Not Be Found</h2>
-    <p>Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily unavailable</p>
-    <a href="#">Back to homepage</a>
+  <div *ngIf="(!sucessfullCall&&isLoadDone)" id="notfound">
+    <div class="notfound">
+      <div class="notfound-404"></div>
+      <h1>404</h1>
+      <h2>Oops! Page Not Be Found</h2>
+      <p>Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily
+        unavailable</p>
+      <a href="#">Back to homepage</a>
+    </div>
   </div>
-</div>
 </div>
