@@ -127,8 +127,10 @@ export class CheckoutComponent implements OnInit {
     this.orderJson['items'].map((item,index) => {
 
       this.totalOrderAmount += ((item.price) * (parseInt( this.itemQuantity[index])))
+      item.quantity = (parseInt( this.itemQuantity[index]));
 
     })
+    console.log(this.orderJson['items']);
     this.backupTotalOrderAmount = this.totalOrderAmount
     if(this.orderJson['items'].length==0)
     {
