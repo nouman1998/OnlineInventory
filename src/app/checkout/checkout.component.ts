@@ -121,15 +121,33 @@ export class CheckoutComponent implements OnInit {
 
 
   getTotalOrderAmount() {
-    debugger
+    //
 
     this.totalOrderAmount = 0;
-    this.orderJson['items'].map((item,index) => {
 
-      this.totalOrderAmount += ((item.price) * (parseInt( this.itemQuantity[index])))
+    this.items.map((item,index) => {
       item.quantity = (parseInt( this.itemQuantity[index]));
+      let index1 =this.orderJson['items'].indexOf(item);
+      // this.orderJson['items'][index1].quantity = item.quantity;
+
+      // this.totalOrderAmount += ((item.price) * item.quantity)
+
+
+    });
+    this.orderJson['items'].map((item,index) => {
+      debugger
+      this.totalOrderAmount += ((item.price) * (parseInt( this.itemQuantity[item.index])))
+
 
     })
+
+    // this.items.map((item,index) => {
+    //   // item.quantity = (parseInt( this.itemQuantity[index]));
+    //   // this.totalOrderAmount += ((item.price) * (parseInt( this.itemQuantity[index])))
+    //   item.quantity = (parseInt( this.itemQuantity[index]));
+
+
+    // })
     this.backupTotalOrderAmount = this.totalOrderAmount
     if(this.orderJson['items'].length==0)
     {
@@ -307,7 +325,7 @@ export class CheckoutComponent implements OnInit {
     funnyDayaForm.reset()
   }
   myFunction(item) {
-    // debugger
+    // //
     console.log(item)
     this.radioButton = !this.radioButton
 
@@ -332,7 +350,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   myFunction1(item) {
-    debugger
+    //
     if (!this.isShippingAddressSame) {
       let billToAddress = {
         "firstName": item.firstName,
@@ -569,15 +587,20 @@ items=[];
   changeCheckbox($event, obj){
     this.totalOrderAmount=0;
     console.log($event);
-
+debugger
     if ($event.target.checked) {
-      this.orderJson['items'].push(obj);
+      let index = this.items.indexOf(obj);
+
+      this.orderJson['items'].splice(index, 0, obj);
+     let index1=this.orderJson['items'].indexOf(obj);
+     this.orderJson['items'][index1].index = index;
 
 
     }
     else {
-      let index = this.orderJson['items'].indexOf(obj);
+      let index =  this.orderJson['items'].indexOf(obj);
       this.orderJson['items'].splice(index, 1);
+
     }
     this.getTotalOrderAmount();
 
