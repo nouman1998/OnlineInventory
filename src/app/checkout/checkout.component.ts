@@ -20,14 +20,14 @@ export class CheckoutComponent implements OnInit {
   address = {}
   myform
   isSaving = false;
-  itemQuantity=[]
+  itemQuantity = []
   firstButtonSelected = true;
   deliveryInstrution = ""
   secondButtonSelected = false;
   shippingMethod = "1"
   backupTotalOrderAmount
   notificaionId = "1"
-  totalTax=100;
+  totalTax = 100;
   initialAddress = {
     id: 1, "firstName": "Shahzad",
     "middleName": "test",
@@ -90,8 +90,8 @@ export class CheckoutComponent implements OnInit {
       }
     ];
 
-    this.items=[...  this.orderJson['items']]
-    this.orderJson['items'].map(item=>{
+    this.items = [...  this.orderJson['items']]
+    this.orderJson['items'].map(item => {
       this.itemQuantity.push(item.quantity)
     })
     this.getTotalOrderAmount()
@@ -127,20 +127,20 @@ export class CheckoutComponent implements OnInit {
 
     this.totalOrderAmount = 0;
 
-    this.items.map((item,index) => {
-      item.quantity = (parseInt( this.itemQuantity[index]));
-      let index1 =this.orderJson['items'].indexOf(item);
-      if(index1>-1)
-      this.orderJson['items'][index1].index = index;
+    this.items.map((item, index) => {
+      item.quantity = (parseInt(this.itemQuantity[index]));
+      let index1 = this.orderJson['items'].indexOf(item);
+      if (index1 > -1)
+        this.orderJson['items'][index1].index = index;
       // this.orderJson['items'][index1].quantity = item.quantity;
 
       // this.totalOrderAmount += ((item.price) * item.quantity)
 
 
     });
-    this.orderJson['items'].map((item,index) => {
+    this.orderJson['items'].map((item, index) => {
       debugger
-      this.totalOrderAmount += ((item.price) * (parseInt( this.itemQuantity[item.index])))
+      this.totalOrderAmount += ((item.price) * (parseInt(this.itemQuantity[item.index])))
 
 
 
@@ -153,23 +153,22 @@ export class CheckoutComponent implements OnInit {
 
 
     // })
-// 
-//       this.totalOrderAmount += ((item.price) * (parseInt( this.itemQuantity[index])))
-//       item.quantity = (parseInt( this.itemQuantity[index]));
+    //
+    //       this.totalOrderAmount += ((item.price) * (parseInt( this.itemQuantity[index])))
+    //       item.quantity = (parseInt( this.itemQuantity[index]));
 
-//     })
-//     console.log(this.orderJson['items']);
+    //     })
+    //     console.log(this.orderJson['items']);
 
     this.backupTotalOrderAmount = this.totalOrderAmount
-    if(this.orderJson['items'].length==0)
-    {
-      this.totalOrderAmount=0;
+    if (this.orderJson['items'].length == 0) {
+      this.totalOrderAmount = 0;
 
-      this.totalTax=0;
+      this.totalTax = 0;
     }
-    else{
+    else {
 
-      this.totalTax=100;
+      this.totalTax = 100;
     }
     // this.totalOrderAmount=120
   }
@@ -217,7 +216,7 @@ export class CheckoutComponent implements OnInit {
 
 
     this.cities = null
-// totalOrderAmount
+    // totalOrderAmount
 
   }
   isAddressSaved = false;
@@ -388,10 +387,16 @@ export class CheckoutComponent implements OnInit {
     console.log(this.isShippingAddressSame)
     console.log(this.address['billToAddress'])
 
+    this.orderJson['items'].map((item, index) => {
+      if (item.quantity == 0) {
+        this.orderJson['items'].splice(index, 1);
+      }
+    });
     if (this.isShippingAddressSame == false && !this.address['billToAddress']) {
       alert("Select Billing Addres First")
     }
-    else {
+
+      else {
       this.preparingJson();
 
       this.service.postOrder(this.orderJson).subscribe(response => {
@@ -439,7 +444,7 @@ export class CheckoutComponent implements OnInit {
     this.orderJson['shippingMethod'] = this.shippingMethod;
     this.orderJson['shippingAmt'] = "50";
     this.orderJson['shippingId'] = this.shippingMethod;
-    this.orderJson['orderTax']= this.totalTax;
+    this.orderJson['orderTax'] = this.totalTax;
 
     if (this.isCouponMatched) {
       this.orderJson['couponDetail'] = {
@@ -596,22 +601,22 @@ export class CheckoutComponent implements OnInit {
     return true;
 
   }
-items=[];
-  changeCheckbox($event, obj){
-    this.totalOrderAmount=0;
+  items = [];
+  changeCheckbox($event, obj) {
+    this.totalOrderAmount = 0;
     console.log($event);
-debugger
+    debugger
     if ($event.target.checked) {
       let index = this.items.indexOf(obj);
 
       this.orderJson['items'].splice(index, 0, obj);
-     let index1=this.orderJson['items'].indexOf(obj);
-     this.orderJson['items'][index1].index = index;
+      let index1 = this.orderJson['items'].indexOf(obj);
+      this.orderJson['items'][index1].index = index;
 
 
     }
     else {
-      let index =  this.orderJson['items'].indexOf(obj);
+      let index = this.orderJson['items'].indexOf(obj);
       this.orderJson['items'].splice(index, 1);
 
     }
@@ -619,7 +624,7 @@ debugger
 
   }
 
-  abc(){
+  abc() {
     this.getTotalOrderAmount()
     console.log(this.itemQuantity);
 
@@ -631,15 +636,15 @@ debugger
     cancelBtnText: 'Cancel',      		//DEFAULT VALUE
     modalSize: 'lg',      				//DEFAULT VALUE
     modalClass: ''      					//DEFAULT VALUE
-   }
+  }
 
-   confirmed() {
+  confirmed() {
     console.log('confirmed');
-   }
+  }
 
-   cancelled() {
+  cancelled() {
     console.log('cancelled');
-   }
+  }
 
 
 }
