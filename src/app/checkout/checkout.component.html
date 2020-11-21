@@ -271,12 +271,12 @@
 
               </select> </td> -->
 
-             <td> <input min=0 max=100 (change)="abc()" [(ngModel)]="itemQuantity[i]" style="width: 50px; text-align:center" type="number"/></td>
+             <td> <input min=0 max=100 (input)="abc(i)" [(ngModel)]="itemQuantity[i]" style="width: 50px; text-align:center" type="number"/></td>
               <td>{{orderdetail.itemDetail}}</td>
               <td>{{orderdetail.price}}</td>
               <td>{{orderdetail.quantity*orderdetail.price}}</td>
 
-               <!-- <td><input checked (change)="changeCheckbox($event,orderdetail )" style="height: 20px;" type="checkbox"></td> 
+               <!-- <td><input checked (change)="changeCheckbox($event,orderdetail )" style="height: 20px;" type="checkbox"></td>
 
               <td><input checked (change)="changeCheckbox($event,orderdetail )" style="height: 20px;" type="checkbox"></td>-->
 
@@ -339,12 +339,12 @@
     </div>
     <div class="row" style="margin-left: 15px; margin-top: 5px; font-weight: 500; font-size: 13px;">
       <div class="col-6 "> <span>Tax</span></div>
-      <div class="col-5" *ngIf="orderJson['items'].length!=0;else templateName"> <span>Rs. {{totalTax}}</span></div>
+      <div class="col-5" *ngIf="!isDisable;else templateName"> <span>Rs. {{totalTax}}</span></div>
       <ng-template style="margin-left: 15px;"class="col-5 " #templateName>  <div class="col-5" > <span>Rs. 0</span></div></ng-template>
     </div>
     <div class="row py-1" style="margin-left: 15px; font-weight: 500; font-size: 13px;">
       <div class="col-6 "> <span>Delivery Charges:</span></div>
-      <div class="col-5 " *ngIf="orderJson['items'].length!=0;else templateName1"> <span>Rs. 50</span></div>
+      <div class="col-5 " *ngIf="!isDisable;else templateName1"> <span>Rs. 50</span></div>
       <ng-template class="col-5 "  style="margin-left: 15px;" #templateName1>  <div class="col-5 "> <span>Rs. 0</span></div></ng-template>
 
 
@@ -356,7 +356,7 @@
 
     <div class="row " style="margin-left: 13px;font-weight: 500;">
       <div class="col-6"> <span>Total:</span></div>
-      <div class="col-5 "*ngIf="orderJson['items'].length!=0;else templateName3"> <span>Rs. {{totalOrderAmount+50+totalTax}}</span></div>
+      <div class="col-5 "*ngIf="!isDisable;else templateName3"> <span>Rs. {{totalOrderAmount+50+totalTax}}</span></div>
       <ng-template class="col-5 " #templateName3>  <div class="col-5 "> <span>Rs.0</span></div></ng-template>
     </div>
 
@@ -367,7 +367,7 @@
     [options]="options"
     (onConfirm)="postOrder()"
     (onCancel)="cancelled()"
-    [disabled]="orderJson['items'].length==0"
+    [disabled]="isDisable"
     type="button"
     class="btn btn-warning my-3"
     style=" margin-left: 30%; height: 34px; "

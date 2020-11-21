@@ -123,7 +123,7 @@ export class CheckoutComponent implements OnInit {
 
   getTotalOrderAmount() {
     //
-    debugger
+    //
 
     this.totalOrderAmount = 0;
 
@@ -139,7 +139,7 @@ export class CheckoutComponent implements OnInit {
 
     });
     this.orderJson['items'].map((item, index) => {
-      debugger
+      //
       this.totalOrderAmount += ((item.price) * (parseInt(this.itemQuantity[item.index])))
 
 
@@ -387,11 +387,7 @@ export class CheckoutComponent implements OnInit {
     console.log(this.isShippingAddressSame)
     console.log(this.address['billToAddress'])
 
-    this.orderJson['items'].map((item, index) => {
-      if (item.quantity == 0) {
-        this.orderJson['items'].splice(index, 1);
-      }
-    });
+
     if (this.isShippingAddressSame == false && !this.address['billToAddress']) {
       alert("Select Billing Addres First")
     }
@@ -605,7 +601,7 @@ export class CheckoutComponent implements OnInit {
   changeCheckbox($event, obj) {
     this.totalOrderAmount = 0;
     console.log($event);
-    debugger
+    //
     if ($event.target.checked) {
       let index = this.items.indexOf(obj);
 
@@ -623,10 +619,26 @@ export class CheckoutComponent implements OnInit {
     this.getTotalOrderAmount();
 
   }
+isDisable
+  abc(i) {
 
-  abc() {
+    this.itemQuantity.map(qty=>{
+      this.isDisable=false;
+        if (qty == 0) {
+
+          this.isDisable=true
+        }
+    })
+
+    // this.orderJson['items'].map((item, index) => {
+    //   this.isDisable=false;
+    //   if (item.quantity == 0) {
+    //     this.orderJson['items'].splice(index, 1);
+    //     this.isDisable=true
+    //   }
+    // });
     this.getTotalOrderAmount()
-    console.log(this.itemQuantity);
+    console.log(this.isDisable);
 
   }
   options: any = {
