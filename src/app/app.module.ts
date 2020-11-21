@@ -51,7 +51,7 @@ import { OrderServiceService } from './order-service.service';
     ,MatDatepickerModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    // MatInputModule,
+    MatInputModule,
     // MatDialogModule,
     AngularConfirmModalModule.forRoot({})
   ],
