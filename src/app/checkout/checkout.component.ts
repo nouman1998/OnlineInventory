@@ -6,6 +6,7 @@ import { Coupon } from './coupon';
 import csc from 'country-state-city'
 import { Router } from '@angular/router';
 import { OrderServiceService } from '../order-service.service';
+
 import { debug } from 'console';
 @Component({
   selector: 'app-checkout',
@@ -122,12 +123,15 @@ export class CheckoutComponent implements OnInit {
 
   getTotalOrderAmount() {
     //
+    debugger
 
     this.totalOrderAmount = 0;
 
     this.items.map((item,index) => {
       item.quantity = (parseInt( this.itemQuantity[index]));
       let index1 =this.orderJson['items'].indexOf(item);
+      if(index1>-1)
+      this.orderJson['items'][index1].index = index;
       // this.orderJson['items'][index1].quantity = item.quantity;
 
       // this.totalOrderAmount += ((item.price) * item.quantity)
@@ -427,6 +431,7 @@ export class CheckoutComponent implements OnInit {
     this.orderJson['shippingMethod'] = this.shippingMethod;
     this.orderJson['shippingAmt'] = "50";
     this.orderJson['shippingId'] = this.shippingMethod;
+    this.orderJson['orderTax']= this.totalTax;
 
     if (this.isCouponMatched) {
       this.orderJson['couponDetail'] = {
@@ -611,4 +616,22 @@ debugger
     console.log(this.itemQuantity);
 
   }
+  options: any = {
+    confirmBtnClass: 'btn btn-success',   //DEFAULT VALUE
+    confirmBtnText: 'Continue',      		//DEFAULT VALUE
+    cancelBtnClass: 'btn btn-danger',     //DEFAULT VALUE
+    cancelBtnText: 'Cancel',      		//DEFAULT VALUE
+    modalSize: 'lg',      				//DEFAULT VALUE
+    modalClass: ''      					//DEFAULT VALUE
+   }
+
+   confirmed() {
+    console.log('confirmed');
+   }
+
+   cancelled() {
+    console.log('cancelled');
+   }
+
+
 }
