@@ -621,14 +621,28 @@ export class CheckoutComponent implements OnInit {
   }
 isDisable
   abc(i) {
+    debugger
+    this.isDisable=false;
 
-    this.itemQuantity.map(qty=>{
+    let notZero =false
+    for (let index = 0; index < this.itemQuantity.length; index++) {
+
+      const qty = this.itemQuantity[index];
       this.isDisable=false;
-        if (qty == 0) {
+      if (qty == 0 && !notZero) {
 
-          this.isDisable=true
-        }
-    })
+        this.isDisable=true
+      }
+      else{
+       notZero =true
+
+        // return
+      }
+
+      this.getTotalOrderAmount()
+      console.log(this.isDisable);
+    }
+
 
     // this.orderJson['items'].map((item, index) => {
     //   this.isDisable=false;
@@ -637,8 +651,7 @@ isDisable
     //     this.isDisable=true
     //   }
     // });
-    this.getTotalOrderAmount()
-    console.log(this.isDisable);
+
 
   }
   options: any = {
