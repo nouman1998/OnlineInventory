@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { AngularConfirmModalModule } from 'angular-confirm-modal';
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
@@ -22,6 +23,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 
 import { ReactiveFormsModule  } from '@angular/forms'
 import { OrderServiceService } from './order-service.service';
+// import {MatDialogModule} from '@angular/material/dialog';
+
 
 // import { CarouselModule, WavesModule } from 'angular-bootstrap-md'
 
@@ -31,7 +34,8 @@ import { OrderServiceService } from './order-service.service';
     CheckoutComponent,
     OrderDetailComponent,
     ThankyouOrderComponent,
-    OrderListComponent
+    OrderListComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,9 @@ import { OrderServiceService } from './order-service.service';
     ,MatDatepickerModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    MatInputModule
+    // MatInputModule,
+    // MatDialogModule,
+    AngularConfirmModalModule.forRoot({})
   ],
   exports:[
     MatFormFieldModule,MatInputModule

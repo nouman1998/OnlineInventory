@@ -9,13 +9,14 @@ import { Observable } from 'rxjs';
 export class OrderServiceService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = "http://localhost:8081/"
+  baseUrl = "http://localhost:8080/"
   private apiurl = this.baseUrl + "order/getCustAddress/";
   private orderListUrl = this.baseUrl + "order/getOrderListForAdmin?";
   private orderDetailUrl = this.baseUrl + "order/getOrderDetail?";
   private saveOrderUrl = this.baseUrl + "order/saveAddress";
   private getOrderByIdUrl = this.baseUrl + 'order/';
   private postOrderUrl = this.baseUrl + 'order/';
+  private returnOrderUrl = this.baseUrl +"order/returnOrder"
 
   getOrderById(id): Observable<any> {
     return this.http.get(this.getOrderByIdUrl + id, { observe: 'response' })
@@ -48,5 +49,12 @@ export class OrderServiceService {
 
   postCustomerAddress(obj) {
     return this.http.post(this.saveOrderUrl, obj);
+  }
+  returnOrder(obj)
+
+  {
+    console.log(this.returnOrderUrl);
+
+    return this.http.put(this.returnOrderUrl,obj);
   }
 }

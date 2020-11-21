@@ -6,6 +6,7 @@ import { Coupon } from './coupon';
 import csc from 'country-state-city'
 import { Router } from '@angular/router';
 import { OrderServiceService } from '../order-service.service';
+
 import { debug } from 'console';
 @Component({
   selector: 'app-checkout',
@@ -121,16 +122,44 @@ export class CheckoutComponent implements OnInit {
 
 
   getTotalOrderAmount() {
+    //
     debugger
 
     this.totalOrderAmount = 0;
-    this.orderJson['items'].map((item,index) => {
 
-      this.totalOrderAmount += ((item.price) * (parseInt( this.itemQuantity[index])))
+    this.items.map((item,index) => {
       item.quantity = (parseInt( this.itemQuantity[index]));
+      let index1 =this.orderJson['items'].indexOf(item);
+      if(index1>-1)
+      this.orderJson['items'][index1].index = index;
+      // this.orderJson['items'][index1].quantity = item.quantity;
+
+      // this.totalOrderAmount += ((item.price) * item.quantity)
+
+
+    });
+    this.orderJson['items'].map((item,index) => {
+      debugger
+      this.totalOrderAmount += ((item.price) * (parseInt( this.itemQuantity[item.index])))
+
+
 
     })
-    console.log(this.orderJson['items']);
+
+    // this.items.map((item,index) => {
+    //   // item.quantity = (parseInt( this.itemQuantity[index]));
+    //   // this.totalOrderAmount += ((item.price) * (parseInt( this.itemQuantity[index])))
+    //   item.quantity = (parseInt( this.itemQuantity[index]));
+
+
+    // })
+// 
+//       this.totalOrderAmount += ((item.price) * (parseInt( this.itemQuantity[index])))
+//       item.quantity = (parseInt( this.itemQuantity[index]));
+
+//     })
+//     console.log(this.orderJson['items']);
+
     this.backupTotalOrderAmount = this.totalOrderAmount
     if(this.orderJson['items'].length==0)
     {
@@ -308,7 +337,7 @@ export class CheckoutComponent implements OnInit {
     funnyDayaForm.reset()
   }
   myFunction(item) {
-    // debugger
+    // //
     console.log(item)
     this.radioButton = !this.radioButton
 
@@ -333,7 +362,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   myFunction1(item) {
-    debugger
+    //
     if (!this.isShippingAddressSame) {
       let billToAddress = {
         "firstName": item.firstName,
@@ -410,6 +439,7 @@ export class CheckoutComponent implements OnInit {
     this.orderJson['shippingMethod'] = this.shippingMethod;
     this.orderJson['shippingAmt'] = "50";
     this.orderJson['shippingId'] = this.shippingMethod;
+    this.orderJson['orderTax']= this.totalTax;
 
     if (this.isCouponMatched) {
       this.orderJson['couponDetail'] = {
@@ -570,15 +600,20 @@ items=[];
   changeCheckbox($event, obj){
     this.totalOrderAmount=0;
     console.log($event);
-
+debugger
     if ($event.target.checked) {
-      this.orderJson['items'].push(obj);
+      let index = this.items.indexOf(obj);
+
+      this.orderJson['items'].splice(index, 0, obj);
+     let index1=this.orderJson['items'].indexOf(obj);
+     this.orderJson['items'][index1].index = index;
 
 
     }
     else {
-      let index = this.orderJson['items'].indexOf(obj);
+      let index =  this.orderJson['items'].indexOf(obj);
       this.orderJson['items'].splice(index, 1);
+
     }
     this.getTotalOrderAmount();
 
@@ -589,4 +624,22 @@ items=[];
     console.log(this.itemQuantity);
 
   }
+  options: any = {
+    confirmBtnClass: 'btn btn-success',   //DEFAULT VALUE
+    confirmBtnText: 'Continue',      		//DEFAULT VALUE
+    cancelBtnClass: 'btn btn-danger',     //DEFAULT VALUE
+    cancelBtnText: 'Cancel',      		//DEFAULT VALUE
+    modalSize: 'lg',      				//DEFAULT VALUE
+    modalClass: ''      					//DEFAULT VALUE
+   }
+
+   confirmed() {
+    console.log('confirmed');
+   }
+
+   cancelled() {
+    console.log('cancelled');
+   }
+
+
 }

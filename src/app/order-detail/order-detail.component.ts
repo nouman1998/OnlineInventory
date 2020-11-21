@@ -28,6 +28,7 @@ export class OrderDetailComponent implements OnInit {
   totalReturnItemAmount = 0
   totalReturnBeforeTax
   orderReturnTotalAmount;
+  dateFormat
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -51,7 +52,9 @@ export class OrderDetailComponent implements OnInit {
       console.log(this.userId);
     });
   }
-
+  orderStatus
+  orderStatusText
+  itemsReturned= false;
   getOrderById() {
     this.isLoadDone = false;
 
@@ -63,12 +66,14 @@ export class OrderDetailComponent implements OnInit {
         this.isLoadDone = true;
         let d = response.body
         console.log(d)
-
+        let dateNow = new Date(d.createDate)
+        this.dateFormat = `${dateNow.getDate()}-${(dateNow.getMonth() + 1)}-${dateNow.getFullYear()}`
         this.order = d;
         this.shippingAmount = d.shippingAmount;
         this.orderReturnTotalAmount = d.shippingAmount;
         this.cardNumbers = this.order.paymentDetails[0].cardNumber.substr(this.order.paymentDetails[0].cardNumber.length - 4)
-
+        this.orderStatus = d.orderStatus;
+        this.getOrderStatusText(this.orderStatus);
         this.order.orderDetailList.map(item => {
           this.taxAmount += item.taxAmount || 0;
           this.totalItemAmount += item.itemTotalAmount || 0;
@@ -104,9 +109,13 @@ export class OrderDetailComponent implements OnInit {
     else {
       let returnOrderJson = {
         "orderId": this.userId,
-        "items": this.returnedItems,
+        "itemLists": this.returnedItems,
 
       }
+      this.service.returnOrder(returnOrderJson).subscribe(response => {
+        this.itemsReturned=true;
+        this.getOrderById();
+      })
       console.log(returnOrderJson)
     }
   }
@@ -138,6 +147,21 @@ export class OrderDetailComponent implements OnInit {
 
     this.calculatingTotal();
 
+  }
+  getOrderStatusText(status) {
+    switch (status) {
+      case 7:
+        this.orderStatusText = "Return Initiated"
+        break;
+      case 8:
+        this.orderStatusText = "Returned";
+        break;
+      default:
+        break;
+    }
+
+    console.log(status);
+    console.log(this.orderStatusText);
   }
 
 
