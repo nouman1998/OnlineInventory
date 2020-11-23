@@ -33,10 +33,13 @@
       </div>
     </div>
     <div [hidden]="!changeFunction" class="row" style="font-family: Arial;font-size: 13px;font-weight: 400;">
+
       <div class="col-lg-1"></div>
       <div class="card">
         <div class="card-body">
-          <div style="font-family: Arial; font-weight: 700;">Select Delivery Address</div>
+          <div style="font-family: Arial; font-weight: 700;">Select Delivery Address
+            <span id='close' (click)="changeFunction=false">X</span>
+          </div>
           <hr>
           <div class="col-lg" *ngFor="let item of addressArray; let i=index;">
 
@@ -62,7 +65,7 @@
         </div>
         <div class="card-footer text-muted">
           <button class="btn btn-warning" style="height: 30px; font-weight: 700; font-size: 10px; font-family: Arial;"
-            (click)="changeFunction=false">Use this address</button>
+            (click)="changeBillingFunction2()">Use this address</button>
         </div>
       </div>
     </div>
@@ -91,10 +94,12 @@
     </div>
 
     <div class="row py-2" [hidden]="!changeBillingFunction">
+
       <div class="col-lg-1"></div>
       <div class="card">
         <div class="card-body">
-          <div style="font-family: Arial; font-weight: 700;">Select Billing Address</div>
+          <div style="font-family: Arial; font-weight: 700;">Select Billing Address
+            <span id='close' (click)="changeBillingFunction=false ">X</span></div>
           <hr>
           <div class="col-lg" *ngFor="let item of billingAddress; let i=index;">
 
@@ -117,7 +122,7 @@
         </div>
         <div class="card-footer text-muted">
           <button class="btn btn-warning" style="height: 30px; font-weight: 700; font-size: 10px; font-family: Arial;"
-            (click)="changeBillingFunction=false">Use this address</button>
+            (click)="changeBillingFunction1()">Use this address</button>
         </div>
 
       </div>
@@ -150,13 +155,7 @@
               </label>
             </div>
 
-            <!-- <div *ngIf="optradio.invalid && (optradio.dirty || optradio.touched)" class="alert alert-danger">
 
-              <small *ngIf="couponName.errors.required">
-                Coupon Name is required.
-              </small>
-
-            </div> -->
 
           </form>
         </div>
@@ -215,6 +214,12 @@
                 <button *ngIf="!isCouponMatched" (click)="checkCoupon()" class=" btn-warning">Apply</button>
                 <button *ngIf="isCouponMatched" (click)="cancelCoupon()" class=" btn-danger">Cancel</button>
 
+
+
+              </div>
+              <div *ngIf="divCoupon" class="col-lg-5">
+                  <span *ngIf="isCouponMatched" class="text-success font-weight-bold">Coupon Applied Successfully </span>
+                  <span *ngIf="!isCouponMatched" class="text-danger font-weight-bold">Invalid Coupon Code </span>
               </div>
             </div>
 
@@ -251,34 +256,14 @@
                   alt="">
               </td>
               <td>{{"-"}}</td>
-              <!-- <td> <select  (change)="abc()" [(ngModel)]="itemQuantity[i]">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
 
-                <option value="15">15</option>
-
-              </select> </td> -->
 
              <td> <input min=0 max=100 (input)="abc(i)" [(ngModel)]="itemQuantity[i]" style="width: 50px; text-align:center" type="number"/></td>
               <td>{{orderdetail.itemDetail}}</td>
               <td>{{orderdetail.price}}</td>
               <td>{{orderdetail.quantity*orderdetail.price}}</td>
 
-               <!-- <td><input checked (change)="changeCheckbox($event,orderdetail )" style="height: 20px;" type="checkbox"></td>
 
-              <td><input checked (change)="changeCheckbox($event,orderdetail )" style="height: 20px;" type="checkbox"></td>-->
 
 
           </tr>
@@ -363,7 +348,7 @@
 
     <button angularConfirmModal
     [title]="'Confirm'"
-    [message]="'Are you sure you want to continue?'"
+    [message]="'Are you sure you want to discard ?'"
     [options]="options"
     (onConfirm)="postOrder()"
     (onCancel)="cancelled()"

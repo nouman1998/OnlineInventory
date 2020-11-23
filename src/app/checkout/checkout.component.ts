@@ -340,7 +340,7 @@ export class CheckoutComponent implements OnInit {
     console.log(item)
     this.radioButton = !this.radioButton
 
-    let shipToAddress = {
+    this.shipToAddress = {
       "firstName": item.firstName,
       "middleName": item.middleName,
       "lastName": item.lastName,
@@ -353,17 +353,22 @@ export class CheckoutComponent implements OnInit {
       "state": item.state,
       "country": item.country,
     }
-    this.address["shipToAddress"] = { ...shipToAddress };
+
 
 
 
     console.log(this.address)
   }
-
+  changeBillingFunction2() {
+    this.address["shipToAddress"] = this.shipToAddress;
+    this.changeFunction = false;
+  }
+  billToAddress
+  shipToAddress
   myFunction1(item) {
     //
     if (!this.isShippingAddressSame) {
-      let billToAddress = {
+      this.billToAddress = {
         "firstName": item.firstName,
         "middleName": item.middleName,
         "lastName": item.lastName,
@@ -376,12 +381,20 @@ export class CheckoutComponent implements OnInit {
         "state": item.state,
         "country": item.country,
       }
-      this.address["billToAddress"] = { ...billToAddress };
+
 
 
       console.log(this.address);
     }
 
+
+  }
+  changeBillingFunction1() {
+    this.address["billToAddress"] = this.billToAddress
+    this.changeBillingFunction = false
+  }
+  changeShippingAddress() {
+    this.changeBillingFunction = false
   }
   postOrder() {
     console.log(this.isShippingAddressSame)
@@ -392,7 +405,7 @@ export class CheckoutComponent implements OnInit {
       alert("Select Billing Addres First")
     }
 
-      else {
+    else {
       this.preparingJson();
 
       this.service.postOrder(this.orderJson).subscribe(response => {
@@ -468,7 +481,7 @@ export class CheckoutComponent implements OnInit {
       "totalPrice": this.totalOrderAmount
     }
 
-    console.log("bbbbbbbb", this.orderJson)
+    this.checkingItemQuantityBeforeJsonPrepare();
 
   }
 
@@ -547,11 +560,14 @@ export class CheckoutComponent implements OnInit {
 
   discountAmount = 0;
   discountType
+  divCoupon
   checkCoupon() {
+    this.divCoupon = true;
     this.discountAmount = 0
     this.isCouponMatched = false;
     this.couponArray.map(item => {
       if (item.name === this.coupon.name) {
+
         this.isCouponMatched = true;
         if (item.type == "percent") {
           this.discountAmount = ((this.totalOrderAmount / 100) * item.amount)
@@ -567,6 +583,7 @@ export class CheckoutComponent implements OnInit {
       }
     });
     if (!this.isCouponMatched) {
+
       alert("Invalid Coupon Code")
     }
 
@@ -574,6 +591,8 @@ export class CheckoutComponent implements OnInit {
 
   cancelCoupon() {
     this.isCouponMatched = false;
+    this.divCoupon = false;
+
     this.totalOrderAmount = this.backupTotalOrderAmount;
     this.coupon.name = "";
     this.coupon.discountAmount = 0;
@@ -619,22 +638,22 @@ export class CheckoutComponent implements OnInit {
     this.getTotalOrderAmount();
 
   }
-isDisable
+  isDisable
   abc(i) {
     debugger
-    this.isDisable=false;
+    this.isDisable = false;
 
-    let notZero =false
+    let notZero = false
     for (let index = 0; index < this.itemQuantity.length; index++) {
 
       const qty = this.itemQuantity[index];
-      this.isDisable=false;
+      this.isDisable = false;
       if (qty == 0 && !notZero) {
 
-        this.isDisable=true
+        this.isDisable = true
       }
-      else{
-       notZero =true
+      else {
+        notZero = true
 
         // return
       }
@@ -644,23 +663,16 @@ isDisable
     }
 
 
-    // this.orderJson['items'].map((item, index) => {
-    //   this.isDisable=false;
-    //   if (item.quantity == 0) {
-    //     this.orderJson['items'].splice(index, 1);
-    //     this.isDisable=true
-    //   }
-    // });
 
 
   }
   options: any = {
-    confirmBtnClass: 'btn btn-success',   //DEFAULT VALUE
-    confirmBtnText: 'Continue',      		//DEFAULT VALUE
-    cancelBtnClass: 'btn btn-danger',     //DEFAULT VALUE
-    cancelBtnText: 'Cancel',      		//DEFAULT VALUE
-    modalSize: 'lg',      				//DEFAULT VALUE
-    modalClass: ''      					//DEFAULT VALUE
+    confirmBtnClass: 'btn btn-success',
+    confirmBtnText: 'Continue',
+    cancelBtnClass: 'btn btn-danger',
+    cancelBtnText: 'Cancel',
+    modalSize: 'lg',
+    modalClass: ''
   }
 
   confirmed() {
@@ -671,5 +683,13 @@ isDisable
     console.log('cancelled');
   }
 
+
+  checkingItemQuantityBeforeJsonPrepare() {
+    this.orderJson['items'].map((item, index) => {
+      if (item.quantity <= 0) {
+        this.orderJson['items'].splice(index, 1);
+      }
+    })
+  }
 
 }

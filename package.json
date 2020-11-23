@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
+    "ag-grid": "^18.1.2",
     "angular-confirm-modal": "^0.1.0",
     "angular-responsive-carousel": "^1.5.11",
     "bootstrap": "^4.5.2",

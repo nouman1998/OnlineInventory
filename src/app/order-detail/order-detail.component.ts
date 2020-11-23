@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrderServiceService } from '../order-service.service';
+import { returnOrder } from './returnOrder';
 
 @Component({
   selector: 'app-order-detail',
@@ -53,8 +54,9 @@ export class OrderDetailComponent implements OnInit {
     });
   }
   orderStatus
+  itemStatusArray
   orderStatusText
-  itemsReturned= false;
+  itemsReturned = false;
   getOrderById() {
     this.isLoadDone = false;
 
@@ -72,8 +74,8 @@ export class OrderDetailComponent implements OnInit {
         this.shippingAmount = d.shippingAmount;
         this.orderReturnTotalAmount = d.shippingAmount;
         this.cardNumbers = this.order.paymentDetails[0].cardNumber.substr(this.order.paymentDetails[0].cardNumber.length - 4)
-        this.orderStatus = d.orderStatus;
-        this.getOrderStatusText(this.orderStatus);
+        this.itemStatusArray = d.orderDetailList;
+        // this.getOrderStatusText();
         this.order.orderDetailList.map(item => {
           this.taxAmount += item.taxAmount || 0;
           this.totalItemAmount += item.itemTotalAmount || 0;
@@ -103,6 +105,7 @@ export class OrderDetailComponent implements OnInit {
 
 
   prepareReturnOrderJson() {
+    console.log(this.returnedItems)
     if (this.returnedItems.length == 0) {
       alert("Select Atleast 1 item to return");
     }
@@ -112,10 +115,16 @@ export class OrderDetailComponent implements OnInit {
         "itemLists": this.returnedItems,
 
       }
+      console.log(returnOrderJson)
       this.service.returnOrder(returnOrderJson).subscribe(response => {
-        this.itemsReturned=true;
+        this.itemsReturned = true;
+        console.log(response);
+
+        alert("Ordered Returned");
         this.getOrderById();
       })
+
+      this.returnedItems=[]
       console.log(returnOrderJson)
     }
   }
@@ -128,9 +137,10 @@ export class OrderDetailComponent implements OnInit {
   }
 
 
-  changeCheckbox(event, obj) {
+  changeCheckbox(event, obj1) {
     this.totalReturnItemAmount = 0;
     console.log(event)
+    let obj = this.mapItemToDTO(obj1);
     console.log(obj)
 
     if (event.target.checked) {
@@ -148,10 +158,40 @@ export class OrderDetailComponent implements OnInit {
     this.calculatingTotal();
 
   }
+
+  checkStatus(status){
+
+    if (status ==1)
+    {
+      return true
+    }
+    else{
+      return false
+    }
+  }
   getOrderStatusText(status) {
+    debugger
     switch (status) {
-      case 7:
+      case 1:
+        this.orderStatusText = "New"
+        break;
+      case 2:
+        this.orderStatusText = "In Progress"
+        break
+      case 3:
+        this.orderStatusText = "Shipped"
+        break
+      case 4:
+        this.orderStatusText = "Delivered"
+        break
+      case 5:
+        this.orderStatusText = "Cancelled"
+        break
+      case 6:
         this.orderStatusText = "Return Initiated"
+        break
+      case 7:
+        this.orderStatusText = "Partial Returned"
         break;
       case 8:
         this.orderStatusText = "Returned";
@@ -162,6 +202,25 @@ export class OrderDetailComponent implements OnInit {
 
     console.log(status);
     console.log(this.orderStatusText);
+    return this.orderStatusText
+  }
+
+  mapItemToDTO(obj) {
+    console.log(obj)
+    let itemDTO = new returnOrder();
+    itemDTO.itemId = obj.item.id;
+    itemDTO.price = obj.itemPrice
+    itemDTO.quantity = obj.quantity;
+    itemDTO.total = (obj.item.price * obj.item.quantity);
+    itemDTO.itemSize = obj.item.itemSize;
+    itemDTO.tax = obj.item.taxRate;
+    itemDTO.couponCode = obj.discountCode;
+    itemDTO.discountType = obj.discountType;
+    itemDTO.couponAmount = obj.discountAmount;
+    itemDTO.status = obj.itemStatus;
+
+    return itemDTO;
+
   }
 
 

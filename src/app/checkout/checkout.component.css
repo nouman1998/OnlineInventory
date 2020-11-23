@@ -22,3 +22,12 @@ small:hover{
 
   cursor: pointer;
 }
+
+
+#close{
+  position: absolute;
+    top: 5px;
+    right: 15px;
+    cursor: pointer;
+}
+#close:hover {background: #bbb;}
