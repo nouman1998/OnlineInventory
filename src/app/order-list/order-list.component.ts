@@ -33,6 +33,7 @@ export class OrderListComponent {
 
 
   displayedColumns = ['order_id','orderTotalAmount','statusDesc','orderDate', 'deliDate','action'];
+  displayedColumn = ['order_id','orderTotalAmount','statusDesc','orderDate', 'deliDate'];
   dataSource: MatTableDataSource<orderListData>;
   public orderList = [];
   expandedElement: orderListData | null;
@@ -93,8 +94,11 @@ export class OrderListComponent {
     this.getOrderList();
  }
 
-  onClickAction(data) {
-       this.router.navigate(['/order-detail'], { queryParams: { id: data }});
+  onClickAction(data) {alert(data);
+       //this.router.navigate(['/order-detail'], { queryParams: { id: data }});
+       this.orderService.cancelOrder(data).subscribe((response) => {
+        console.log(response);
+       })
   }
 
   routeToReturnOrder(data) {

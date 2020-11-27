@@ -7,7 +7,6 @@ import csc from 'country-state-city'
 import { Router } from '@angular/router';
 import { OrderServiceService } from '../order-service.service';
 
-import { debug } from 'console';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -17,29 +16,33 @@ export class CheckoutComponent implements OnInit {
   @ViewChild('exampleModal') public childModal;
 
   constructor(private http: HttpClient, private router: Router, private service: OrderServiceService) { }
+  isLoading=false
   address = {}
   myform
   isSaving = false;
   itemQuantity = []
   firstButtonSelected = true;
   deliveryInstrution = ""
+  delieveryAmount=100;
   secondButtonSelected = false;
   shippingMethod = "1"
   backupTotalOrderAmount
   notificaionId = "1"
   totalTax = 100;
+  addressResponse=false;;
   initialAddress = {
-    id: 1, "firstName": "Shahzad",
-    "middleName": "test",
-    "lastName": "Iqbal",
-    "phone": "test",
-    "email": "n@n.com",
-    "addressLine1": "House S-33 Street 4 Allama Iqbal Colony Mehmoodabad Gate KHI ACHa",
-    "addressLine2": "test",
-    "city": "test",
-    "zipCode": "test",
-    "state": "test",
-    "country": "test",
+    id: null,
+    "firstName": "",
+    "middleName": "",
+    "lastName": "",
+    "phone": "",
+    "email": "",
+    "addressLine1": "",
+    "addressLine2": "",
+    "city": "",
+    "zipCode": "",
+    "state": "",
+    "country": "",
   }
 
   localUrl = 'http://localhost:8080/order/';
@@ -95,14 +98,14 @@ export class CheckoutComponent implements OnInit {
       this.itemQuantity.push(item.quantity)
     })
     this.getTotalOrderAmount()
-
     this.getCustomerAddress(this.createdByCustomer);
 
-  }
 
+  }
   getCustomerAddress(customerId) {
     this.addressArray = [];
     this.service.getCustomerAddress(customerId).subscribe((addresses: any) => {
+      this.isLoading=true
       console.log("ADRESSS", addresses)
       //  this.addressArray.push()
       this.initialAddress = addresses[0];
@@ -124,7 +127,7 @@ export class CheckoutComponent implements OnInit {
   getTotalOrderAmount() {
     //
     //
-
+debugger
     this.totalOrderAmount = 0;
 
     this.items.map((item, index) => {
@@ -132,9 +135,6 @@ export class CheckoutComponent implements OnInit {
       let index1 = this.orderJson['items'].indexOf(item);
       if (index1 > -1)
         this.orderJson['items'][index1].index = index;
-      // this.orderJson['items'][index1].quantity = item.quantity;
-
-      // this.totalOrderAmount += ((item.price) * item.quantity)
 
 
     });
@@ -146,6 +146,8 @@ export class CheckoutComponent implements OnInit {
 
     })
 
+
+    this.applyCoupon()
     // this.items.map((item,index) => {
     //   // item.quantity = (parseInt( this.itemQuantity[index]));
     //   // this.totalOrderAmount += ((item.price) * (parseInt( this.itemQuantity[index])))
@@ -185,10 +187,7 @@ export class CheckoutComponent implements OnInit {
   ];
   last = new Date(new Date().getTime() + (7 * 24 * 60 * 60 * 1000))
   deliveryDate = this.last.getDate() + " - " + this.monthNames[this.last.getMonth()] + " - " + this.last.getFullYear();
-  addressArray = [
-    this.initialAddress,
-
-  ]
+  addressArray=[this.initialAddress]
   provinces
   cities
   provinceChange(): void {
@@ -446,18 +445,18 @@ export class CheckoutComponent implements OnInit {
       "zipCode": "00000"
     }
 
-    this.orderJson['orderTotal'] = this.backupTotalOrderAmount;
+    this.orderJson['orderTotal'] = (this.backupTotalOrderAmount+this.totalTax+this.delieveryAmount)
     this.orderJson['orderStatus'] = 1;
     this.orderJson['paymentStatus'] = 1;
     this.orderJson['notificationId'] = this.notificaionId;
     this.orderJson['shippingMethod'] = this.shippingMethod;
-    this.orderJson['shippingAmt'] = "50";
+    this.orderJson['shippingAmt'] = this.delieveryAmount;
     this.orderJson['shippingId'] = this.shippingMethod;
     this.orderJson['orderTax'] = this.totalTax;
 
     if (this.isCouponMatched) {
       this.orderJson['couponDetail'] = {
-        "couponName": this.coupon.name,
+        "couponName": this.couponName,
         "discountType": this.discountType,
         "discountAmt": this.discountAmount
       };
@@ -478,7 +477,7 @@ export class CheckoutComponent implements OnInit {
       "cardUserName": "Nouman Ejaz",
       "cardExpiryDate": "22/03",
       "totalTax": this.totalTax,
-      "totalPrice": this.totalOrderAmount
+      "totalPrice": this.totalOrderAmount-this.discountAmount
     }
 
     this.checkingItemQuantityBeforeJsonPrepare();
@@ -561,12 +560,34 @@ export class CheckoutComponent implements OnInit {
   discountAmount = 0;
   discountType
   divCoupon
+  couponName
   checkCoupon() {
     this.divCoupon = true;
     this.discountAmount = 0
     this.isCouponMatched = false;
+    this.applyCoupon()
+    if (!this.isCouponMatched) {
+
+      alert("Invalid Coupon Code")
+    }
+
+  }
+
+  cancelCoupon() {
+    this.isCouponMatched = false;
+    this.divCoupon = false;
+    // this.applyCoupon()
+    // this.totalOrderAmount = this.backupTotalOrderAmount;
+    this.coupon.name = "";
+    this.coupon.discountAmount = 0;
+    this.coupon.discountType = ""
+    this.getTotalOrderAmount()
+
+  }
+  applyCoupon(){
     this.couponArray.map(item => {
       if (item.name === this.coupon.name) {
+        this.couponName= item.name;
 
         this.isCouponMatched = true;
         if (item.type == "percent") {
@@ -582,22 +603,6 @@ export class CheckoutComponent implements OnInit {
 
       }
     });
-    if (!this.isCouponMatched) {
-
-      alert("Invalid Coupon Code")
-    }
-
-  }
-
-  cancelCoupon() {
-    this.isCouponMatched = false;
-    this.divCoupon = false;
-
-    this.totalOrderAmount = this.backupTotalOrderAmount;
-    this.coupon.name = "";
-    this.coupon.discountAmount = 0;
-    this.coupon.discountType = ""
-
   }
 
 

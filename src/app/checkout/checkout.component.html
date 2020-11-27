@@ -1,226 +1,237 @@
-<div style="margin:0 auto; width: 100%; padding: 10px; ">
-
-
-<div class="row">
-  <div class="col-lg-12">
-    <nav class="navbar navbar-light bg-light" style="background-color: #ffc107 !important;">
-      <a class="navbar-brand m-auto">Checkout Page</a>
-    </nav>
-  </div>
+<div style="margin-left: 49%;
+margin-top: 22%;
+" *ngIf="!isLoading" class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
 </div>
-<div class="row p-2">
+<div *ngIf="isLoading" style="margin:0 auto; width: 100%; padding: 10px; ">
 
-  <!-- <div class="col-lg-3"></div> -->
-  <div class="col-lg-9" style="font-family: Arial;font-size: 13px;font-weight: 400;">
-    <div [hidden]="changeFunction" class="row">
-      <div class="col-lg-1 font-weight-bold"></div>
-      <div class="col-lg-3 font-weight-bold">Shipping address</div>
-      <div class="col-lg-4" style="font-family: Arial;font-size: 13px;font-weight: 400;">
-        <div class="row" style="margin-left: 1px; font-weight: 500 ">
-          {{address['shipToAddress'].firstName +" "+address['shipToAddress'].lastName}} </div>
-        {{address['shipToAddress'].addressLine1}}
-        <div class="row" style="margin-left: 1px; "> <a data-toggle="modal" data-target="#exampleModalCenter"><small
-              style="font-weight: 400;">Add a delievery
-              instructions</small></a></div>
-      </div>
-      <div class="col-lg-2">
-        <a *ngIf="addressArray.length!=0" (click)="toggleChange()"> <small
-            style="font-weight: 500; color: blue;">Change</small>
-        </a>
-        <a *ngIf="addressArray.length==0" data-toggle="modal" data-target="#exampleModal"> <small
-            style="font-weight: 500; color: blue;">Add Address </small>
-        </a>
-      </div>
+
+
+  <div class="row">
+    <div class="col-lg-12">
+      <nav class="navbar navbar-light bg-light" style="background-color: #ffc107 !important;">
+        <a class="navbar-brand m-auto">Checkout Page</a>
+      </nav>
     </div>
-    <div [hidden]="!changeFunction" class="row" style="font-family: Arial;font-size: 13px;font-weight: 400;">
+  </div>
 
-      <div class="col-lg-1"></div>
-      <div class="card">
-        <div class="card-body">
-          <div style="font-family: Arial; font-weight: 700;">Select Delivery Address
-            <span id='close' (click)="changeFunction=false">X</span>
-          </div>
-          <hr>
-          <div class="col-lg" *ngFor="let item of addressArray; let i=index;">
+  <div class="row p-2">
 
-            <div class="row">
-              <div class="col-1"> <span><input style="width: 10px;" [attr.checked]="i==0" (change)="myFunction(item)" id="1" name="gender1"
-                    type="radio"></span></div>
-              <div class="col" style="margin-top: 6px;">
-                <span
-                  style="font-family: Arial;font-size: 13px;font-weight: 700;">{{item.firstName+ " "+item.lastName}}-&nbsp;</span>
-                <span style="font-family: Arial;font-size: 13px;font-weight: 400;"> {{item.addressLine1}}</span>
+    <!-- <div class="col-lg-3"></div> -->
+    <div class="col-lg-9" style="font-family: Arial;font-size: 13px;font-weight: 400;">
+
+      <div [hidden]="changeFunction" class="row">
+        <div class="col-lg-1 font-weight-bold"></div>
+        <div class="col-lg-3 font-weight-bold">Shipping address</div>
+        <div class="col-lg-4" style="font-family: Arial;font-size: 13px;font-weight: 400;">
+          <div class="row" style="margin-left: 1px; font-weight: 500 ">
+            {{address['shipToAddress'].firstName +" "+address['shipToAddress'].lastName}} </div>
+          {{address['shipToAddress'].addressLine1}}
+          <div class="row" style="margin-left: 1px; "> <a data-toggle="modal" data-target="#exampleModalCenter"><small
+                style="font-weight: 400;">Add a delievery
+                instructions</small></a></div>
+        </div>
+        <div class="col-lg-2">
+          <a *ngIf="addressArray.length!=0" (click)="toggleChange()"> <small
+              style="font-weight: 500; color: blue;">Change</small>
+          </a>
+          <a *ngIf="addressArray.length==0" data-toggle="modal" data-target="#exampleModal"> <small
+              style="font-weight: 500; color: blue;">Add Address </small>
+          </a>
+        </div>
+      </div>
+      <div [hidden]="!changeFunction" class="row" style="font-family: Arial;font-size: 13px;font-weight: 400;">
+
+        <div class="col-lg-1"></div>
+        <div class="card">
+          <div class="card-body">
+            <div style="font-family: Arial; font-weight: 700;">Select Delivery Address
+              <span id='close' (click)="changeFunction=false">X</span>
+            </div>
+            <hr>
+            <div class="col-lg" *ngFor="let item of addressArray; let i=index;">
+
+              <div class="row">
+                <div class="col-1"> <span><input style="width: 10px;" [attr.checked]="i==0" (change)="myFunction(item)"
+                      id="1" name="gender1" type="radio"></span></div>
+                <div class="col" style="margin-top: 6px;">
+                  <span
+                    style="font-family: Arial;font-size: 13px;font-weight: 700;">{{item.firstName+ " "+item.lastName}}-&nbsp;</span>
+                  <span style="font-family: Arial;font-size: 13px;font-weight: 400;"> {{item.addressLine1}}</span>
+                </div>
               </div>
             </div>
-          </div>
 
 
-          <div class="row">
-            <div class="col-1"></div>
-            <div class="col-lg" style="margin-top: 6px;"> <a data-toggle="modal" data-target="#exampleModal" style="font-size: 10px; font-weight: 700;margin-left: 9px; color: blue;
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-lg" style="margin-top: 6px;"> <a data-toggle="modal" data-target="#exampleModal" style="font-size: 10px; font-weight: 700;margin-left: 9px; color: blue;
                 cursor: pointer;">Add New Address</a></div>
+            </div>
+
+
           </div>
-
-
-        </div>
-        <div class="card-footer text-muted">
-          <button class="btn btn-warning" style="height: 30px; font-weight: 700; font-size: 10px; font-family: Arial;"
-            (click)="changeBillingFunction2()">Use this address</button>
+          <div class="card-footer text-muted">
+            <button class="btn btn-warning" style="height: 30px; font-weight: 700; font-size: 10px; font-family: Arial;"
+              (click)="changeBillingFunction2()">Use this address</button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <hr>
+      <hr>
 
-    <div class="row py-2" [hidden]="changeBillingFunction">
-      <div class="col-lg-1 font-weight-bold"></div>
-      <div class="col-lg-3 font-weight-bold">Billing address</div>
-      <div class="col-lg-4">
-        <div class="row" style="margin-left: 1px; "><small
-            style="font-weight: 500;font-size: 13px; ">{{address['billToAddress'].firstName +" "+address['billToAddress'].lastName}}</small>
+      <div class="row py-2" [hidden]="changeBillingFunction">
+        <div class="col-lg-1 font-weight-bold"></div>
+        <div class="col-lg-3 font-weight-bold">Billing address</div>
+        <div class="col-lg-4">
+          <div class="row" style="margin-left: 1px; "><small
+              style="font-weight: 500;font-size: 13px; ">{{address['billToAddress'].firstName +" "+address['billToAddress'].lastName}}</small>
+          </div>
+          {{address['billToAddress'].addressLine1}}
+          <div class="row" style="margin-left: 1px; "> <a data-toggle="modal" data-target="#exampleModalCenter"><small
+                style="font-weight: 400;">Add a delievery
+                instructions</small></a></div>
         </div>
-        {{address['billToAddress'].addressLine1}}
-        <div class="row" style="margin-left: 1px; "> <a data-toggle="modal" data-target="#exampleModalCenter"><small
-              style="font-weight: 400;">Add a delievery
-              instructions</small></a></div>
-      </div>
-      <div class="col-lg-2">
-        <a *ngIf="addressArray.length!=0" (click)="changeBillingFunction=true"> <small
-            style="font-weight: 500; color: blue;">Change</small> </a>
-        <a *ngIf="addressArray.length==0" data-toggle="modal" data-target="#exampleModal"> <small
-            style="font-weight: 500; color: blue;">Add Address</small> </a>
+        <div class="col-lg-2">
+          <a *ngIf="addressArray.length!=0" (click)="changeBillingFunction=true"> <small
+              style="font-weight: 500; color: blue;">Change</small> </a>
+          <a *ngIf="addressArray.length==0" data-toggle="modal" data-target="#exampleModal"> <small
+              style="font-weight: 500; color: blue;">Add Address</small> </a>
+        </div>
+
       </div>
 
-    </div>
+      <div class="row py-2" [hidden]="!changeBillingFunction">
 
-    <div class="row py-2" [hidden]="!changeBillingFunction">
+        <div class="col-lg-1"></div>
+        <div class="card">
+          <div class="card-body">
+            <div style="font-family: Arial; font-weight: 700;">Select Billing Address
+              <span id='close' (click)="changeBillingFunction=false ">X</span></div>
+            <hr>
+            <div class="col-lg" *ngFor="let item of billingAddress; let i=index;">
 
-      <div class="col-lg-1"></div>
-      <div class="card">
-        <div class="card-body">
-          <div style="font-family: Arial; font-weight: 700;">Select Billing Address
-            <span id='close' (click)="changeBillingFunction=false ">X</span></div>
-          <hr>
-          <div class="col-lg" *ngFor="let item of billingAddress; let i=index;">
-
-            <div class="row">
-              <div class="col-1"> <span><input style="width: 10px;" [attr.checked]="i===0" (change)="myFunction1(item)" name="billingradio"
-                    type="radio"></span></div>
-              <div class="col" style="margin-top: 6px;">
-                <span
-                  style="font-family: Arial;font-size: 13px;font-weight: 700;">{{item.firstName+ " "+item.lastName}}-&nbsp;</span>
-                <span style="font-family: Arial;font-size: 13px;font-weight: 400;"> {{item.addressLine1}}</span>
+              <div class="row">
+                <div class="col-1"> <span><input style="width: 10px;" [attr.checked]="i===0"
+                      (change)="myFunction1(item)" name="billingradio" type="radio"></span></div>
+                <div class="col" style="margin-top: 6px;">
+                  <span
+                    style="font-family: Arial;font-size: 13px;font-weight: 700;">{{item.firstName+ " "+item.lastName}}-&nbsp;</span>
+                  <span style="font-family: Arial;font-size: 13px;font-weight: 400;"> {{item.addressLine1}}</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="row">
-            <div class="col-1"></div>
-            <div class="col-lg" style="margin-top: 6px; "> <a data-toggle="modal" data-target="#exampleModal1" style="font-size: 10px; font-weight: 700;margin-left: 9px;  color: blue;
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-lg" style="margin-top: 6px; "> <a data-toggle="modal" data-target="#exampleModal1" style="font-size: 10px; font-weight: 700;margin-left: 9px;  color: blue;
                 cursor: pointer;">Add New Address</a></div>
+            </div>
           </div>
-        </div>
-        <div class="card-footer text-muted">
-          <button class="btn btn-warning" style="height: 30px; font-weight: 700; font-size: 10px; font-family: Arial;"
-            (click)="changeBillingFunction1()">Use this address</button>
-        </div>
-
-      </div>
-
-    </div>
-    <hr>
-
-    <div class="row">
-      <div class="col-lg-1 font-weight-bold"></div>
-      <div class="col-lg-3 font-weight-bold">Notification Type</div>
-      <div class="col-lg-4" style="font-family: Arial;font-size: 13px;font-weight: 400;">
-        <div class="row" style="margin-left: 1px;  ">
-          <form>
-            <div class="form-check-inline">
-              <label class="form-check-label" for="radio1" style="font-size: 13px;">
-                <input   style="height: 12px; " [(ngModel)]="notificaionId" type="radio" class="form-check-input" name="radiobutton"
-                  value="1" >Email
-              </label>
-            </div>
-            <div class="form-check-inline">
-              <label class="form-check-label" for="radio2" style="font-size: 13px;">
-                <input style="height: 12px;  " [(ngModel)]="notificaionId" type="radio" class="form-check-input" name="radiobutton"
-                 value="2">Phone
-              </label>
-            </div>
-            <div class="form-check-inline">
-              <label class="form-check-label" style="font-size: 13px;">
-                <input style="height: 12px; " [(ngModel)]="notificaionId" type="radio" class="form-check-input" name="radiobutton"
-                value="3">Both
-              </label>
-            </div>
-
-
-
-          </form>
-        </div>
-
-      </div>
-      <div class="col-lg-2">
-
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-lg-1 font-weight-bold"></div>
-      <div class="col-lg-3 font-weight-bold"><s></s> Shipping Method </div>
-      <div class="col-lg-4" style="font-family: Arial;font-size: 13px;font-weight: 400;">
-        <div class="row">
-          <div class="col-5">
-
-            <select [(ngModel)]="shippingMethod" style="width: 200px;" id="sMethod" name="shippingMethod">
-              <option selected="selected"  value="1">Regular</option>
-              <option value="card" value="2">Extra</option>
-
-            </select>
+          <div class="card-footer text-muted">
+            <button class="btn btn-warning" style="height: 30px; font-weight: 700; font-size: 10px; font-family: Arial;"
+              (click)="changeBillingFunction1()">Use this address</button>
           </div>
+
         </div>
 
       </div>
-      <div class="col-lg-2">
+      <hr>
 
+      <div class="row">
+        <div class="col-lg-1 font-weight-bold"></div>
+        <div class="col-lg-3 font-weight-bold">Notification Type</div>
+        <div class="col-lg-4" style="font-family: Arial;font-size: 13px;font-weight: 400;">
+          <div class="row" style="margin-left: 1px;  ">
+            <form>
+              <div class="form-check-inline">
+                <label class="form-check-label" for="radio1" style="font-size: 13px;">
+                  <input style="height: 12px; " [(ngModel)]="notificaionId" type="radio" class="form-check-input"
+                    name="radiobutton" value="1">Email
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label" for="radio2" style="font-size: 13px;">
+                  <input style="height: 12px;  " [(ngModel)]="notificaionId" type="radio" class="form-check-input"
+                    name="radiobutton" value="2">Phone
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label" style="font-size: 13px;">
+                  <input style="height: 12px; " [(ngModel)]="notificaionId" type="radio" class="form-check-input"
+                    name="radiobutton" value="3">Both
+                </label>
+              </div>
+
+
+
+            </form>
+          </div>
+
+        </div>
+        <div class="col-lg-2">
+
+        </div>
       </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-lg-1 font-weight-bold"></div>
-      <div class="col-lg-2 font-weight-bold">Coupon Detail</div>
-      <div class="col-lg-9" style="font-family: Arial;font-size: 13px;font-weight: 400;">
-        <div class="row" style="margin-left: 1px;  ">
-          <div class="col-1"></div>
-          <div class='col-10'>
-            <div class="row">
-              <div class="col-lg-5">
-                <form>
+      <hr>
+      <div class="row">
+        <div class="col-lg-1 font-weight-bold"></div>
+        <div class="col-lg-3 font-weight-bold"><s></s> Shipping Method </div>
+        <div class="col-lg-4" style="font-family: Arial;font-size: 13px;font-weight: 400;">
+          <div class="row">
+            <div class="col-5">
+
+              <select [(ngModel)]="shippingMethod" style="width: 200px;" id="sMethod" name="shippingMethod">
+                <option selected="selected" value="1">Regular</option>
+                <option value="card" value="2">Extra</option>
+
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-lg-1 font-weight-bold"></div>
+        <div class="col-lg-2 font-weight-bold">Coupon Detail</div>
+        <div class="col-lg-9" style="font-family: Arial;font-size: 13px;font-weight: 400;">
+          <div class="row" style="margin-left: 1px;  ">
+            <div class="col-1"></div>
+            <div class='col-10'>
+              <div class="row">
+                <div class="col-lg-5">
+                  <form>
 
 
 
 
-                  <input required  [(ngModel)]="coupon.name" name="couponName" #couponName="ngModel" type="text" class="form-control" id="coupanName"
-                    placeholder="Coupon Name" style="    margin-left: 7px;">
+                    <input required [(ngModel)]="coupon.name" name="couponName" #couponName="ngModel" type="text"
+                      class="form-control" id="coupanName" placeholder="Coupon Name" style="    margin-left: 7px;">
 
 
 
 
 
-                </form>
-              </div>
-              <div class="col-lg-2">
-                <button *ngIf="!isCouponMatched" (click)="checkCoupon()" class=" btn-warning">Apply</button>
-                <button *ngIf="isCouponMatched" (click)="cancelCoupon()" class=" btn-danger">Cancel</button>
+                  </form>
+                </div>
+                <div class="col-lg-2">
+                  <button *ngIf="!isCouponMatched" (click)="checkCoupon()" class=" btn-warning">Apply</button>
+                  <button *ngIf="isCouponMatched" (click)="cancelCoupon()" class=" btn-danger">Cancel</button>
 
 
 
-              </div>
-              <div *ngIf="divCoupon" class="col-lg-5">
-                  <span *ngIf="isCouponMatched" class="text-success font-weight-bold">Coupon Applied Successfully </span>
+                </div>
+                <div *ngIf="divCoupon" class="col-lg-5">
+                  <span *ngIf="isCouponMatched" class="text-success font-weight-bold">Coupon Applied Successfully
+                  </span>
                   <span *ngIf="!isCouponMatched" class="text-danger font-weight-bold">Invalid Coupon Code </span>
+                </div>
               </div>
+
             </div>
 
           </div>
@@ -228,13 +239,11 @@
         </div>
 
       </div>
-
-    </div>
-    <hr>
+      <hr>
       <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
         <div class="col-lg-1 font-weight-bold"></div>
         <div class="col-lg-2 font-weight-bold">Items</div>
-        <div class="col-lg-9"  style="font-family: Arial;font-size: 13px;font-weight: 400;">
+        <div class="col-lg-9" style="font-family: Arial;font-size: 13px;font-weight: 400;">
           <table style="width:100%;  font-size: 13px; font-family: Arial;">
             <tr
               style="border-style: solid; border-left: 0; border-right: 0; border-top: 0.1em; border-width:  0.12em; border-color: black; ">
@@ -251,14 +260,13 @@
             <tr *ngFor="let orderdetail of items ;let i = index;"
               style="border-style: solid;  border-left: 0; border-right: 0; border-top: 0.1em; border-width: 0.1em; margin-bottom: 10px; padding:0px ">
               <td>
-                <img width="50px" height="50px"
-                  [src]="orderdetail.itemImageUrl"
-                  alt="">
+                <img width="50px" height="50px" [src]="orderdetail.itemImageUrl" alt="">
               </td>
               <td>{{"-"}}</td>
 
 
-             <td> <input min=0 max=100 (input)="abc(i)" [(ngModel)]="itemQuantity[i]" style="width: 50px; text-align:center" type="number"/></td>
+              <td> <input min=0 max=100 (input)="abc(i)" [(ngModel)]="itemQuantity[i]"
+                  style="width: 50px; text-align:center" type="number" /></td>
               <td>{{orderdetail.itemDetail}}</td>
               <td>{{orderdetail.price}}</td>
               <td>{{orderdetail.quantity*orderdetail.price}}</td>
@@ -266,362 +274,362 @@
 
 
 
-          </tr>
+            </tr>
 
           </table>
         </div>
       </div>
       <hr>
-    <div class="row" style="margin-top: 15px;">
-      <div class="col-lg-1 font-weight-bold"></div>
-      <div class="col-lg-2 font-weight-bold">View Order</div>
-      <div class="col-lg-9" style="font-family: Arial;font-size: 13px;font-weight: 400;">
-        <div class="row" style="margin-left: 1px;  ">
-          <div class="col-1"></div>
-          <div class='col-6'>
-            <form>
+      <div class="row" style="margin-top: 15px;">
+        <div class="col-lg-1 font-weight-bold"></div>
+        <div class="col-lg-2 font-weight-bold">View Order</div>
+        <div class="col-lg-9" style="font-family: Arial;font-size: 13px;font-weight: 400;">
+          <div class="row" style="margin-left: 1px;  ">
+            <div class="col-1"></div>
+            <div class='col-6'>
+              <form>
 
 
 
 
-              <button style=" height: 34px; " class="btn btn-warning" (click)="routeToViewOrder()">View Order</button>
-              <button style=" height: 34px; margin-left: 10px; " class="btn btn-warning"
-                (click)="routeToReturnOrder()">Return Order</button>
+                <button style=" height: 34px; " class="btn btn-warning" (click)="routeToViewOrder()">View Order</button>
+                <button style=" height: 34px; margin-left: 10px; " class="btn btn-warning"
+                  (click)="routeToReturnOrder()">Return Order</button>
 
 
 
 
 
 
-            </form>
+              </form>
+            </div>
           </div>
+
         </div>
 
       </div>
-
-    </div>
-  </div>
-
-
-
-  <div class="col-lg-3" style="font-family: Arial;font-size: 13px;font-weight: 400;">
-    <div class="font-weight-bold text-center" style="font-size: 15px;">Delivery Estimate</div>
-    <span class="font-weight-bold " style=" font-size: 15px; padding-bottom: 5px;">Please Note:</span>
-    <p class="py-1">Delivery timelines are
-      currently taking longer than usual because of COVID.
-      Please add 2-5
-      days extra to estimated delivery
-    </p>
-    <div class="font-weight-bold" style="font-size: 14px; font-weight: 500;;">Estimate Delivery : {{deliveryDate}}</div>
-    <br>
-    <div class="text-uppercase font-weight-bold" style="margin-top: -15px; font-size: 14px;font-weight: 500;"> Price
-      Details
-      ({{orderJson['items'].length}} items)</div>
-
-    <div class="row" style="margin-left: 15px; margin-top: 5px; font-weight: 500; font-size: 13px;">
-      <div class="col-6 "> <span>Order Total:</span></div>
-      <div class="col-5 "> <span>Rs. {{totalOrderAmount}}</span></div>
-    </div>
-    <div class="row" style="margin-left: 15px; margin-top: 5px; font-weight: 500; font-size: 13px;">
-      <div class="col-6 "> <span>Tax</span></div>
-      <div class="col-5" *ngIf="!isDisable;else templateName"> <span>Rs. {{totalTax}}</span></div>
-      <ng-template style="margin-left: 15px;"class="col-5 " #templateName>  <div class="col-5" > <span>Rs. 0</span></div></ng-template>
-    </div>
-    <div class="row py-1" style="margin-left: 15px; font-weight: 500; font-size: 13px;">
-      <div class="col-6 "> <span>Delivery Charges:</span></div>
-      <div class="col-5 " *ngIf="!isDisable;else templateName1"> <span>Rs. 50</span></div>
-      <ng-template class="col-5 "  style="margin-left: 15px;" #templateName1>  <div class="col-5 "> <span>Rs. 0</span></div></ng-template>
-
-
-    </div>
-
-    <div style="margin-left: 15px;">
-      <hr style="border:1px solid black">
-    </div>
-
-    <div class="row " style="margin-left: 13px;font-weight: 500;">
-      <div class="col-6"> <span>Total:</span></div>
-      <div class="col-5 "*ngIf="!isDisable;else templateName3"> <span>Rs. {{totalOrderAmount+50+totalTax}}</span></div>
-      <ng-template class="col-5 " #templateName3>  <div class="col-5 "> <span>Rs.0</span></div></ng-template>
     </div>
 
 
-    <button angularConfirmModal
-    [title]="'Confirm'"
-    [message]="'Are you sure you want to discard ?'"
-    [options]="options"
-    (onConfirm)="postOrder()"
-    (onCancel)="cancelled()"
-    [disabled]="isDisable"
-    type="button"
-    class="btn btn-warning my-3"
-    style=" margin-left: 30%; height: 34px; "
-    >
-    Continue
-  </button>
+
+    <div class="col-lg-3" style="font-family: Arial;font-size: 13px;font-weight: 400;">
+      <div class="font-weight-bold text-center" style="font-size: 15px;">Delivery Estimate</div>
+      <span class="font-weight-bold " style=" font-size: 15px; padding-bottom: 5px;">Please Note:</span>
+      <p class="py-1">Delivery timelines are
+        currently taking longer than usual because of COVID.
+        Please add 2-5
+        days extra to estimated delivery
+      </p>
+      <div class="font-weight-bold" style="font-size: 14px; font-weight: 500;;">Estimate Delivery : {{deliveryDate}}
+      </div>
+      <br>
+      <div class="text-uppercase font-weight-bold" style="margin-top: -15px; font-size: 14px;font-weight: 500;"> Price
+        Details
+        ({{orderJson['items'].length}} items)</div>
+
+      <div class="row" style="margin-left: 15px; margin-top: 5px; font-weight: 500; font-size: 13px;">
+        <div class="col-6 "> <span>Order Total:</span></div>
+        <div class="col-5 "> <span>Rs. {{totalOrderAmount}}</span></div>
+      </div>
+      <div class="row" style="margin-left: 15px; margin-top: 5px; font-weight: 500; font-size: 13px;">
+        <div class="col-6 "> <span>Tax</span></div>
+        <div class="col-5" *ngIf="!isDisable;else templateName"> <span>Rs. {{totalTax}}</span></div>
+        <ng-template style="margin-left: 15px;" class="col-5 " #templateName>
+          <div class="col-5"> <span>Rs. 0</span></div>
+        </ng-template>
+      </div>
+      <div class="row py-1" style="margin-left: 15px; font-weight: 500; font-size: 13px;">
+        <div class="col-6 "> <span>Delivery Charges:</span></div>
+        <div class="col-5 " *ngIf="!isDisable;else templateName1"> <span>Rs. {{delieveryAmount}}</span></div>
+        <ng-template class="col-5 " style="margin-left: 15px;" #templateName1>
+          <div class="col-5 "> <span>Rs. 0</span></div>
+        </ng-template>
+
+
+      </div>
+
+      <div style="margin-left: 15px;">
+        <hr style="border:1px solid black">
+      </div>
+
+      <div class="row " style="margin-left: 13px;font-weight: 500;">
+        <div class="col-6"> <span>Total:</span></div>
+        <div class="col-5 " *ngIf="!isDisable;else templateName3"> <span>Rs.
+            {{totalOrderAmount+delieveryAmount+totalTax}}</span></div>
+        <ng-template class="col-5 " #templateName3>
+          <div class="col-5 "> <span>Rs.0</span></div>
+        </ng-template>
+      </div>
+
+
+      <button angularConfirmModal [title]="'Confirm'" [message]="'Are you sure you want to discard ?'"
+        [options]="options" (onConfirm)="postOrder()" (onCancel)="cancelled()" [disabled]="isDisable" type="button"
+        class="btn btn-warning my-3" style=" margin-left: 30%; height: 34px; ">
+        Continue
+      </button>
 
       <!--   -->
 
+    </div>
   </div>
-</div>
-<!-- </div> -->
+  <!-- </div> -->
 
 
 
-<div  class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add address</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form #funnyDayaForm="ngForm" name="myform">
-          <!-- <div class="row"> -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add address</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #funnyDayaForm="ngForm" name="myform">
+            <!-- <div class="row"> -->
 
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; margin-left: 7px;">First Name</small> </label>
-          <div class="row" style="   margin-left: 1px;">
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; margin-left: 7px;">First Name</small> </label>
+            <div class="row" style="   margin-left: 1px;">
 
-            <input required #firstName="ngModel" class="form-control" type="text" placeholder="First Name"
-              name="firstName" [(ngModel)]="checkout.firstName"
-              [ngClass]="{'is-invalid':(firstName.invalid && (firstName.dirty || firstName.touched))}"
-              pattern="([a-zA-Z]{1,30}\s*)+">
+              <input required #firstName="ngModel" class="form-control" type="text" placeholder="First Name"
+                name="firstName" [(ngModel)]="checkout.firstName"
+                [ngClass]="{'is-invalid':(firstName.invalid && (firstName.dirty || firstName.touched))}"
+                pattern="([a-zA-Z]{1,30}\s*)+">
 
-            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+              <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
 
-              <small *ngIf="firstName.errors.required">
-                First Name is required.
-              </small>
-              <small class="alert alert-danger" *ngIf="firstName.errors.pattern">
-                First Name should not contain special characters.
+                <small *ngIf="firstName.errors.required">
+                  First Name is required.
+                </small>
+                <small class="alert alert-danger" *ngIf="firstName.errors.pattern">
+                  First Name should not contain special characters.
+                </small>
+              </div>
+
+            </div>
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; margin-left: 7px;">Middle Name</small> </label>
+
+            <div class="row" style="   margin-left: 1px;">
+              <input #middleName="ngModel" class="form-control" type="text" name="middleName" placeholder="Middle Name"
+                [(ngModel)]="checkout.middleName" pattern="([a-zA-Z]{1,30}\s*)+">
+            </div>
+            <div *ngIf="middleName.invalid && (middleName.dirty || middleName.touched)" class="alert alert-danger">
+
+              <small *ngIf="(middleName.errors&&middleName.errors.pattern)">
+                Middle Name should not contain special characters.
               </small>
             </div>
 
-          </div>
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; margin-left: 7px;">Middle Name</small> </label>
-
-          <div class="row" style="   margin-left: 1px;">
-            <input #middleName="ngModel" class="form-control" type="text" name="middleName" placeholder="Middle Name"
-              [(ngModel)]="checkout.middleName" pattern="([a-zA-Z]{1,30}\s*)+">
-          </div>
-          <div *ngIf="middleName.invalid && (middleName.dirty || middleName.touched)" class="alert alert-danger">
-
-            <small *ngIf="(middleName.errors&&middleName.errors.pattern)">
-              Middle Name should not contain special characters.
-            </small>
-          </div>
 
 
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; margin-left: 7px;">Last Name</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input required #lastName="ngModel" class="form-control" type="text" placeholder="Last Name"
+                name="lastName" [(ngModel)]="checkout.lastName"
+                [ngClass]="{'is-invalid':(lastName.invalid && (lastName.dirty || lastName.touched))}"
+                pattern="([a-zA-Z]{1,30}\s*)+">
 
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; margin-left: 7px;">Last Name</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input required #lastName="ngModel" class="form-control" type="text" placeholder="Last Name" name="lastName"
-              [(ngModel)]="checkout.lastName"
-              [ngClass]="{'is-invalid':(lastName.invalid && (lastName.dirty || lastName.touched))}"
-              pattern="([a-zA-Z]{1,30}\s*)+">
 
+              <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
 
-            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+                <small *ngIf="lastName.errors.required">
+                  Last Name is required.
+                </small>
+                <small *ngIf="lastName.errors.pattern">
+                  Last Name should not contain special characters.
+                </small>
+              </div>
 
-              <small *ngIf="lastName.errors.required">
-                Last Name is required.
-              </small>
-              <small *ngIf="lastName.errors.pattern">
-                Last Name should not contain special characters.
-              </small>
             </div>
 
-          </div>
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; margin-left: 7px;">Phone Number</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input (keypress)="numberOnly($event)" type="text" required minlength=11 maxlength=15 class="form-control"
+                name="PhoneNumber" placeholder="Phone Number" #PhoneNumber="ngModel" [(ngModel)]="checkout.phoneNumber"
+                [ngClass]="{'is-invalid':(PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched))}">
+              <div *ngIf="PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched)" class="alert alert-danger">
 
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; margin-left: 7px;">Phone Number</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input (keypress)="numberOnly($event)" type="text" required minlength=11 maxlength=15 class="form-control" name="PhoneNumber"
-              placeholder="Phone Number" #PhoneNumber="ngModel" [(ngModel)]="checkout.phoneNumber"
-              [ngClass]="{'is-invalid':(PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched))}">
-            <div *ngIf="PhoneNumber.invalid && (PhoneNumber.dirty || PhoneNumber.touched)" class="alert alert-danger">
+                <small *ngIf="PhoneNumber.errors.required">
+                  <div> Phone Number is required.</div>
+                </small>
 
-              <small *ngIf="PhoneNumber.errors.required">
-                <div> Phone Number is required.</div>
-              </small>
-
-              <small *ngIf="PhoneNumber.errors?.minlength">
-             <div>  Phone Number must be at least 11 characters long.</div>
-              </small>
-              <small *ngIf="PhoneNumber.errors?.maxlength">
-              <div>  Phone Number can be of max 15 charcters.</div>
-              </small>
-              <!-- <small *ngIf="PhoneNumber.errors?.pattern">
+                <small *ngIf="PhoneNumber.errors?.minlength">
+                  <div> Phone Number must be at least 11 characters long.</div>
+                </small>
+                <small *ngIf="PhoneNumber.errors?.maxlength">
+                  <div> Phone Number can be of max 15 charcters.</div>
+                </small>
+                <!-- <small *ngIf="PhoneNumber.errors?.pattern">
               <div> Phone Number can contain numbers only.</div>
               </small> -->
+              </div>
             </div>
-          </div>
 
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; font-family: Arial;margin-left: 7px;">Pin Code</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input type='text' required minlength=5 maxlength=5 class="form-control" placeholder="Pincode"
-              name="pincode" #pincode="ngModel" [(ngModel)]="checkout.pincode"
-              [ngClass]="{'is-invalid':(pincode.invalid && (pincode.dirty || pincode.touched))}">
-            <div *ngIf="pincode.invalid && (pincode.dirty || pincode.touched)" class="alert alert-danger">
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; font-family: Arial;margin-left: 7px;">Pin Code</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input type='text' required minlength=5 maxlength=5 class="form-control" placeholder="Pincode"
+                name="pincode" #pincode="ngModel" [(ngModel)]="checkout.pincode"
+                [ngClass]="{'is-invalid':(pincode.invalid && (pincode.dirty || pincode.touched))}">
+              <div *ngIf="pincode.invalid && (pincode.dirty || pincode.touched)" class="alert alert-danger">
 
-              <small *ngIf="pincode.errors.required">
-                Pincode is required.
-              </small>
+                <small *ngIf="pincode.errors.required">
+                  Pincode is required.
+                </small>
 
-              <small *ngIf="pincode.errors?.minlength">
-                Pincode must be at least 5 characters long.
-              </small>
-              <small *ngIf="pincode.errors?.maxlength">
-                Pincode can be of max 5 charcters.
-              </small>
+                <small *ngIf="pincode.errors?.minlength">
+                  Pincode must be at least 5 characters long.
+                </small>
+                <small *ngIf="pincode.errors?.maxlength">
+                  Pincode can be of max 5 charcters.
+                </small>
+              </div>
             </div>
-          </div>
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; font-family: Arial;margin-left: 7px;">Locality</small> </label>
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; font-family: Arial;margin-left: 7px;">Locality</small> </label>
 
-          <div class="row" style="   margin-left: 1px;">
-            <input class="form-control" type="text" name="Locality" placeholder="Locality"
-              [(ngModel)]="checkout.Locality" name="locality">
-
-          </div>
-
-          <!-- </div> -->
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; font-family: Arial;margin-left: 7px;">Address Lane 1</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input required class="form-control" type="text" placeholder="Address 1" name="address1" #address1="ngModel"
-              [(ngModel)]="checkout.address"
-              [ngClass]="{'is-invalid':(address1.invalid && (address1.dirty || address1.touched))}">
-            <div *ngIf="address1.invalid && (address1.dirty || address1.touched)" class="alert alert-danger">
-
-              <small *ngIf="address1.errors.required">
-                Address is required.
-              </small>
-
+            <div class="row" style="   margin-left: 1px;">
+              <input class="form-control" type="text" name="Locality" placeholder="Locality"
+                [(ngModel)]="checkout.Locality" name="locality">
 
             </div>
-          </div>
 
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial; margin-left: 7px;">Address Lane 2</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input name="Address2" class="form-control" type="text" placeholder="Address 2"
-              [(ngModel)]="checkout.address1">
-          </div>
+            <!-- </div> -->
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; font-family: Arial;margin-left: 7px;">Address Lane 1</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input required class="form-control" type="text" placeholder="Address 1" name="address1"
+                #address1="ngModel" [(ngModel)]="checkout.address"
+                [ngClass]="{'is-invalid':(address1.invalid && (address1.dirty || address1.touched))}">
+              <div *ngIf="address1.invalid && (address1.dirty || address1.touched)" class="alert alert-danger">
+
+                <small *ngIf="address1.errors.required">
+                  Address is required.
+                </small>
 
 
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial; margin-left: 7px;">Country</small> </label>
-          <div class="row " style="   margin-left: 1px;">
+              </div>
+            </div>
+
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700;font-family: Arial; margin-left: 7px;">Address Lane 2</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input name="Address2" class="form-control" type="text" placeholder="Address 2"
+                [(ngModel)]="checkout.address1">
+            </div>
 
 
-            <div>
-              <select style="        width: 339px;
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700;font-family: Arial; margin-left: 7px;">Country</small> </label>
+            <div class="row " style="   margin-left: 1px;">
+
+
+              <div>
+                <select style="        width: 339px;
     height: 28px;
     font-size: 10px;" name="country1" [(ngModel)]="checkout.country" class="form-control" (change)="countryChange()">
-                <option [value]="country.id" *ngFor="let country of countries;let i=index">
-                  {{country.name}}
+                  <option [value]="country.id" *ngFor="let country of countries;let i=index">
+                    {{country.name}}
+                  </option>
+
+                </select>
+              </div>
+
+
+
+
+              <!-- </div>  -->
+            </div>
+
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; font-family: Arial;margin-left: 7px;">State</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+
+              <select style="    width: 339px;
+          height: 28px;
+          font-size: 10px;" [(ngModel)]="checkout.state" name="state" required class="form-control"
+                id="exampleFormControlSelect1" (change)="provinceChange()">
+                <option [value]="province.id" *ngFor="let province of provinces">
+                  {{province.name}}
                 </option>
 
               </select>
+
             </div>
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700;font-family: Arial; margin-left: 7px;">City</small> </label>
+            <div class="row" style="   margin-left: 1px;">
 
-
-
-
-            <!-- </div>  -->
-          </div>
-
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; font-family: Arial;margin-left: 7px;">State</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-
-            <select style="    width: 339px;
-          height: 28px;
-          font-size: 10px;" [(ngModel)]="checkout.state" name="state" required class="form-control"
-              id="exampleFormControlSelect1" (change)="provinceChange()">
-              <option [value]="province.id" *ngFor="let province of provinces">
-                {{province.name}}
-              </option>
-
-            </select>
-
-          </div>
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial; margin-left: 7px;">City</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-
-            <select style="    width: 339px;
+              <select style="    width: 339px;
               height: 33px;
               font-size: 13px;" [(ngModel)]="checkout.city" name="state" required class="form-control"
-              id="exampleFormControlSelect1">
-              <option [value]="city.id" *ngFor="let city of cities">
-                {{city.name}}
-              </option>
+                id="exampleFormControlSelect1">
+                <option [value]="city.id" *ngFor="let city of cities">
+                  {{city.name}}
+                </option>
 
-            </select>
-
-          </div>
-
-          <!-- <div class="row"> -->
-
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial; margin-left: 7px;">Landmark</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input class="form-control" type="text" name="landmark" [(ngModel)]="checkout.landmark"
-              placeholder="Landmark(Optional)">
-          </div>
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial; margin-left: 7px;">Street</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input required class="form-control" type="text" placeholder="Street" name="street" #street="ngModel"
-              [(ngModel)]="checkout.street"
-              [ngClass]="{'is-invalid':(street.invalid && (street.dirty || street.touched))}">
-            <div *ngIf="street.invalid && (street.dirty || street.touched)" class="alert alert-danger">
-
-              <small *ngIf="street.errors.required">
-                Street is required.
-              </small>
-
-
-            </div>
-          </div>
-          <!-- </div> -->
-
-          <!-- <div class="row"> -->
-
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial, Helvetica, sans-serif; margin-left: 7px;">Email</small>
-          </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input email=true required type="email" class="form-control" type="text" placeholder="email" name="email"
-              #email="ngModel" [(ngModel)]="checkout.email" (click)="hello(email)"
-              [ngClass]="{'is-invalid':(email.invalid && (email.dirty || email.touched))}">
-            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-
-              <small *ngIf="email.errors.required">
-                Email is required.
-              </small>
-
-              <small *ngIf="email.errors.email">
-                Enter a Valid Email.
-              </small>
+              </select>
 
             </div>
 
-          </div>
+            <!-- <div class="row"> -->
 
-          <!-- </div> -->
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700;font-family: Arial; margin-left: 7px;">Landmark</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input class="form-control" type="text" name="landmark" [(ngModel)]="checkout.landmark"
+                placeholder="Landmark(Optional)">
+            </div>
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700;font-family: Arial; margin-left: 7px;">Street</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input required class="form-control" type="text" placeholder="Street" name="street" #street="ngModel"
+                [(ngModel)]="checkout.street"
+                [ngClass]="{'is-invalid':(street.invalid && (street.dirty || street.touched))}">
+              <div *ngIf="street.invalid && (street.dirty || street.touched)" class="alert alert-danger">
+
+                <small *ngIf="street.errors.required">
+                  Street is required.
+                </small>
 
 
-          <!-- <div class="modal-footer">
+              </div>
+            </div>
+            <!-- </div> -->
+
+            <!-- <div class="row"> -->
+
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700;font-family: Arial, Helvetica, sans-serif; margin-left: 7px;">Email</small>
+            </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input email=true required type="email" class="form-control" type="text" placeholder="email" name="email"
+                #email="ngModel" [(ngModel)]="checkout.email" (click)="hello(email)"
+                [ngClass]="{'is-invalid':(email.invalid && (email.dirty || email.touched))}">
+              <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+
+                <small *ngIf="email.errors.required">
+                  Email is required.
+                </small>
+
+                <small *ngIf="email.errors.email">
+                  Enter a Valid Email.
+                </small>
+
+              </div>
+
+            </div>
+
+            <!-- </div> -->
+
+
+            <!-- <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-toggle="collapse"
               href="#collapseExample2">Close</button>
 
@@ -629,233 +637,236 @@
                 (click)="saveAddress(funnyDayaForm); " type="button" class="btn btn-primary">Save
                 changes</button></span>
           </div> -->
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button data-dismiss="modal" type="button" class="btn btn-primary"
-          [disabled]="(!(funnyDayaForm.form.valid)||!checkout.country||!checkout.city||!checkout.state)"
-          (click)="saveShippingAddress(funnyDayaForm)">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Additional Information</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <textarea [(ngModel)]="deliveryInstrution" rows="10" cols="62" placeholder="Add Delievery Instructions here"></textarea>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button data-dismiss="modal" type="button" class="btn btn-primary"
+            [disabled]="(!(funnyDayaForm.form.valid)||!checkout.country||!checkout.city||!checkout.state)"
+            (click)="saveShippingAddress(funnyDayaForm)">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- Button trigger modal -->
 
 
-
-
-<!-- //BillingModal -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add address</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Additional Information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="deliveryInstrution" rows="10" cols="62"
+            placeholder="Add Delievery Instructions here"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+        </div>
       </div>
-      <div class="modal-body">
-        <form #funnyDayaForm="ngForm" name="myform">
-          <!-- <div class="row"> -->
+    </div>
+  </div>
 
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; margin-left: 7px;">First Name</small> </label>
-          <div class="row" style="   margin-left: 1px;">
 
-            <input required #firstName1="ngModel" class="form-control" type="text" placeholder="First Name"
-              name="firstName1" [(ngModel)]="checkout1.firstName"
-              [ngClass]="{'is-invalid':(firstName1.invalid && (firstName1.dirty || firstName1.touched))}">
 
-            <div *ngIf="firstName1.invalid && (firstName1.dirty || firstName1.touched)" class="alert alert-danger">
 
-              <small *ngIf="firstName1.errors.required">
-                First Name is required.
-              </small>
+  <!-- //BillingModal -->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add address</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #funnyDayaForm="ngForm" name="myform">
+            <!-- <div class="row"> -->
+
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; margin-left: 7px;">First Name</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+
+              <input required #firstName1="ngModel" class="form-control" type="text" placeholder="First Name"
+                name="firstName1" [(ngModel)]="checkout1.firstName"
+                [ngClass]="{'is-invalid':(firstName1.invalid && (firstName1.dirty || firstName1.touched))}">
+
+              <div *ngIf="firstName1.invalid && (firstName1.dirty || firstName1.touched)" class="alert alert-danger">
+
+                <small *ngIf="firstName1.errors.required">
+                  First Name is required.
+                </small>
+              </div>
+
+            </div>
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; margin-left: 7px;">Middle Name</small> </label>
+
+            <div class="row" style="   margin-left: 1px;">
+              <input class="form-control" type="text" name="MiddleName1" placeholder="Middle Name"
+                [(ngModel)]="checkout1.middleName">
             </div>
 
-          </div>
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; margin-left: 7px;">Middle Name</small> </label>
 
-          <div class="row" style="   margin-left: 1px;">
-            <input class="form-control" type="text" name="MiddleName1" placeholder="Middle Name"
-              [(ngModel)]="checkout1.middleName">
-          </div>
-
-
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; margin-left: 7px;">Last Name</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input required #lastName1="ngModel" class="form-control" type="text" placeholder="Last Name" name="lastName1"
-              [(ngModel)]="checkout1.lastName"
-              [ngClass]="{'is-invalid':(lastName1.invalid && (lastName1.dirty || lastName1.touched))}">
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; margin-left: 7px;">Last Name</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input required #lastName1="ngModel" class="form-control" type="text" placeholder="Last Name"
+                name="lastName1" [(ngModel)]="checkout1.lastName"
+                [ngClass]="{'is-invalid':(lastName1.invalid && (lastName1.dirty || lastName1.touched))}">
 
 
-            <div *ngIf="lastName1.invalid && (lastName1.dirty || lastName1.touched)" class="alert alert-danger">
+              <div *ngIf="lastName1.invalid && (lastName1.dirty || lastName1.touched)" class="alert alert-danger">
 
-              <small *ngIf="lastName1.errors.required">
-                Last Name is required.
-              </small>
+                <small *ngIf="lastName1.errors.required">
+                  Last Name is required.
+                </small>
+              </div>
+
             </div>
+            <!-- </div> -->
+            <!-- <div class="row"> -->
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; margin-left: 7px;">Phone Number</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input (keypress)="numberOnly($event)" type="text" required minlength=11 maxlength=15 class="form-control"
+                name="PhoneNumber1" (change)="changePhone(PhoneNumber)" placeholder="Phone Number"
+                #PhoneNumber1="ngModel" [(ngModel)]="checkout1.phoneNumber"
+                [ngClass]="{'is-invalid':(PhoneNumber1.invalid && (PhoneNumber1.dirty || PhoneNumber1.touched))}">
+              <div *ngIf="PhoneNumber1.invalid && (PhoneNumber1.dirty ||PhoneNumber1.touched)"
+                class="alert alert-danger">
 
-          </div>
-          <!-- </div> -->
-          <!-- <div class="row"> -->
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; margin-left: 7px;">Phone Number</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input (keypress)="numberOnly($event)" type="text" required minlength=11 maxlength=15 class="form-control" name="PhoneNumber1" (change)="changePhone(PhoneNumber)"
-              placeholder="Phone Number" #PhoneNumber1="ngModel" [(ngModel)]="checkout1.phoneNumber"
-              [ngClass]="{'is-invalid':(PhoneNumber1.invalid && (PhoneNumber1.dirty || PhoneNumber1.touched))}">
-            <div *ngIf="PhoneNumber1.invalid && (PhoneNumber1.dirty ||PhoneNumber1.touched)" class="alert alert-danger">
+                <small *ngIf="PhoneNumber1.errors.required">
+                  Phone Number is required.
+                </small>
 
-              <small *ngIf="PhoneNumber1.errors.required">
-                Phone Number is required.
-              </small>
-
-              <small *ngIf="PhoneNumber1.errors?.minlength">
-               <div> Phone Number must be at least 11 characters long.</div>
-              </small>
-              <small *ngIf="PhoneNumber1.errors?.maxlength">
-              <div>  Phone Number can be of max 15 charcters.</div>
-              </small>
-              <!-- <small *ngIf="PhoneNumber1.errors?.pattern">
+                <small *ngIf="PhoneNumber1.errors?.minlength">
+                  <div> Phone Number must be at least 11 characters long.</div>
+                </small>
+                <small *ngIf="PhoneNumber1.errors?.maxlength">
+                  <div> Phone Number can be of max 15 charcters.</div>
+                </small>
+                <!-- <small *ngIf="PhoneNumber1.errors?.pattern">
              <div> Phone Number can contain numbers only</div>
               </small> -->
+              </div>
             </div>
-          </div>
 
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; font-family: Arial;margin-left: 7px;">Pin Code</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input type='number' required minlength=5 maxlength=5 class="form-control" placeholder="Pincode"
-              name="pincode1" #pincode1="ngModel" [(ngModel)]="checkout1.pincode"
-              [ngClass]="{'is-invalid':(pincode.invalid && (pincode.dirty || pincode.touched))}">
-            <div *ngIf="pincode.invalid && (pincode.dirty || pincode.touched)" class="alert alert-danger">
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; font-family: Arial;margin-left: 7px;">Pin Code</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input type='number' required minlength=5 maxlength=5 class="form-control" placeholder="Pincode"
+                name="pincode1" #pincode1="ngModel" [(ngModel)]="checkout1.pincode"
+                [ngClass]="{'is-invalid':(pincode.invalid && (pincode.dirty || pincode.touched))}">
+              <div *ngIf="pincode.invalid && (pincode.dirty || pincode.touched)" class="alert alert-danger">
 
-              <small *ngIf="pincode1.errors.required">
-                Pincode is required.
-              </small>
+                <small *ngIf="pincode1.errors.required">
+                  Pincode is required.
+                </small>
 
-              <small *ngIf="pincode1.errors?.minlength">
-                Pincode must be at least 5 characters long.
-              </small>
-              <small *ngIf="pincode1.errors?.maxlength">
-                Pincode can be of max 5 charcters.
-              </small>
+                <small *ngIf="pincode1.errors?.minlength">
+                  Pincode must be at least 5 characters long.
+                </small>
+                <small *ngIf="pincode1.errors?.maxlength">
+                  Pincode can be of max 5 charcters.
+                </small>
+              </div>
             </div>
-          </div>
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; font-family: Arial;margin-left: 7px;">Locality</small> </label>
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; font-family: Arial;margin-left: 7px;">Locality</small> </label>
 
-          <div class="row" style="   margin-left: 1px;">
-            <input class="form-control" type="text" name="Locality" placeholder="Locality"
-              [(ngModel)]="checkout1.Locality" name="locality">
-
-          </div>
-
-          <!-- </div> -->
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; font-family: Arial;margin-left: 7px;">Address Lane 1</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input required class="form-control" type="text" placeholder="Address 1" name="address1b" #address1b="ngModel"
-              [(ngModel)]="checkout1.address"
-              [ngClass]="{'is-invalid':(address1b.invalid && (address1b.dirty || address1b.touched))}">
-            <div *ngIf="address1b.invalid && (address1b.dirty || address1b.touched)" class="alert alert-danger">
-
-              <small *ngIf="address1b.errors.required">
-                Address is required.
-              </small>
-
+            <div class="row" style="   margin-left: 1px;">
+              <input class="form-control" type="text" name="Locality" placeholder="Locality"
+                [(ngModel)]="checkout1.Locality" name="locality">
 
             </div>
-          </div>
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial; margin-left: 7px;">Address Lane 2</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input name="Address2" class="form-control" type="text" placeholder="Address 2"
-              [(ngModel)]="checkout1.address1">
-          </div>
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial; margin-left: 7px;">Country</small> </label>
-          <div class="row " style="   margin-left: 1px;">
+
+            <!-- </div> -->
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; font-family: Arial;margin-left: 7px;">Address Lane 1</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input required class="form-control" type="text" placeholder="Address 1" name="address1b"
+                #address1b="ngModel" [(ngModel)]="checkout1.address"
+                [ngClass]="{'is-invalid':(address1b.invalid && (address1b.dirty || address1b.touched))}">
+              <div *ngIf="address1b.invalid && (address1b.dirty || address1b.touched)" class="alert alert-danger">
+
+                <small *ngIf="address1b.errors.required">
+                  Address is required.
+                </small>
 
 
-            <div>
-              <select style="    width: 339px;
+              </div>
+            </div>
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700;font-family: Arial; margin-left: 7px;">Address Lane 2</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input name="Address2" class="form-control" type="text" placeholder="Address 2"
+                [(ngModel)]="checkout1.address1">
+            </div>
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700;font-family: Arial; margin-left: 7px;">Country</small> </label>
+            <div class="row " style="   margin-left: 1px;">
+
+
+              <div>
+                <select style="    width: 339px;
           height: 28px;
           font-size: 10px;" name="country1b" [(ngModel)]="checkout1.country" class="form-control"
-                (change)="countryChange()">
-                <option [value]="country.id" *ngFor="let country of countries;let i=index">
-                  {{country.name}}
+                  (change)="countryChange()">
+                  <option [value]="country.id" *ngFor="let country of countries;let i=index">
+                    {{country.name}}
+                  </option>
+
+                </select>
+              </div>
+
+
+
+
+              <!-- </div>  -->
+            </div>
+
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700; font-family: Arial;margin-left: 7px;">State</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+
+              <select style="    width: 339px;
+        height: 28px;
+        font-size: 10px;" [(ngModel)]="checkout1.state" name="state" required class="form-control"
+                id="exampleFormControlSelect1" (change)="provinceChange()">
+                <option [value]="province.id" *ngFor="let province of provinces">
+                  {{province.name}}
                 </option>
 
               </select>
+
             </div>
-
-
-
-
-            <!-- </div>  -->
-          </div>
-
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700; font-family: Arial;margin-left: 7px;">State</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-
-            <select style="    width: 339px;
-        height: 28px;
-        font-size: 10px;" [(ngModel)]="checkout1.state" name="state" required class="form-control"
-              id="exampleFormControlSelect1" (change)="provinceChange()">
-              <option [value]="province.id" *ngFor="let province of provinces">
-                {{province.name}}
-              </option>
-
-            </select>
-
-          </div>
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial; margin-left: 7px;">City</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <!-- <input required class="form-control" type="text" placeholder="City/District/Town" name="city"
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700;font-family: Arial; margin-left: 7px;">City</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <!-- <input required class="form-control" type="text" placeholder="City/District/Town" name="city"
             #city="ngModel" [(ngModel)]="checkout.city"
             [ngClass]="{'is-invalid':(city.invalid && (city.dirty || city.touched))}"> -->
-            <select style="        width: 339px;
+              <select style="        width: 339px;
     height: 28px;
     font-size: 10px;" [(ngModel)]="checkout1.city" name="state" required class="form-control"
-              id="exampleFormControlSelect1">
-              <option [value]="city.id" *ngFor="let city of cities">
-                {{city.name}}
-              </option>
+                id="exampleFormControlSelect1">
+                <option [value]="city.id" *ngFor="let city of cities">
+                  {{city.name}}
+                </option>
 
-            </select>
-            <!-- <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+              </select>
+              <!-- <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
 
             <small *ngIf="city.errors.required">
               City is required.
@@ -863,61 +874,61 @@
 
 
           </div> -->
-          </div>
-
-
-          <!-- <div class="row"> -->
-
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial; margin-left: 7px;">Landmark</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input class="form-control" type="text" name="landmark1" [(ngModel)]="checkout1.landmark"
-              placeholder="Landmark(Optional)">
-          </div>
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial; margin-left: 7px;">Street</small> </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input required class="form-control" type="text" placeholder="Street" name="street1" #street1="ngModel"
-              [(ngModel)]="checkout1.street"
-              [ngClass]="{'is-invalid':(street1.invalid && (street1.dirty || street1.touched))}">
-            <div *ngIf="street1.invalid && (street1.dirty || street1.touched)" class="alert alert-danger">
-
-              <small *ngIf="street1.errors.required">
-                Street is required.
-              </small>
-
-
-            </div>
-          </div>
-          <!-- </div> -->
-
-          <!-- <div class="row"> -->
-
-          <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
-              style="font-weight: 700;font-family: Arial, Helvetica, sans-serif; margin-left: 7px;">Email</small>
-          </label>
-          <div class="row" style="   margin-left: 1px;">
-            <input email=true required type="email" class="form-control" type="text" placeholder="email" name="email1"
-              #email1="ngModel" [(ngModel)]="checkout1.email" (click)="hello(email)"
-              [ngClass]="{'is-invalid':(email1.invalid && (email1.dirty || email1.touched))}">
-            <div *ngIf="email1.invalid && (email1.dirty || email1.touched)" class="alert alert-danger">
-
-              <small *ngIf="email1.errors.required">
-                Email is required.
-              </small>
-
-              <small *ngIf="email1.errors.email">
-                Enter a Valid Email.
-              </small>
-
             </div>
 
-          </div>
 
-          <!-- </div> -->
+            <!-- <div class="row"> -->
+
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700;font-family: Arial; margin-left: 7px;">Landmark</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input class="form-control" type="text" name="landmark1" [(ngModel)]="checkout1.landmark"
+                placeholder="Landmark(Optional)">
+            </div>
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700;font-family: Arial; margin-left: 7px;">Street</small> </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input required class="form-control" type="text" placeholder="Street" name="street1" #street1="ngModel"
+                [(ngModel)]="checkout1.street"
+                [ngClass]="{'is-invalid':(street1.invalid && (street1.dirty || street1.touched))}">
+              <div *ngIf="street1.invalid && (street1.dirty || street1.touched)" class="alert alert-danger">
+
+                <small *ngIf="street1.errors.required">
+                  Street is required.
+                </small>
 
 
-          <!-- <div class="modal-footer">
+              </div>
+            </div>
+            <!-- </div> -->
+
+            <!-- <div class="row"> -->
+
+            <label class="" for="exampleInputEmail1" style="margin-bottom: 2px;"><small
+                style="font-weight: 700;font-family: Arial, Helvetica, sans-serif; margin-left: 7px;">Email</small>
+            </label>
+            <div class="row" style="   margin-left: 1px;">
+              <input email=true required type="email" class="form-control" type="text" placeholder="email" name="email1"
+                #email1="ngModel" [(ngModel)]="checkout1.email" (click)="hello(email)"
+                [ngClass]="{'is-invalid':(email1.invalid && (email1.dirty || email1.touched))}">
+              <div *ngIf="email1.invalid && (email1.dirty || email1.touched)" class="alert alert-danger">
+
+                <small *ngIf="email1.errors.required">
+                  Email is required.
+                </small>
+
+                <small *ngIf="email1.errors.email">
+                  Enter a Valid Email.
+                </small>
+
+              </div>
+
+            </div>
+
+            <!-- </div> -->
+
+
+            <!-- <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-toggle="collapse"
               href="#collapseExample2">Close</button>
 
@@ -925,16 +936,17 @@
                 (click)="saveAddress(funnyDayaForm); " type="button" class="btn btn-primary">Save
                 changes</button></span>
           </div> -->
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="funnyDayaForm.reset();">Close</button>
-        <button data-dismiss="modal" type="button" class="btn btn-primary"
-          (click)="saveBillingAddress(funnyDayaForm)">Save changes</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"
+            (click)="funnyDayaForm.reset();">Close</button>
+          <button data-dismiss="modal" type="button" class="btn btn-primary"
+            (click)="saveBillingAddress(funnyDayaForm)">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 
@@ -943,5 +955,3 @@
 >
 Delete some very important stuff
 </a> -->
-
-

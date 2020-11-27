@@ -1,4 +1,10 @@
-<div style="margin:0 auto;margin-top: 4%; width: 70%;">
+<div style="margin-left: 49%;
+margin-top: 22%;
+" *ngIf="!isLoading" class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+
+<div *ngIf="isLoading" style="margin:0 auto;margin-top: 4%; width: 70%;">
   <div *ngIf="(sucessfullCall&&isLoadDone)">
     <div class="row">
       <div class="col-lg-12">
@@ -38,7 +44,8 @@
               <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Order Status </span>
             </div>
             <div class="col-lg-7">
-              <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{ getOrderStatusText(order.orderStatus  )}}</span>
+              <span style="font-size: 13px;font-family: Arial; font-weight:500 ;">
+                {{ getOrderStatusText(order.orderStatus)}}</span>
             </div>
           </div>
 
@@ -76,7 +83,7 @@
               </div>
               <div class="col-lg-6">
                 <span style="font-size: 13px;font-family: Arial; font-weight:500 ;">
-                  {{order.orderDetailList.taxAmount||0}}.00</span>
+                  {{taxAmount||0}}.00</span>
               </div>
             </div>
 
@@ -109,10 +116,10 @@
               <div class="col-lg-6">
                 <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Shipping & Handling: </span>
               </div>
-              <div class="col-lg-6"  *ngIf="(totalReturnItemAmount!=0)">
+              <div class="col-lg-6" *ngIf="(totalReturnItemAmount!=0)">
                 <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{shippingAmount}}.00</span>
               </div>
-              <div class="col-lg-6"*ngIf="(totalReturnItemAmount==0)">
+              <div class="col-lg-6" *ngIf="(totalReturnItemAmount==0)">
                 <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> 0.00</span>
               </div>
             </div>
@@ -121,10 +128,12 @@
                 <span style="font-size: 13px;font-family: Arial; font-weight:700 ;">Total before Tax: </span>
               </div>
               <div class="col-lg-6" *ngIf="(totalReturnItemAmount!=0)">
-                <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{totalReturnItemAmount+shippingAmount}}.00</span>
+                <span style="font-size: 13px;font-family: Arial; font-weight:500 ;">
+                  {{totalReturnItemAmount+shippingAmount}}.00</span>
               </div>
               <div class="col-lg-6" *ngIf="(totalReturnItemAmount==0)">
-                <span style="font-size: 13px;font-family: Arial; font-weight:500 ;"> {{totalReturnItemAmount||0}}.00</span>
+                <span style="font-size: 13px;font-family: Arial; font-weight:500 ;">
+                  {{totalReturnItemAmount||0}}.00</span>
               </div>
             </div>
             <div class="row">
@@ -133,7 +142,7 @@
               </div>
               <div class="col-lg-6">
                 <span style="font-size: 13px;font-family: Arial; font-weight:500 ;">
-                  {{order.orderDetailList.taxAmount||0}}.00</span>
+                  {{order.orderTax||0}}.00</span>
               </div>
             </div>
 
@@ -144,13 +153,13 @@
               </div>
 
               <div class="col-lg-6" *ngIf="(totalReturnItemAmount!=0)">
-                <span  style="font-size: 13px;font-family: Arial; font-weight:500 ;">
+                <span style="font-size: 13px;font-family: Arial; font-weight:500 ;">
                   {{orderReturnTotalAmount||0}}.00</span>
               </div>
 
-              <div class="col-lg-6"*ngIf="(totalReturnItemAmount==0)">
-                <span  style="font-size: 13px;font-family: Arial; font-weight:500 ;">
-                 0.00</span>
+              <div class="col-lg-6" *ngIf="(totalReturnItemAmount==0)">
+                <span style="font-size: 13px;font-family: Arial; font-weight:500 ;">
+                  0.00</span>
               </div>
             </div>
           </div>
@@ -183,8 +192,9 @@
             <th>Size</th>
             <th>Price/Pcs</th>
             <th>Total</th>
-            <th *ngIf="(returnParam)">Return</th>
-            <!-- <th *ngIf="(returnParam&&!itemsReturned)"></th> -->
+            <th
+              *ngIf="(returnParam||!checkStatus(order.orderStatus))">
+              Return</th>
           </tr>
           <tr *ngFor="let orderdetail of order.orderDetailList; "
             style="border-style: solid;  border-left: 0; border-right: 0; border-top: 0.1em; border-width: 0.1em; margin-bottom: 10px;">
@@ -193,14 +203,17 @@
                 src="https://image.made-in-china.com/2f0j00fpQYBhNcgiqM/Eruoep-Ladies-Latest-Short-Dress-Party-Dress-for-Women.jpg"
                 alt="">
             </td>
-            <td>{{orderdetail.item.name||"-"}}</td>
+            <td>{{orderdetail.item.product.name||"-"}}</td>
             <td>{{orderdetail.quantity}}</td>
             <td>{{orderdetail.item.itemSize}}</td>
             <td>{{orderdetail.itemPrice}}</td>
             <td>{{orderdetail.itemTotalAmount}}</td>
-            <td  *ngIf="(returnParam&&checkStatus(orderdetail.itemStatus))"><input type="checkbox" (change)="changeCheckbox($event,orderdetail )"
-                name="returnCheckbox" id=""></td>
-                <td *ngIf="!checkStatus(orderdetail.itemStatus)">{{ getOrderStatusText(orderdetail.itemStatus)}}</td>
+            <td *ngIf="(returnParam&&checkStatus(orderdetail.itemStatus))"><input type="checkbox"
+                (change)="changeCheckbox($event,orderdetail )" name="returnCheckbox" id=""></td>
+
+
+              <td *ngIf="((returnParam&&!checkStatus(orderdetail.itemStatus))||(!returnParam&&!checkStatus( order.orderStatus)))" >{{ getOrderStatusText(orderdetail.itemStatus)}}</td>
+
 
           </tr>
           <tr>
@@ -210,7 +223,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td *ngIf="returnParam "> <button  (click)="prepareReturnOrderJson()" class="btn btn-warning">Return</button>
+            <td *ngIf="returnParam "> <button (click)="prepareReturnOrderJson()" class="btn btn-warning">Return</button>
             </td>
 
           </tr>

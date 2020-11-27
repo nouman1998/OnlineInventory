@@ -16,6 +16,7 @@ export class OrderDetailComponent implements OnInit {
   taxAmount = 0;
   totalItemAmount = 0;
   totalBeforeTax = 0;
+  isLoading=false
   taxCollected = 0
   orderTotalAmount = 0;
   shippingAmount = 0;
@@ -59,9 +60,10 @@ export class OrderDetailComponent implements OnInit {
   itemsReturned = false;
   getOrderById() {
     this.isLoadDone = false;
-
+    // this.isLoading=true;
     this.service.getOrderById(this.userId).subscribe((response) => {
       console.log(response);
+      this.isLoading=true;
 
       if (response.status == 200) {
         this.sucessfullCall = true;
@@ -75,9 +77,10 @@ export class OrderDetailComponent implements OnInit {
         this.orderReturnTotalAmount = d.shippingAmount;
         this.cardNumbers = this.order.paymentDetails[0].cardNumber.substr(this.order.paymentDetails[0].cardNumber.length - 4)
         this.itemStatusArray = d.orderDetailList;
+        this.taxAmount = this.order.orderTax;
         // this.getOrderStatusText();
         this.order.orderDetailList.map(item => {
-          this.taxAmount += item.taxAmount || 0;
+
           this.totalItemAmount += item.itemTotalAmount || 0;
 
 
@@ -203,6 +206,19 @@ export class OrderDetailComponent implements OnInit {
     console.log(status);
     console.log(this.orderStatusText);
     return this.orderStatusText
+  }
+
+  returnStatus= false
+  checkboxOrStatus=false //false for checkbox
+  statusOrInputFields(){
+    if(this.returnParam||(this.getOrderStatusText(this.order.orderStatus)=="Partial Returned"||this.getOrderStatusText(this.order.orderStatus)=="Returned"))
+    {
+        this.returnStatus = true;
+    }
+
+
+
+
   }
 
   mapItemToDTO(obj) {

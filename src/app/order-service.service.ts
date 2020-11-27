@@ -14,6 +14,7 @@ export class OrderServiceService {
   private orderListUrl = this.baseUrl + "order/getOrderListForAdmin?";
   private orderDetailUrl = this.baseUrl + "order/getOrderDetail?";
   private saveOrderUrl = this.baseUrl + "order/saveAddress";
+  private cancelOrderUrl = this.baseUrl + 'order/cancelOrder/';
   private getOrderByIdUrl = this.baseUrl + 'order/';
   private postOrderUrl = this.baseUrl + 'order/';
   private returnOrderUrl = this.baseUrl +"order/returnOrder"
@@ -57,4 +58,10 @@ export class OrderServiceService {
 
     return this.http.put(this.returnOrderUrl,obj);
   }
+  cancelOrder(id): Observable<any> {alert(this.cancelOrderUrl + id)
+    return this.http.put(this.cancelOrderUrl + id, { observe: 'response' })
+  }
+  getOrderDetail(orderId: number) {
+    return this.http.get(this.orderDetailUrl+orderId);
+}
 }
