@@ -80,7 +80,8 @@ export class CheckoutComponent implements OnInit {
         "itemImageUrl": "http://pngimg.com/uploads/pentacle/pentacle_PNG51.png",
         "quantity": 5,
         "price": 200,
-        "total": 1000
+        "total": 1000,
+        "name":"abc"
       },
       {
         "productId": "17838",
@@ -89,7 +90,8 @@ export class CheckoutComponent implements OnInit {
         "itemImageUrl": "http://pngimg.com/uploads/pentacle/pentacle_PNG51.png",
         "quantity": 5,
         "price": 200,
-        "total": 1000
+        "total": 1000,
+        "name":"abc"
       }
     ];
 
