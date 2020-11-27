@@ -463,9 +463,9 @@ debugger
     }
     else {
       this.orderJson['couponDetail'] = {
-        "couponName": null,
-        "discountType": null,
-        "discountAmt": null
+        "couponName": "",
+        "discountType": "",
+        "discountAmt": 0
       };
     }
     this.orderJson['paymentDetail'] = {
