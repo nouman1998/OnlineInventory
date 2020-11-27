@@ -429,7 +429,7 @@ debugger
 
   preparingJson() {
     this.orderJson['address'] = this.address;
-    this.orderJson['deliveryInstruction'] = this.deliveryInstrution;
+    this.orderJson['deliveryInstruction'] = this.finalDeliveryInstruction;
     this.orderJson['customerDetail'] = {
       "customerId": 1,
       "addressLine1": "test address 1",
@@ -696,5 +696,14 @@ debugger
       }
     })
   }
+finalDeliveryInstruction="";
+  saveDelieveryInstructions(){
 
+    this.finalDeliveryInstruction = this.deliveryInstrution;
+
+  }
+
+  cancelDelieveryInstruction(){
+    this.deliveryInstrution= this.finalDeliveryInstruction;
+  }
 }

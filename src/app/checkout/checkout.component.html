@@ -668,8 +668,8 @@ margin-top: 22%;
             placeholder="Add Delievery Instructions here"></textarea>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+          <button type="button" class="btn btn-secondary" (click)="cancelDelieveryInstruction()" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)=" saveDelieveryInstructions()" data-dismiss="modal">Save changes</button>
         </div>
       </div>
     </div>
