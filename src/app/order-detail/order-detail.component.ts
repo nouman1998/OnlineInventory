@@ -12,11 +12,10 @@ import { returnOrder } from './returnOrder';
 export class OrderDetailComponent implements OnInit {
   baseUrl = "http://localhost:8080/order/";
   order;
-  //checkout order
   taxAmount = 0;
   totalItemAmount = 0;
   totalBeforeTax = 0;
-  isLoading=false
+  isLoading = false
   taxCollected = 0
   orderTotalAmount = 0;
   shippingAmount = 0;
@@ -63,7 +62,7 @@ export class OrderDetailComponent implements OnInit {
     // this.isLoading=true;
     this.service.getOrderById(this.userId).subscribe((response) => {
       console.log(response);
-      this.isLoading=true;
+      this.isLoading = true;
 
       if (response.status == 200) {
         this.sucessfullCall = true;
@@ -123,11 +122,11 @@ export class OrderDetailComponent implements OnInit {
         this.itemsReturned = true;
         console.log(response);
 
-        alert("Ordered Returned");
+
         this.getOrderById();
       })
 
-      this.returnedItems=[]
+      this.returnedItems = []
       console.log(returnOrderJson)
     }
   }
@@ -162,13 +161,12 @@ export class OrderDetailComponent implements OnInit {
 
   }
 
-  checkStatus(status){
+  checkStatus(status) {
 
-    if (status ==1)
-    {
+    if (status == 1) {
       return true
     }
-    else{
+    else {
       return false
     }
   }
@@ -208,12 +206,11 @@ export class OrderDetailComponent implements OnInit {
     return this.orderStatusText
   }
 
-  returnStatus= false
-  checkboxOrStatus=false //false for checkbox
-  statusOrInputFields(){
-    if(this.returnParam||(this.getOrderStatusText(this.order.orderStatus)=="Partial Returned"||this.getOrderStatusText(this.order.orderStatus)=="Returned"))
-    {
-        this.returnStatus = true;
+  returnStatus = false
+  checkboxOrStatus = false //false for checkbox
+  statusOrInputFields() {
+    if (this.returnParam || (this.getOrderStatusText(this.order.orderStatus) == "Partial Returned" || this.getOrderStatusText(this.order.orderStatus) == "Returned")) {
+      this.returnStatus = true;
     }
 
 
@@ -238,6 +235,19 @@ export class OrderDetailComponent implements OnInit {
     return itemDTO;
 
   }
+    isReturnButtonDisabled=false
+  checkReturnStatus(){
+    debugger
+    this.isReturnButtonDisabled=false
+    this.order.orderDetailList.map(item=>{
 
+      if(item.itemStatus==1){
+        this.isReturnButtonDisabled=true
+      }
+
+
+    })
+    return this.isReturnButtonDisabled;
+  }
 
 }

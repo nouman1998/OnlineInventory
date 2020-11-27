@@ -193,7 +193,7 @@ margin-top: 22%;
             <th>Price/Pcs</th>
             <th>Total</th>
             <th
-              *ngIf="(returnParam||!checkStatus(order.orderStatus))">
+              *ngIf="(returnParam||!checkStatus(order.orderStatus))" >
               Return</th>
           </tr>
           <tr *ngFor="let orderdetail of order.orderDetailList; "
@@ -223,7 +223,7 @@ margin-top: 22%;
             <td></td>
             <td></td>
             <td></td>
-            <td *ngIf="returnParam "> <button (click)="prepareReturnOrderJson()" class="btn btn-warning">Return</button>
+            <td *ngIf="returnParam "> <button [disabled]="!checkReturnStatus()" (click)="prepareReturnOrderJson()" class="btn btn-warning">Return</button>
             </td>
 
           </tr>
