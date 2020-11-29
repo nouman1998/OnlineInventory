@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { HttpClientModule } from '@angular/common/http';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 // import { CarouselModule, WavesModule } from 'angular-bootstrap-md'
 
 @NgModule({
   declarations: [
     AppComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,
