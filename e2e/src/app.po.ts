@@ -9,3 +9,4 @@ export class AppPage {
     return element(by.css('app-root .content span')).getText() as Promise<string>;
   }
 }
+ 
