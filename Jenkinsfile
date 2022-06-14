@@ -3,14 +3,10 @@ pipeline {
     stages {
         stage('---pull code from github---') {
             steps {
-                sh "git pull origin master"
+                git pull origin master
             }
         }
-        stage('build') {
-            steps {
-                sh "ng build"
-            }
-        }
+       
        
     }
 }
