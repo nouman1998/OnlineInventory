@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('---pull code from github---') {
             steps {
-              bat 'git pull origin ${BRANCH_NAME}' 
+              bat 'git pull origin ${params.GIT_BRANCH}' 
             }
         }
        
