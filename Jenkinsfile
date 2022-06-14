@@ -1,4 +1,8 @@
 pipeline {
+  
+    script{
+            env.BRANCH = 'master'
+        }
     agent any
     stages {
         stage('---pull code from github---') {
